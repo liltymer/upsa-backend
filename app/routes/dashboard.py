@@ -10,9 +10,6 @@ router = APIRouter(prefix="/dashboard", tags=["Dashboard"])
 
 
 def classify_cgpa(cgpa: float) -> str:
-    """
-    Official UPSA degree classification bands.
-    """
     if cgpa >= 3.6:
         return "First Class"
     elif cgpa >= 3.0:
@@ -28,9 +25,6 @@ def classify_cgpa(cgpa: float) -> str:
 
 
 def academic_standing(cgpa: float) -> str:
-    """
-    A student is on probation only if CGPA falls below 1.0.
-    """
     if cgpa < 1.0:
         return "Probation"
     return "Good Standing"
@@ -50,5 +44,9 @@ def get_my_dashboard(
         "index_number": current_user.index_number,
         "cgpa": round(cgpa, 2),
         "classification": classification,
-        "academic_standing": standing
+        "academic_standing": standing,
+        "academic_year": current_user.academic_year,
+        "programme": current_user.programme,
+        "level": current_user.level,
+        "role": current_user.role,  # ← ADDED
     }
