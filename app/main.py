@@ -14,6 +14,8 @@ from app.routes.risk import router as risk_router
 from app.routes.trends import router as trends_router
 from app.routes.projection import router as projection_router
 from app.routes.transcript import router as transcript_router
+from app.routes.admin import router as admin_router
+from app.routes.announcements import router as announcements_router
 
 # Create tables on startup
 Base.metadata.create_all(bind=engine)
@@ -52,6 +54,8 @@ app.include_router(risk_router)
 app.include_router(trends_router)
 app.include_router(projection_router)
 app.include_router(transcript_router)
+app.include_router(admin_router)
+app.include_router(announcements_router)
 
 
 @app.get("/")
