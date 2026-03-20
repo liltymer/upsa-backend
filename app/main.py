@@ -16,6 +16,7 @@ from app.routes.projection import router as projection_router
 from app.routes.transcript import router as transcript_router
 from app.routes.admin import router as admin_router
 from app.routes.announcements import router as announcements_router
+from app.routes.password_reset import router as password_reset_router
 
 # Create tables on startup
 Base.metadata.create_all(bind=engine)
@@ -56,6 +57,7 @@ app.include_router(projection_router)
 app.include_router(transcript_router)
 app.include_router(admin_router)
 app.include_router(announcements_router)
+app.include_router(password_reset_router)
 
 
 @app.get("/")

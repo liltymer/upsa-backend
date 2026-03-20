@@ -77,3 +77,8 @@ def get_gpa_history(db: Session, student_id: int) -> list:
         })
 
     return sorted(history, key=lambda x: (x["year"], x["semester"]))
+
+
+
+
+
