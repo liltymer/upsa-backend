@@ -6,7 +6,7 @@ def send_reset_email(to_email: str, student_name: str, reset_token: str):
     Sends a password reset email using Resend API.
     Works on Render free tier — no SMTP port blocking.
     """
-    resend.api_key = os.getenv("RESEND_API_KEY")
+    resend.api_key = os.getenv("RESEND_API_KEY", "").strip()
     frontend_url = os.getenv("FRONTEND_URL", "https://gradeiq-upsa.vercel.app")
     reset_link = f"{frontend_url}/reset-password?token={reset_token}"
 
