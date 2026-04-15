@@ -29,13 +29,8 @@ app = FastAPI(title="GradeIQ UPSA API")
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-        "http://localhost:5173",                    # Local development
-        "https://gradeiq-upsa.vercel.app",          # Vercel production
-        "https://gradeiq-upsa-liltymer.vercel.app", # Vercel preview
-        "https://upsa-frontend.vercel.app",         # Old frontend if any
-    ],
-    allow_credentials=True,
+    allow_origins=["*"],
+    allow_credentials=False,
     allow_methods=["*"],
     allow_headers=["*"],
 )
