@@ -44,16 +44,16 @@ The REST API powering GradeIQ UPSA. Built with FastAPI and PostgreSQL, it handle
 git clone https://github.com/liltymer/upsa-backend.git
 cd upsa-backend
 
-# Create and activate a virtual environment
+# virtual environment
 python -m venv venv
 source venv/bin/activate  # On Windows: venv\Scripts\activate
 
 # Install dependencies
 pip install -r requirements.txt
 
-# Create your environment file
+# environment file
 cp .env.example .env
-# Fill in your database URL, secret keys, and Resend API key
+
 
 # Run database migrations
 alembic upgrade head
@@ -70,10 +70,10 @@ Interactive docs available at `http://localhost:8000/docs`
 ## Environment Variables
 
 ```env
-DATABASE_URL=your_postgresql_connection_string
-SECRET_KEY=your_jwt_secret_key
-RESEND_API_KEY=your_resend_api_key
-FRONTEND_URL=your_frontend_url
+DATABASE_URL=**********
+SECRET_KEY=**********
+RESEND_API_KEY= **********
+FRONTEND_URL=https://github.com/liltymer/upsa-frontend
 ```
 
 ---
