@@ -104,7 +104,7 @@ def test_login_with_either_index_number(client):
         "index_number": DEGREE_INDEX, "programme": BSC_IT, "academic_year": "2026/2027",
     })
     for username in (DIPLOMA_INDEX, DEGREE_INDEX, "ama@gmail.com"):
-        res = client.post("/auth/login", data={"username": username, "password": "correct-horse-1"})
+        res = client.post("/auth/login", data={"username": username, "password": "Correct-Horse-1"})
         assert res.status_code == 200, username
 
 
@@ -199,7 +199,7 @@ def test_link_second_account(client):
     assert wrong.status_code == 400
 
     res = client.post("/enrollments/link-account", headers=new_headers,
-                      json={"email": "old@gmail.com", "password": "correct-horse-1"})
+                      json={"email": "old@gmail.com", "password": "Correct-Horse-1"})
     assert res.status_code == 200, res.text
     enrollments = res.json()["enrollments"]
     current = [e for e in enrollments if e["is_current"]]
@@ -208,8 +208,8 @@ def test_link_second_account(client):
     assert old["status"] == "completed" and old["cgpa"] == 4.0
 
     # Old login is gone; the diploma index now signs in to the merged account
-    assert client.post("/auth/login", data={"username": "old@gmail.com", "password": "correct-horse-1"}).status_code == 401
-    assert client.post("/auth/login", data={"username": DIPLOMA_INDEX, "password": "correct-horse-1"}).status_code == 200
+    assert client.post("/auth/login", data={"username": "old@gmail.com", "password": "Correct-Horse-1"}).status_code == 401
+    assert client.post("/auth/login", data={"username": DIPLOMA_INDEX, "password": "Correct-Horse-1"}).status_code == 200
 
 
 def test_cannot_reach_another_students_programme(client):
@@ -225,3 +225,33 @@ def test_cannot_reach_another_students_programme(client):
     assert client.put(f"/results/{b_result}", headers=a, json={"grade": "F"}).status_code == 404
     assert client.post("/results/move", headers=a, json={"result_ids": [b_result], "enrollment_id": b_enrollment}).status_code == 404
     assert client.patch(f"/enrollments/{b_enrollment}", headers=a, json={"programme": "Hacked"}).status_code == 404
+
+
+def test_top_up_can_join_at_level_200(client):
+    res = register(client, index_number="20269999", programme=BSC_IT, level=200,
+                   academic_year="2026/2027", is_top_up=True, entry_level=200)
+    assert res.status_code == 201, res.text
+    headers = login(client)
+    current = client.get("/enrollments/me", headers=headers).json()["enrollments"][0]
+    assert (current["entry_level"], current["current_level"], current["is_top_up"]) == (200, 200, True)
+
+    # Level 100 is not a valid top-up entry
+    bad = register(client, email="x@gmail.com", index_number="X1", programme=BSC_IT, level=100,
+                   academic_year="2026/2027", is_top_up=True, entry_level=100)
+    assert bad.status_code == 422
+
+
+def test_reference_lists_official_programmes(client):
+    body = client.get("/reference/academic").json()
+    names = {p["name"] for p in body["programmes"]}
+    assert len([p for p in body["programmes"] if p["award_type"] == "diploma"]) == 5
+    assert len([p for p in body["programmes"] if p["award_type"] == "degree"]) == 17
+    assert "Bachelor of Science in Applied Statistics" in names
+    assert body["top_up_entry_levels"] == [200, 300]
+
+
+def test_typed_diploma_name_is_detected(client):
+    res = register(client, programme="Tertiary Diploma in Accounting", level=100)
+    assert res.status_code == 201, res.text
+    headers = login(client)
+    assert client.get("/enrollments/me", headers=headers).json()["enrollments"][0]["award_type"] == "diploma"

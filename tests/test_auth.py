@@ -8,7 +8,9 @@ def test_register_and_login_case_insensitive_email(client):
 
 
 def test_register_rejects_short_password(client):
-    assert register(client, password="short").status_code == 422
+    res = register(client, password="Sh0rt!")
+    assert res.status_code == 400
+    assert "at least 8 characters" in res.json()["detail"]
 
 
 def test_register_rejects_duplicate(client):
@@ -19,7 +21,7 @@ def test_register_rejects_duplicate(client):
 def test_register_rejects_bad_academic_year(client):
     res = client.post("/auth/register", json={
         "name": "Kofi", "index_number": "1", "email": "k@gmail.com",
-        "password": "long-enough-1", "programme": "BSc IT",
+        "password": "Long-Enough-1", "programme": "BSc IT",
         "level": 100, "academic_year": "2025/26/x",
     })
     assert res.status_code == 400
@@ -50,8 +52,8 @@ def test_reset_token_is_stored_hashed(client, db, no_real_email):
     assert stored != raw and len(stored) == 64
 
     assert client.get(f"/auth/verify-reset-token/{raw}").status_code == 200
-    res = client.post("/auth/reset-password", json={"token": raw, "new_password": "brand-new-pass"})
+    res = client.post("/auth/reset-password", json={"token": raw, "new_password": "Brand-New-Pass-2"})
     assert res.status_code == 200
-    assert client.post("/auth/login", data={"username": "ama@gmail.com", "password": "brand-new-pass"}).status_code == 200
+    assert client.post("/auth/login", data={"username": "ama@gmail.com", "password": "Brand-New-Pass-2"}).status_code == 200
     # single use
-    assert client.post("/auth/reset-password", json={"token": raw, "new_password": "again-new-pass"}).status_code == 400
+    assert client.post("/auth/reset-password", json={"token": raw, "new_password": "Again-New-Pass-3"}).status_code == 400

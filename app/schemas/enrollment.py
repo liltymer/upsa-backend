@@ -16,7 +16,7 @@ class TopUpRequest(BaseModel):
     index_number: str = Field(min_length=1, max_length=30)
     programme: str = Field(min_length=2, max_length=200)
     academic_year: str = Field(description="Academic year the top-up started, e.g. 2026/2027")
-    entry_level: Literal[100, 200, 300, 400] = 300
+    entry_level: Literal[200, 300] = 300
 
 
 class EnrollmentUpdate(BaseModel):

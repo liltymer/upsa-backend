@@ -16,7 +16,7 @@ def _legacy_db():
             conn.exec_driver_sql(f'DROP TABLE IF EXISTS "{table}"')
     run_migrations("0001_baseline")
 
-    pw = hash_password("correct-horse-1")
+    pw = hash_password("Correct-Horse-1")
     with engine.begin() as conn:
         conn.execute(sa.text(
             "INSERT INTO students (id, name, index_number, email, password_hash, programme, level, academic_year, role) VALUES "
