@@ -6,14 +6,14 @@ from datetime import datetime, timedelta, timezone
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy import func
 from sqlalchemy.orm import Session
-from pydantic import BaseModel, EmailStr
+from pydantic import BaseModel, EmailStr, Field
 
-from app.config import PASSWORD_MIN_LENGTH
 from app.database import get_db
 from app.models.student import Student
 from app.models.password_reset import PasswordResetToken
 from app.services.email import send_reset_email
-from app.services.auth import hash_password
+from app.services.auth import hash_password, verify_password
+from app.services.password_policy import PASSWORD_MAX_LENGTH, password_error
 from app.services.rate_limit import rate_limit
 
 logger = logging.getLogger(__name__)
@@ -43,7 +43,7 @@ def hash_token(token: str) -> str:
 
 class ResetPasswordRequest(BaseModel):
     token: str
-    new_password: str
+    new_password: str = Field(min_length=1, max_length=PASSWORD_MAX_LENGTH)
 
 
 # ================================
@@ -157,12 +157,6 @@ def reset_password(
     Accepts a token and new password.
     Updates the student's password and marks the token as used.
     """
-    if len(data.new_password) < PASSWORD_MIN_LENGTH:
-        raise HTTPException(
-            status_code=400,
-            detail=f"Password must be at least {PASSWORD_MIN_LENGTH} characters."
-        )
-
     reset_token = db.query(PasswordResetToken).filter(
         PasswordResetToken.token == hash_token(data.token),
         PasswordResetToken.is_used.is_(False),
@@ -187,6 +181,12 @@ def reset_password(
 
     if not student:
         raise HTTPException(status_code=404, detail="Student not found.")
+
+    weakness = password_error(data.new_password, email=student.email, name=student.name)
+    if weakness:
+        raise HTTPException(status_code=400, detail=weakness)
+    if verify_password(data.new_password, student.password_hash):
+        raise HTTPException(status_code=400, detail="Choose a password you have not used on this account before.")
 
     student.password_hash = hash_password(data.new_password)
     reset_token.is_used = True

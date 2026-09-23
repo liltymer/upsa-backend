@@ -5,7 +5,6 @@ from sqlalchemy import func
 from sqlalchemy.orm import Session
 from typing import Literal, Optional
 
-from app.config import PASSWORD_MIN_LENGTH
 from app.database import get_db
 from app.models.enrollment import Enrollment
 from app.models.student import Student
@@ -20,6 +19,7 @@ from app.services.enrollments import (
     start_year_from_current,
     validate_level,
 )
+from app.services.password_policy import PASSWORD_MAX_LENGTH, password_error
 from app.services.rate_limit import rate_limit
 from app.utils.grading import award_type_for_programme, parse_academic_year
 
@@ -34,7 +34,7 @@ class RegisterRequest(BaseModel):
     name: str = Field(min_length=2, max_length=120)
     index_number: str = Field(min_length=1, max_length=30)
     email: EmailStr
-    password: str = Field(min_length=PASSWORD_MIN_LENGTH, max_length=128)
+    password: str = Field(min_length=1, max_length=PASSWORD_MAX_LENGTH)
     programme: str = Field(min_length=1, max_length=200)
     level: Literal[100, 200, 300, 400]
     academic_year: str  # current academic year, e.g. "2025/2026"
@@ -67,6 +67,10 @@ def register(data: RegisterRequest, db: Session = Depends(get_db)):
     programme = data.programme.strip()
     award_type = award_type_for_programme(programme)
     entry_level = (data.entry_level or 300) if data.is_top_up else 100
+
+    weakness = password_error(data.password, email=email, name=data.name)
+    if weakness:
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=weakness)
 
     try:
         parse_academic_year(data.academic_year)

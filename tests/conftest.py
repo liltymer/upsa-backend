@@ -19,7 +19,7 @@ from app.migrate import run_migrations  # noqa: E402
 from app.models.student import Student  # noqa: E402
 from app.services.rate_limit import reset_rate_limits  # noqa: E402
 
-PASSWORD = "correct-horse-1"
+PASSWORD = "Correct-Horse-1"
 
 
 def reset_database():

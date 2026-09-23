@@ -1,6 +1,4 @@
-from typing import Literal
-
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, Query
 from sqlalchemy.orm import Session
 
 from app.database import get_db
@@ -15,7 +13,7 @@ router = APIRouter(prefix="/gpa", tags=["GPA"])
 @router.get("/semester")
 def semester_gpa(
     academic_year: str,
-    semester: Literal[1, 2],
+    semester: int = Query(ge=1, le=2),
     db: Session = Depends(get_db),
     enrollment: Enrollment = Depends(get_enrollment),
 ):
