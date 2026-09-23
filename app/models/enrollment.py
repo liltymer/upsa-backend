@@ -1,4 +1,4 @@
-from sqlalchemy import Boolean, Column, DateTime, ForeignKey, Integer, String
+from sqlalchemy import JSON, Boolean, Column, DateTime, ForeignKey, Integer, String
 from sqlalchemy.orm import relationship
 from sqlalchemy.sql import func
 
@@ -12,7 +12,7 @@ class Enrollment(Base):
     A student who tops up from a diploma to a degree has two enrollments:
     the completed diploma (old index number, its own final CGPA) and the
     active degree (new index number, fresh CGPA). GPA figures are always
-    computed per enrollment — never across them.
+    computed per enrollment: never across them.
     """
     __tablename__ = "enrollments"
 
@@ -27,13 +27,15 @@ class Enrollment(Base):
     programme = Column(String(200), nullable=False)
     award_type = Column(String(20), nullable=False)             # diploma | degree
     entry_level = Column(Integer, nullable=False)                # 100, or 300 for a top-up
-    current_level = Column(Integer, nullable=False)              # 100 – 400
+    current_level = Column(Integer, nullable=False)              # 100 - 400
     start_academic_year = Column(String(9), nullable=False)      # e.g. "2024/2025"
 
     status = Column(String(20), nullable=False, default="active")  # active | completed
     is_current = Column(Boolean, nullable=False, default=True)
     # Set when the system created/split this record and the student should confirm the details
     needs_review = Column(Boolean, nullable=False, default=False)
+    # Student's own names for subject areas, keyed by course code prefix: {"DIPT": "IT courses"}
+    area_labels = Column(JSON, nullable=True)
 
     created_at = Column(DateTime(timezone=True), server_default=func.now())
 

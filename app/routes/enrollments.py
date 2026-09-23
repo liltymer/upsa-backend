@@ -9,6 +9,7 @@ from app.models.result import Result
 from app.models.student import Student
 from app.routes.auth import normalize_index
 from app.schemas.enrollment import (
+    AreaLabel,
     EnrollmentUpdate,
     LinkAccountRequest,
     PreviousProgramme,
@@ -83,7 +84,7 @@ def my_enrollments(
     db: Session = Depends(get_db),
     current_user: Student = Depends(get_current_user),
 ):
-    """Every programme on the account — current first, then previous ones."""
+    """Every programme on the account: current first, then previous ones."""
     return {"enrollments": _list(db, current_user)}
 
 
@@ -180,7 +181,7 @@ def update_enrollment(
     db: Session = Depends(get_db),
     current_user: Student = Depends(get_current_user),
 ):
-    """Correct a programme record — works for completed programmes too (typo fixes)."""
+    """Correct a programme record: works for completed programmes too (typo fixes)."""
     enrollment = _own_enrollment(db, current_user, enrollment_id)
 
     if data.index_number is not None:
@@ -213,6 +214,29 @@ def update_enrollment(
     enrollment.needs_review = False
     db.commit()
     return {"message": "Programme updated.", "enrollment": summarize_enrollment(db, enrollment)}
+
+
+@router.put("/enrollments/{enrollment_id}/area-labels")
+def set_area_label(
+    enrollment_id: int,
+    data: AreaLabel,
+    db: Session = Depends(get_db),
+    current_user: Student = Depends(get_current_user),
+):
+    """Give a subject area (course-code prefix) a name the student recognises."""
+    enrollment = _own_enrollment(db, current_user, enrollment_id)
+    labels = dict(enrollment.area_labels or {})
+    code = data.code.upper()
+    name = data.name.strip()
+    if name:
+        labels[code] = name
+    else:
+        labels.pop(code, None)
+    if len(labels) > 30:
+        raise HTTPException(status_code=400, detail="Too many custom area names.")
+    enrollment.area_labels = labels or None  # new dict so the change is saved
+    db.commit()
+    return {"message": "Area name saved.", "area_labels": enrollment.area_labels or {}}
 
 
 @router.delete("/enrollments/{enrollment_id}")

@@ -66,7 +66,7 @@ def generate_transcript(db: Session, enrollment: Enrollment) -> dict:
         "status": enrollment.status,
         "level": enrollment.current_level,
         "academic_year": enrollment.start_academic_year,
-        "period": f"{enrollment.start_academic_year} – {last_year}",
+        "period": f"{enrollment.start_academic_year} to {last_year}",
         "transcript": semesters,
         "total_credits": credits,
         "total_grade_points": points,

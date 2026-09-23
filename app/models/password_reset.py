@@ -8,7 +8,7 @@ class PasswordResetToken(Base):
 
     id = Column(Integer, primary_key=True, index=True)
     student_id = Column(Integer, ForeignKey("students.id"), nullable=False)
-    # SHA-256 of the token that was emailed — the raw token is never stored
+    # SHA-256 of the token that was emailed: the raw token is never stored
     token = Column(String(64), unique=True, nullable=False, index=True)
     is_used = Column(Boolean, default=False)
     expires_at = Column(DateTime(timezone=True), nullable=False)

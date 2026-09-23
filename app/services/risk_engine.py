@@ -23,17 +23,17 @@ def analyze_academic_risk(db: Session, enrollment: Enrollment) -> dict:
 
     if cgpa < PROBATION_THRESHOLD:
         risk_level = "High"
-        alerts.append("CGPA below 1.0 — Academic Probation")
+        alerts.append("Your CGPA is below 1.0, which means academic probation.")
     elif classification == "Pass":
         risk_level = "High"
-        alerts.append("CGPA in the Pass band — at risk of graduating without a class")
+        alerts.append("Your CGPA is in the Pass band. You are at risk of graduating without a class.")
     elif cgpa < 3.0:
         risk_level = "Medium"
-        alerts.append(f"CGPA in the {classification} band — improvement needed")
+        alerts.append(f"Your CGPA is in the {classification} band. There is room to improve.")
     else:
         risk_level = "Low"
         if next_band:
-            alerts.append(f"CGPA in the {classification} band — pushing for {next_band['label']}")
+            alerts.append(f"Your CGPA is in the {classification} band and within reach of {next_band['label']}.")
 
     return {
         "enrollment_id": enrollment.id,

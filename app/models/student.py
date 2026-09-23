@@ -7,7 +7,7 @@ from app.database import Base
 class Student(Base):
     """
     A person's login account. Academic details (index number, programme,
-    level) live on their enrollments — see app/models/enrollment.py.
+    level) live on their enrollments: see app/models/enrollment.py.
     """
     __tablename__ = "students"
 
@@ -15,6 +15,8 @@ class Student(Base):
 
     # Personal info
     name = Column(String, nullable=False)
+    # What the student wants to be called in greetings (names are ordered differently)
+    preferred_name = Column(String(60), nullable=True)
     email = Column(String, unique=True, nullable=False, index=True)
     password_hash = Column(String, nullable=False)
 

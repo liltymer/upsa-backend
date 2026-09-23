@@ -231,7 +231,7 @@ def get_anonymous_analytics(
 
 
 # ================================
-# ANNOUNCEMENTS — ADMIN CRUD
+# ANNOUNCEMENTS: ADMIN CRUD
 # ================================
 
 @router.get("/announcements", response_model=List[AnnouncementResponse])
@@ -309,7 +309,7 @@ def delete_announcement(
 
 
 # ================================
-# COURSE CATALOGUE — ADMIN CRUD
+# COURSE CATALOGUE: ADMIN CRUD
 # ================================
 
 @router.get("/courses")

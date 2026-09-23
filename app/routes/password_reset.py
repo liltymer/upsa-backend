@@ -67,7 +67,7 @@ def forgot_password(
         func.lower(Student.email) == data.email.strip().lower()
     ).first()
 
-    # Always return success — never reveal if email exists
+    # Always return success: never reveal if email exists
     if not student:
         return {
             "message": "If that email is registered, a reset link has been sent."

@@ -19,7 +19,7 @@ def get_my_dashboard(
 ):
     """
     Headline figures for one programme (current by default), plus a summary of
-    the student's other programmes — e.g. a completed diploma before a top-up.
+    the student's other programmes: e.g. a completed diploma before a top-up.
     """
     summary = summarize_enrollment(db, enrollment)
     others = [
@@ -30,12 +30,15 @@ def get_my_dashboard(
 
     return {
         "name": current_user.name,
+        "preferred_name": current_user.preferred_name,
         "role": current_user.role,
         "enrollment_id": enrollment.id,
         "index_number": enrollment.index_number,
         "programme": enrollment.programme,
         "award_type": enrollment.award_type,
         "level": enrollment.current_level,
+        "level_label": summary["level_label"],
+        "completed": summary["completed"],
         "academic_year": current_academic_year(),
         "is_top_up": summary["is_top_up"],
         "status": enrollment.status,

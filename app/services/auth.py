@@ -43,7 +43,7 @@ _DUMMY_HASH = pwd_context.hash("timing-equaliser")
 def hash_password(password: str) -> str:
     """
     Hash password using bcrypt.
-    Capped at 72 bytes — bcrypt hard limit.
+    Capped at 72 bytes: bcrypt hard limit.
     """
     return pwd_context.hash(password[:72])
 
