@@ -24,7 +24,7 @@ def academic_stage(enrollment, points, credits, cgpa, classification, next_band,
     stage = {
         "key": None,
         "title": "",
-        "label": f"Level {level} · {done} of {total} semesters recorded",
+        "label": f"{done} of {total} semesters recorded",
         "messages": [],
         "semesters_done": done,
         "total_semesters": total,
