@@ -244,6 +244,11 @@ def _actions(enrollment, cgpa, classification, next_band, target, latest, previo
             "link": "/results",
         }]
 
+    # A finished programme: look back and help with what comes next
+    # (a student who enters credits still to take is not finished: target is set then)
+    if (estimate["remaining_semesters"] == 0 and target is None) or enrollment.status == "completed":
+        return _finished_actions(enrollment, cgpa, classification, pulling_down, areas)
+
     if cgpa < 1.0:
         actions.append({
             "kind": "urgent",
@@ -316,4 +321,47 @@ def _actions(enrollment, cgpa, classification, next_band, target, latest, previo
             "link": "/results",
         })
 
+    return actions[:3]
+
+
+def _finished_actions(enrollment, cgpa, classification, pulling_down, areas) -> list[dict]:
+    """Reflective next steps once every semester of a programme is recorded."""
+    actions = []
+    others = [e for e in enrollment.student.enrollments if e.id != enrollment.id]
+    award_word = "diploma" if enrollment.award_type == "diploma" else "degree"
+
+    if enrollment.award_type == "diploma" and not any(e.award_type == "degree" for e in others):
+        actions.append({
+            "kind": "update",
+            "title": "Topping up to a degree?",
+            "body": f"Add your degree from Profile. Your {award_word} and its {classification} stay in your history, "
+                    "and the degree starts a fresh CGPA.",
+            "link": "/profile",
+        })
+
+    weak_areas = [a for a in areas if a["courses"] >= 2 and a["vs_cgpa"] <= -0.3]
+    if weak_areas:
+        weakest = min(weak_areas, key=lambda a: a["gpa"])
+        actions.append({
+            "kind": "area",
+            "title": f"Your weakest area was {weakest['label']}",
+            "body": f"Those courses ({weakest['area']}) averaged {weakest['gpa']:.2f} against your CGPA of {cgpa:.2f}. "
+                    "If your next programme has similar courses, give them extra time from the start.",
+            "link": "/results",
+        })
+    elif pulling_down:
+        worst = pulling_down[0]
+        actions.append({
+            "kind": "course",
+            "title": f"{worst['course_name']} cost you the most",
+            "body": f"A {worst['grade']} in a {worst['credit_hours']} credit course. Plan extra preparation for similar courses later.",
+            "link": "/results",
+        })
+
+    actions.append({
+        "kind": "start",
+        "title": "Keep a copy of your transcript",
+        "body": f"Download your unofficial {award_word} transcript as a PDF for your records.",
+        "link": "/transcript",
+    })
     return actions[:3]

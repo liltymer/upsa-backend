@@ -131,3 +131,12 @@ def test_preferred_name(client):
     assert client.get("/dashboard/me", headers=headers).json()["preferred_name"] == "Joshua"
     client.put("/students/me", headers=headers, json={"preferred_name": ""})
     assert client.get("/dashboard/me", headers=headers).json()["preferred_name"] is None
+
+
+def test_finished_programme_actions_look_back(client):
+    headers = diploma_student(client)
+    actions = client.get("/insights/me", headers=headers).json()["actions"]
+    titles = [a["title"] for a in actions]
+    assert titles[0] == "Topping up to a degree?"
+    assert any(t.startswith("Your weakest area was") for t in titles)
+    assert not any("extra attention" in t or t.startswith("Aim for") for t in titles)
