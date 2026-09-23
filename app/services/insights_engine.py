@@ -332,7 +332,7 @@ def _finished_actions(enrollment, cgpa, classification, pulling_down, areas) -> 
 
     if enrollment.award_type == "diploma" and not any(e.award_type == "degree" for e in others):
         actions.append({
-            "kind": "update",
+            "kind": "topup",
             "title": "Topping up to a degree?",
             "body": f"Add your degree from Profile. Your {award_word} and its {classification} stay in your history, "
                     "and the degree starts a fresh CGPA.",
