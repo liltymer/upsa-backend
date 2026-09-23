@@ -11,15 +11,20 @@ if not DATABASE_URL:
     raise RuntimeError("DATABASE_URL is not set in .env")
 
 # Fix for psycopg2 — replace postgres:// with postgresql://
-# and handle Neon's channel_binding parameter
 if DATABASE_URL.startswith("postgres://"):
     DATABASE_URL = DATABASE_URL.replace("postgres://", "postgresql://", 1)
+
+# Hosted Postgres (Neon) requires SSL; SQLite is used for local runs and tests
+if DATABASE_URL.startswith("sqlite"):
+    connect_args = {"check_same_thread": False}
+else:
+    connect_args = {"sslmode": "require"}
 
 engine = create_engine(
     DATABASE_URL,
     pool_pre_ping=True,
     future=True,
-    connect_args={"sslmode": "require"},
+    connect_args=connect_args,
 )
 
 SessionLocal = sessionmaker(

@@ -1,65 +1,75 @@
 from sqlalchemy.orm import Session
-from collections import defaultdict
 
+from app.models.enrollment import Enrollment
 from app.models.result import Result
-from app.models.student import Student
-from app.utils.gpa import calculate_semester_gpa, calculate_cgpa
+from app.utils.gpa import semester_summaries, totals
+from app.utils.grading import (
+    get_classification,
+    level_for_academic_year,
+    truncate_gpa,
+)
+
+SEMESTER_NAMES = {1: "First Semester", 2: "Second Semester"}
 
 
-def generate_transcript(db: Session, student_id: int) -> dict | None:
+def generate_transcript(db: Session, enrollment: Enrollment) -> dict:
     """
-    Builds a full academic transcript for a student,
-    grouped by semester and sorted chronologically.
+    Transcript for ONE programme, grouped by semester in chronological order
+    with the same per-semester figures as the UPSA transcript.
     """
-    student = db.query(Student).filter(Student.id == student_id).first()
-
-    if not student:
-        return None
-
+    student = enrollment.student
     results = (
         db.query(Result)
-        .filter(Result.student_id == student_id)
-        .order_by(Result.year, Result.semester)
+        .filter(Result.enrollment_id == enrollment.id)
+        .order_by(Result.academic_year, Result.semester, Result.course_code)
         .all()
     )
 
-    semesters = defaultdict(list)
-
-    for r in results:
-        key = (r.year, r.semester)
-        semesters[key].append(r)
-
-    transcript_data = []
-
-    for (year, semester), records in sorted(semesters.items()):
-        courses = []
-
-        for r in records:
-            courses.append({
-                "course_code": r.course_code,       # ✅ directly on Result
-                "course_title": r.course_name,      # ✅ directly on Result
-                "credits": r.credit_hours,          # ✅ directly on Result
-                "grade": r.grade,
-                "grade_point": r.grade_point,
-            })
-
-        semester_gpa = calculate_semester_gpa(db, student_id, year, semester)
-
-        transcript_data.append({
-            "year": year,
-            "semester": semester,
-            "courses": courses,
-            "semester_gpa": semester_gpa,
+    semesters = []
+    for s in semester_summaries(results):
+        semesters.append({
+            "academic_year": s["academic_year"],
+            "semester": s["semester"],
+            "title": f"{s['academic_year']} Academic Year - {SEMESTER_NAMES[s['semester']]}",
+            "level": level_for_academic_year(
+                enrollment.entry_level, enrollment.start_academic_year, s["academic_year"]
+            ),
+            "courses": [
+                {
+                    "course_code": r.course_code,
+                    "course_title": r.course_name,
+                    "credits": r.credit_hours,
+                    "grade": r.grade,
+                    "grade_point": r.grade_point,
+                    "grade_value": r.grade_point * r.credit_hours,
+                }
+                for r in s["results"]
+            ],
+            "total_credits": s["total_credits"],
+            "total_grade_points": s["total_grade_points"],
+            "semester_gpa": s["gpa"],
+            "cumulative_credits": s["cumulative_credits"],
+            "cumulative_grade_points": s["cumulative_grade_points"],
+            "cgpa": s["cgpa"],
         })
 
-    cgpa = calculate_cgpa(db, student_id)
+    points, credits = totals(results)
+    cgpa = truncate_gpa(points, credits)
+    last_year = semesters[-1]["academic_year"] if semesters else enrollment.start_academic_year
 
     return {
+        "enrollment_id": enrollment.id,
         "student_name": student.name,
-        "index_number": student.index_number,
-        "programme": student.programme,
-        "level": student.level,
-        "academic_year": student.academic_year,
-        "transcript": transcript_data,
+        "index_number": enrollment.index_number,
+        "programme": enrollment.programme,
+        "award_type": enrollment.award_type,
+        "status": enrollment.status,
+        "level": enrollment.current_level,
+        "academic_year": enrollment.start_academic_year,
+        "period": f"{enrollment.start_academic_year} – {last_year}",
+        "transcript": semesters,
+        "total_credits": credits,
+        "total_grade_points": points,
         "cgpa": cgpa,
+        "classification": get_classification(cgpa, enrollment.award_type) if results else None,
     }

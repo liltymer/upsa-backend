@@ -1,19 +1,22 @@
-from pydantic import BaseModel
-from typing import Optional
+from pydantic import BaseModel, ConfigDict
+from typing import Literal, Optional
 from datetime import datetime
+
+
+Priority = Literal["normal", "important", "urgent"]
 
 
 class AnnouncementCreate(BaseModel):
     title: str
     message: str
-    priority: Optional[str] = "normal"
+    priority: Priority = "normal"
     is_active: Optional[bool] = True
 
 
 class AnnouncementUpdate(BaseModel):
     title: Optional[str] = None
     message: Optional[str] = None
-    priority: Optional[str] = None
+    priority: Optional[Priority] = None
     is_active: Optional[bool] = None
 
 
@@ -26,5 +29,4 @@ class AnnouncementResponse(BaseModel):
     created_at: datetime
     updated_at: Optional[datetime] = None
 
-    class Config:
-        from_attributes = True
+    model_config = ConfigDict(from_attributes=True)
