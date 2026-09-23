@@ -43,7 +43,33 @@ def _area_code(course_code: str) -> str:
     return match.group(0).upper() if match else course_code.strip().upper()
 
 
-def _course(r: Result, enrollment: Enrollment, cgpa: float) -> dict:
+# Friendly names for UPSA course-code prefixes. Students can rename any area.
+DEFAULT_AREA_NAMES = {
+    "DIPC": "Core business",
+    "DIPT": "Information technology",
+    "DIPL": "Law",
+    "DIPA": "Accounting",
+    "DIPM": "Marketing and management",
+    "DIPP": "Public relations",
+}
+
+
+def area_label(code: str, custom: Optional[dict]) -> str:
+    if custom and custom.get(code):
+        return custom[code]
+    return DEFAULT_AREA_NAMES.get(code, code)
+
+
+def _cgpa_effect(r: Result, points: float, credits: int) -> float:
+    """How much this course moved the CGPA: CGPA with it minus CGPA without it."""
+    rest_credits = credits - r.credit_hours
+    if rest_credits <= 0:
+        return 0.0
+    without = (points - r.grade_point * r.credit_hours) / rest_credits
+    return round(points / credits - without, 2)
+
+
+def _course(r: Result, enrollment: Enrollment, cgpa: float, points: float = 0.0, credits: int = 0) -> dict:
     return {
         "result_id": r.id,
         "course_code": r.course_code,
@@ -56,6 +82,8 @@ def _course(r: Result, enrollment: Enrollment, cgpa: float) -> dict:
         "level": level_for_academic_year(enrollment.entry_level, enrollment.start_academic_year, r.academic_year),
         # How many grade points (x credits) this course sits below or above the CGPA
         "impact": round((r.grade_point - cgpa) * r.credit_hours, 2),
+        # Plain version for students: negative means it lowered the CGPA by that much
+        "cgpa_effect": _cgpa_effect(r, points, credits) if credits else 0.0,
     }
 
 
@@ -118,7 +146,7 @@ def generate_insights(db: Session, enrollment: Enrollment, remaining_credits: Op
     weakest_semester = min(history, key=lambda h: h["gpa"]) if history else None
 
     # ---- courses ----
-    courses = [_course(r, enrollment, cgpa) for r in results]
+    courses = [_course(r, enrollment, cgpa, points, credits) for r in results]
     pulling_down = sorted([c for c in courses if c["impact"] < 0], key=lambda c: (c["impact"], c["grade_point"]))[:TOP_N]
     strongest = sorted([c for c in courses if c["grade_point"] >= 3.5],
                        key=lambda c: (-c["grade_point"], -c["credit_hours"], c["course_code"]))[:TOP_N]
@@ -132,6 +160,8 @@ def generate_insights(db: Session, enrollment: Enrollment, remaining_credits: Op
         p, c = totals(rows)
         areas.append({
             "area": code,
+            "label": area_label(code, enrollment.area_labels),
+            "custom_label": bool(enrollment.area_labels and enrollment.area_labels.get(code)),
             "courses": len(rows),
             "credits": c,
             "gpa": truncate_gpa(p, c),

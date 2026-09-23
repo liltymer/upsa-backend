@@ -32,3 +32,9 @@ class EnrollmentUpdate(BaseModel):
 class LinkAccountRequest(BaseModel):
     email: str = Field(min_length=3, max_length=254)
     password: str = Field(min_length=1, max_length=128)
+
+
+class AreaLabel(BaseModel):
+    code: str = Field(min_length=1, max_length=12, pattern=r"^[A-Za-z]+$")
+    # Empty name resets the area to its default name
+    name: str = Field("", max_length=40)

@@ -1,3 +1,5 @@
+from typing import Optional
+
 from fastapi import APIRouter, Depends, HTTPException
 from pydantic import BaseModel, Field
 from sqlalchemy.orm import Session
@@ -13,7 +15,9 @@ router = APIRouter(prefix="/students", tags=["Students"])
 
 class ProfileUpdate(BaseModel):
     """Account details only: programme details are edited per programme via /enrollments."""
-    name: str = Field(min_length=2, max_length=120)
+    name: Optional[str] = Field(None, min_length=2, max_length=120)
+    # Empty string clears it
+    preferred_name: Optional[str] = Field(None, max_length=60)
 
 
 def _profile(db: Session, student: Student) -> dict:
@@ -21,6 +25,7 @@ def _profile(db: Session, student: Student) -> dict:
     return {
         "id": student.id,
         "name": student.name,
+        "preferred_name": student.preferred_name,
         "email": student.email,
         "role": student.role,
         # Current programme, kept at top level for existing screens
@@ -54,11 +59,13 @@ def update_my_profile(
     db: Session = Depends(get_db),
     current_user: Student = Depends(get_current_user),
 ):
-    name = data.name.strip()
-    if len(name) < 2:
-        raise HTTPException(status_code=400, detail="Name must be at least 2 characters.")
-
-    current_user.name = name
+    if data.name is not None:
+        name = data.name.strip()
+        if len(name) < 2:
+            raise HTTPException(status_code=400, detail="Name must be at least 2 characters.")
+        current_user.name = name
+    if data.preferred_name is not None:
+        current_user.preferred_name = data.preferred_name.strip() or None
     db.commit()
     db.refresh(current_user)
 

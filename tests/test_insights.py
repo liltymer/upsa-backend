@@ -94,3 +94,40 @@ def test_other_students_programme_is_private(client):
     other = login(client, email="b@gmail.com")
     assert client.get("/insights/me", headers=other, params={"enrollment_id": 1}).status_code == 404
     assert DIPLOMA_TRANSCRIPT  # fixture data shared with test_topup
+
+
+def test_cgpa_effect_is_plain_and_exact(client):
+    headers = diploma_student(client)
+    body = client.get("/insights/me", headers=headers).json()
+    worst = body["pulling_down"][0]
+    # Removing one 3-credit C- from 72 credits changes the CGPA by about 0.08
+    assert worst["cgpa_effect"] == -0.08
+    assert body["strongest"][0]["cgpa_effect"] > 0
+
+
+def test_area_labels_default_and_rename(client):
+    headers = diploma_student(client)
+    areas = {a["area"]: a for a in client.get("/insights/me", headers=headers).json()["areas"]}
+    assert areas["DIPT"]["label"] == "Information technology" and not areas["DIPT"]["custom_label"]
+    eid = client.get("/enrollments/me", headers=headers).json()["enrollments"][0]["id"]
+
+    res = client.put(f"/enrollments/{eid}/area-labels", headers=headers, json={"code": "dipt", "name": "IT and programming"})
+    assert res.status_code == 200, res.text
+    areas = {a["area"]: a for a in client.get("/insights/me", headers=headers).json()["areas"]}
+    assert areas["DIPT"]["label"] == "IT and programming" and areas["DIPT"]["custom_label"]
+
+    client.put(f"/enrollments/{eid}/area-labels", headers=headers, json={"code": "DIPT", "name": ""})
+    areas = {a["area"]: a for a in client.get("/insights/me", headers=headers).json()["areas"]}
+    assert areas["DIPT"]["label"] == "Information technology"
+
+    bad = client.put(f"/enrollments/{eid}/area-labels", headers=headers, json={"code": "DI'PT;", "name": "x"})
+    assert bad.status_code == 422
+
+
+def test_preferred_name(client):
+    headers = diploma_student(client)
+    res = client.put("/students/me", headers=headers, json={"preferred_name": "Joshua"})
+    assert res.status_code == 200 and res.json()["preferred_name"] == "Joshua"
+    assert client.get("/dashboard/me", headers=headers).json()["preferred_name"] == "Joshua"
+    client.put("/students/me", headers=headers, json={"preferred_name": ""})
+    assert client.get("/dashboard/me", headers=headers).json()["preferred_name"] is None

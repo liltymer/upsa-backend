@@ -1,4 +1,4 @@
-from sqlalchemy import Boolean, Column, DateTime, ForeignKey, Integer, String
+from sqlalchemy import JSON, Boolean, Column, DateTime, ForeignKey, Integer, String
 from sqlalchemy.orm import relationship
 from sqlalchemy.sql import func
 
@@ -34,6 +34,8 @@ class Enrollment(Base):
     is_current = Column(Boolean, nullable=False, default=True)
     # Set when the system created/split this record and the student should confirm the details
     needs_review = Column(Boolean, nullable=False, default=False)
+    # Student's own names for subject areas, keyed by course code prefix: {"DIPT": "IT courses"}
+    area_labels = Column(JSON, nullable=True)
 
     created_at = Column(DateTime(timezone=True), server_default=func.now())
 

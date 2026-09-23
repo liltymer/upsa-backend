@@ -30,6 +30,7 @@ def get_my_dashboard(
 
     return {
         "name": current_user.name,
+        "preferred_name": current_user.preferred_name,
         "role": current_user.role,
         "enrollment_id": enrollment.id,
         "index_number": enrollment.index_number,
