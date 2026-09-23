@@ -7,7 +7,7 @@ from app.database import Base
 class Student(Base):
     """
     A person's login account. Academic details (index number, programme,
-    level) live on their enrollments — see app/models/enrollment.py.
+    level) live on their enrollments: see app/models/enrollment.py.
     """
     __tablename__ = "students"
 

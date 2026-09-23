@@ -12,7 +12,7 @@ router = APIRouter(prefix="/students", tags=["Students"])
 
 
 class ProfileUpdate(BaseModel):
-    """Account details only — programme details are edited per programme via /enrollments."""
+    """Account details only: programme details are edited per programme via /enrollments."""
     name: str = Field(min_length=2, max_length=120)
 
 

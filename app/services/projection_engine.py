@@ -38,7 +38,7 @@ def calculate_target_grade(
     remaining_credits: int
 ) -> dict:
     """
-    Reverse projection — the average grade point needed over the remaining
+    Reverse projection: the average grade point needed over the remaining
     credits of this programme to reach a target CGPA.
     """
     current_points, current_credits = _current_totals(db, enrollment.id)

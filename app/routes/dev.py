@@ -21,10 +21,10 @@ def seed(db: Session = Depends(get_db)):
     """
     Clears all results and seeds fresh sample data
     for the first registered student.
-    For development use only — remove in production.
+    For development use only: remove in production.
     """
 
-    # Clear existing results only — keep students
+    # Clear existing results only: keep students
     db.query(Result).delete()
     db.commit()
 
@@ -44,10 +44,10 @@ def seed(db: Session = Depends(get_db)):
     student = enrollment.student
     start_year = parse_academic_year(enrollment.start_academic_year)
 
-    # Sample results — UPSA style, grade only, no scores
+    # Sample results: UPSA style, grade only, no scores
     sample_results = [
 
-        # Year 1 — Semester 1
+        # Year 1: Semester 1
         {
             "course_code": "DIPC003",
             "course_name": "Business Management",
@@ -84,7 +84,7 @@ def seed(db: Session = Depends(get_db)):
             "year": 1, "semester": 1
         },
 
-        # Year 1 — Semester 2
+        # Year 1: Semester 2
         {
             "course_code": "DIPC006",
             "course_name": "Principles of Accounting",
@@ -143,7 +143,7 @@ def seed(db: Session = Depends(get_db)):
         "level": enrollment.current_level,
         "semesters_seeded": 2,
         "results_created": created,
-        "note": "All grades are UPSA-style — no scores."
+        "note": "All grades are UPSA-style. No scores."
     }
 
 

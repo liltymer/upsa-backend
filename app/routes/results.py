@@ -37,7 +37,7 @@ class ResultCreate(BaseModel):
 
 
 class ResultUpdate(BaseModel):
-    """Every field is optional — results in completed programmes can still be corrected."""
+    """Every field is optional: results in completed programmes can still be corrected."""
     grade: Optional[str] = None
     course_code: Optional[str] = Field(None, min_length=1, max_length=20)
     course_name: Optional[str] = Field(None, min_length=1, max_length=200)
@@ -272,7 +272,7 @@ def move_results(
     current_user: Student = Depends(get_current_user),
 ):
     """
-    Move results to another of the student's programmes — used to separate
+    Move results to another of the student's programmes: used to separate
     diploma results that were entered under a degree (or vice versa).
     """
     target = get_enrollment(payload.enrollment_id, db, current_user)
@@ -312,7 +312,7 @@ def delete_result(
 ):
     """Student removes a result they entered by mistake."""
     result = get_own_result(result_id, current_user, db)
-    label = f"{result.course_code} — {result.course_name} ({result.academic_year} Semester {result.semester})"
+    label = f"{result.course_code} {result.course_name} ({result.academic_year} Semester {result.semester})"
 
     db.delete(result)
     db.commit()

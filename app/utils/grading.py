@@ -1,4 +1,4 @@
-# Official UPSA grading scale — identical for diploma and degree programmes.
+# Official UPSA grading scale: identical for diploma and degree programmes.
 # Students enter their grade (A, B+, etc.) and the system derives the grade point.
 # Classification bands differ: degrees use First Class … Pass, diplomas use Distinction … Pass.
 
@@ -36,8 +36,8 @@ GRADE_SCALE = [
 AwardType = Literal["diploma", "degree"]
 
 # Highest band first. "min" is inclusive.
-# The official diploma chart lists Credit as 2.5–3.49 and Distinction from 3.6,
-# so 3.50–3.59 is treated as Credit.
+# The official diploma chart lists Credit as 2.5-3.49 and Distinction from 3.6,
+# so 3.50-3.59 is treated as Credit.
 CLASSIFICATION_BANDS: dict[str, list[dict]] = {
     "degree": [
         {"label": "First Class",        "min": 3.6, "range": "3.60 - 4.00"},

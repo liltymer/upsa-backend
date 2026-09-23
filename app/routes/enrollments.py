@@ -83,7 +83,7 @@ def my_enrollments(
     db: Session = Depends(get_db),
     current_user: Student = Depends(get_current_user),
 ):
-    """Every programme on the account — current first, then previous ones."""
+    """Every programme on the account: current first, then previous ones."""
     return {"enrollments": _list(db, current_user)}
 
 
@@ -180,7 +180,7 @@ def update_enrollment(
     db: Session = Depends(get_db),
     current_user: Student = Depends(get_current_user),
 ):
-    """Correct a programme record — works for completed programmes too (typo fixes)."""
+    """Correct a programme record: works for completed programmes too (typo fixes)."""
     enrollment = _own_enrollment(db, current_user, enrollment_id)
 
     if data.index_number is not None:

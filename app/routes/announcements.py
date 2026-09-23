@@ -13,7 +13,7 @@ router = APIRouter(prefix="/announcements", tags=["announcements"])
 def get_active_announcements(db: Session = Depends(get_db)):
     """
     Returns all active announcements for students to see on their dashboard.
-    No authentication required — public endpoint.
+    No authentication required: public endpoint.
     """
     return (
         db.query(Announcement)

@@ -15,6 +15,7 @@ from app.routes.courses import router as courses_router
 from app.routes.auth import router as auth_router
 from app.routes.dashboard import router as dashboard_router
 from app.routes.enrollments import router as enrollments_router
+from app.routes.insights import router as insights_router
 from app.routes.risk import router as risk_router
 from app.routes.trends import router as trends_router
 from app.routes.projection import router as projection_router
@@ -69,7 +70,7 @@ async def security_headers(request: Request, call_next):
     # The API only serves JSON/PDF; the interactive docs need their CDN assets
     if not request.url.path.startswith(DOCS_PATHS):
         response.headers.setdefault("Content-Security-Policy", "default-src 'none'; frame-ancestors 'none'")
-    # Responses carry personal academic data — never cache them in shared caches
+    # Responses carry personal academic data: never cache them in shared caches
     if request.headers.get("authorization"):
         response.headers.setdefault("Cache-Control", "no-store")
     return response
@@ -89,6 +90,7 @@ app.include_router(results_router)
 app.include_router(gpa_router)
 app.include_router(courses_router)
 app.include_router(dashboard_router)
+app.include_router(insights_router)
 app.include_router(risk_router)
 app.include_router(trends_router)
 app.include_router(projection_router)

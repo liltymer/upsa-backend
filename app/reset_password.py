@@ -19,7 +19,7 @@ from sqlalchemy import func
 
 from app.config import PASSWORD_MIN_LENGTH
 from app.database import SessionLocal
-import app.models  # noqa: F401 — registers every model so relationships resolve
+import app.models  # noqa: F401 (registers every model so relationships resolve)
 from app.models.student import Student
 from app.services.auth import hash_password
 

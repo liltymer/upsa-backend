@@ -19,7 +19,7 @@ def get_my_dashboard(
 ):
     """
     Headline figures for one programme (current by default), plus a summary of
-    the student's other programmes — e.g. a completed diploma before a top-up.
+    the student's other programmes: e.g. a completed diploma before a top-up.
     """
     summary = summarize_enrollment(db, enrollment)
     others = [
