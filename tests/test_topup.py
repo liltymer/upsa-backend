@@ -225,3 +225,33 @@ def test_cannot_reach_another_students_programme(client):
     assert client.put(f"/results/{b_result}", headers=a, json={"grade": "F"}).status_code == 404
     assert client.post("/results/move", headers=a, json={"result_ids": [b_result], "enrollment_id": b_enrollment}).status_code == 404
     assert client.patch(f"/enrollments/{b_enrollment}", headers=a, json={"programme": "Hacked"}).status_code == 404
+
+
+def test_top_up_can_join_at_level_200(client):
+    res = register(client, index_number="20269999", programme=BSC_IT, level=200,
+                   academic_year="2026/2027", is_top_up=True, entry_level=200)
+    assert res.status_code == 201, res.text
+    headers = login(client)
+    current = client.get("/enrollments/me", headers=headers).json()["enrollments"][0]
+    assert (current["entry_level"], current["current_level"], current["is_top_up"]) == (200, 200, True)
+
+    # Level 100 is not a valid top-up entry
+    bad = register(client, email="x@gmail.com", index_number="X1", programme=BSC_IT, level=100,
+                   academic_year="2026/2027", is_top_up=True, entry_level=100)
+    assert bad.status_code == 422
+
+
+def test_reference_lists_official_programmes(client):
+    body = client.get("/reference/academic").json()
+    names = {p["name"] for p in body["programmes"]}
+    assert len([p for p in body["programmes"] if p["award_type"] == "diploma"]) == 5
+    assert len([p for p in body["programmes"] if p["award_type"] == "degree"]) == 17
+    assert "Bachelor of Science in Applied Statistics" in names
+    assert body["top_up_entry_levels"] == [200, 300]
+
+
+def test_typed_diploma_name_is_detected(client):
+    res = register(client, programme="Tertiary Diploma in Accounting", level=100)
+    assert res.status_code == 201, res.text
+    headers = login(client)
+    assert client.get("/enrollments/me", headers=headers).json()["enrollments"][0]["award_type"] == "diploma"

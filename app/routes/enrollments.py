@@ -26,6 +26,7 @@ from app.utils.grading import (
     GRADE_SCALE,
     MAX_LEVEL,
     PROGRAMMES,
+    TOP_UP_ENTRY_LEVELS,
     award_type_for_programme,
     current_academic_year,
     parse_academic_year,
@@ -69,6 +70,7 @@ def academic_reference():
         "grade_scale": GRADE_SCALE,
         "classification_bands": CLASSIFICATION_BANDS,
         "max_level": MAX_LEVEL,
+        "top_up_entry_levels": TOP_UP_ENTRY_LEVELS,
     }
 
 

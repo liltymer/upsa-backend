@@ -96,7 +96,7 @@ def summarize_enrollment(db: Session, enrollment: Enrollment) -> dict:
         "start_academic_year": enrollment.start_academic_year,
         "status": enrollment.status,
         "is_current": enrollment.is_current,
-        "is_top_up": enrollment.award_type == "degree" and enrollment.entry_level >= 300,
+        "is_top_up": enrollment.award_type == "degree" and enrollment.entry_level > 100,
         "needs_review": enrollment.needs_review,
         "cgpa": cgpa,
         "classification": get_classification(cgpa, enrollment.award_type) if results else None,

@@ -62,34 +62,42 @@ PROBATION_THRESHOLD = 1.0
 # PROGRAMMES
 # ================================
 
+# Official list from admissions.upsa.edu.gh/admissions/undergraduate/undergraduate-programmes/
+# (checked September 2026). Students can still type a programme that is not listed.
 PROGRAMMES: list[dict] = [
     {"name": "Diploma in Accounting", "award_type": "diploma"},
-    {"name": "Diploma in Marketing", "award_type": "diploma"},
-    {"name": "Diploma in Management", "award_type": "diploma"},
-    {"name": "Diploma in Public Relations", "award_type": "diploma"},
     {"name": "Diploma in Information Technology Management", "award_type": "diploma"},
-    {"name": "Bachelor of Science in Data Science and Analytics", "award_type": "degree"},
-    {"name": "Bachelor of Laws (LLB)", "award_type": "degree"},
+    {"name": "Diploma in Management", "award_type": "diploma"},
+    {"name": "Diploma in Marketing", "award_type": "diploma"},
+    {"name": "Diploma in Public Relations", "award_type": "diploma"},
+    {"name": "Bachelor of Arts in Applied French and Communications", "award_type": "degree"},
     {"name": "Bachelor of Arts in Communication Studies", "award_type": "degree"},
-    {"name": "Bachelor of Science in Logistics and Transport Management", "award_type": "degree"},
     {"name": "Bachelor of Arts in Public Relations Management", "award_type": "degree"},
+    {"name": "Bachelor of Business Administration", "award_type": "degree"},
+    {"name": "Bachelor of Laws (LLB)", "award_type": "degree"},
     {"name": "Bachelor of Science in Accounting", "award_type": "degree"},
     {"name": "Bachelor of Science in Accounting and Finance", "award_type": "degree"},
-    {"name": "Bachelor of Science in Business Economics", "award_type": "degree"},
     {"name": "Bachelor of Science in Actuarial Science", "award_type": "degree"},
+    {"name": "Bachelor of Science in Agribusiness and Finance", "award_type": "degree"},
+    {"name": "Bachelor of Science in Applied Marketing", "award_type": "degree"},
+    {"name": "Bachelor of Science in Applied Statistics", "award_type": "degree"},
     {"name": "Bachelor of Science in Banking and Finance", "award_type": "degree"},
-    {"name": "Bachelor of Business Administration", "award_type": "degree"},
+    {"name": "Bachelor of Science in Business Economics", "award_type": "degree"},
+    {"name": "Bachelor of Science in Data Science and Analytics", "award_type": "degree"},
     {"name": "Bachelor of Science in Information Technology", "award_type": "degree"},
-    {"name": "Bachelor of Science in Marketing", "award_type": "degree"},
+    {"name": "Bachelor of Science in Logistics and Transport Management", "award_type": "degree"},
     {"name": "Bachelor of Science in Real Estate Management and Finance", "award_type": "degree"},
 ]
+
+# Level a top-up student can join a degree at, after a diploma or HND
+TOP_UP_ENTRY_LEVELS = [200, 300]
 
 MAX_LEVEL = {"diploma": 200, "degree": 400}
 
 
 def award_type_for_programme(programme: str) -> AwardType:
-    """Infers the award type from a programme name ("Diploma in …" → diploma)."""
-    return "diploma" if programme.strip().lower().startswith("diploma") else "degree"
+    """Infers the award type from a programme name ("Diploma in …", "Tertiary Diploma in …" → diploma)."""
+    return "diploma" if "diploma" in programme.strip().lower() else "degree"
 
 
 def is_diploma_course_code(code: str) -> bool:

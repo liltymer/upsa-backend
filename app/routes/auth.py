@@ -38,8 +38,9 @@ class RegisterRequest(BaseModel):
     programme: str = Field(min_length=1, max_length=200)
     level: Literal[100, 200, 300, 400]
     academic_year: str  # current academic year, e.g. "2025/2026"
-    # Top-up students entered their degree at Level 300 after a diploma
+    # Top-up students join a degree after a diploma, usually at Level 300 (sometimes 200)
     is_top_up: bool = False
+    entry_level: Optional[Literal[200, 300]] = None
     previous_programme: Optional[PreviousProgramme] = None
 
 
@@ -65,7 +66,7 @@ def register(data: RegisterRequest, db: Session = Depends(get_db)):
     index_number = normalize_index(data.index_number)
     programme = data.programme.strip()
     award_type = award_type_for_programme(programme)
-    entry_level = 300 if data.is_top_up else 100
+    entry_level = (data.entry_level or 300) if data.is_top_up else 100
 
     try:
         parse_academic_year(data.academic_year)
