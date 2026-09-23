@@ -1,5 +1,5 @@
 import os
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from typing import Optional
 
 from dotenv import load_dotenv
@@ -33,6 +33,8 @@ pwd_context = CryptContext(
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/auth/login")
 
+_DUMMY_HASH = pwd_context.hash("timing-equaliser")
+
 
 # ===============================
 # PASSWORD FUNCTIONS
@@ -46,10 +48,15 @@ def hash_password(password: str) -> str:
     return pwd_context.hash(password[:72])
 
 
-def verify_password(plain_password: str, hashed_password: str) -> bool:
+def verify_password(plain_password: str, hashed_password: str | None) -> bool:
     """
     Verify a plain password against its bcrypt hash.
+    With no hash (unknown user) a dummy hash is still checked so the
+    response time does not reveal whether an account exists.
     """
+    if hashed_password is None:
+        pwd_context.verify(plain_password[:72], _DUMMY_HASH)
+        return False
     return pwd_context.verify(plain_password[:72], hashed_password)
 
 
@@ -63,10 +70,12 @@ def create_access_token(data: dict) -> str:
     """
     to_encode = data.copy()
 
-    expire = datetime.utcnow() + timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
+    expire = datetime.now(timezone.utc) + timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
 
     to_encode.update({
         "exp": expire,
+        "iat": datetime.now(timezone.utc),
+        "type": "access",
         "sub": str(data.get("sub"))
     })
 
@@ -96,15 +105,33 @@ def get_current_user(
         payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
         user_id: Optional[str] = payload.get("sub")
 
-        if user_id is None:
+        if user_id is None or payload.get("type", "access") != "access":
             raise credentials_exception
+        user_id = int(user_id)
 
-    except JWTError:
+    except (JWTError, ValueError):
         raise credentials_exception
 
-    user = db.query(Student).filter(Student.id == int(user_id)).first()
+    user = db.query(Student).filter(Student.id == user_id).first()
 
     if user is None:
         raise credentials_exception
 
     return user
+
+
+# ===============================
+# ADMIN GUARD
+# ===============================
+
+def require_admin(current_user: Student = Depends(get_current_user)) -> Student:
+    """
+    Allows the request through only for admin accounts.
+    Raises 403 for everyone else.
+    """
+    if current_user.role != "admin":
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="Admin access required."
+        )
+    return current_user

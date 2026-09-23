@@ -2,51 +2,47 @@ from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 
 from app.database import get_db
-from app.services.auth import get_current_user
+from app.models.enrollment import Enrollment
 from app.models.student import Student
-from app.utils.gpa import calculate_cgpa
+from app.services.auth import get_current_user
+from app.services.enrollments import get_enrollment, summarize_enrollment
+from app.utils.grading import current_academic_year
 
 router = APIRouter(prefix="/dashboard", tags=["Dashboard"])
-
-
-def classify_cgpa(cgpa: float) -> str:
-    if cgpa >= 3.6:
-        return "First Class"
-    elif cgpa >= 3.0:
-        return "Second Class Upper"
-    elif cgpa >= 2.5:
-        return "Second Class Lower"
-    elif cgpa >= 2.0:
-        return "Third Class"
-    elif cgpa >= 1.0:
-        return "Pass"
-    else:
-        return "Fail"
-
-
-def academic_standing(cgpa: float) -> str:
-    if cgpa < 1.0:
-        return "Probation"
-    return "Good Standing"
 
 
 @router.get("/me")
 def get_my_dashboard(
     db: Session = Depends(get_db),
-    current_user: Student = Depends(get_current_user)
+    current_user: Student = Depends(get_current_user),
+    enrollment: Enrollment = Depends(get_enrollment),
 ):
-    cgpa = calculate_cgpa(db, current_user.id)
-    classification = classify_cgpa(cgpa)
-    standing = academic_standing(cgpa)
+    """
+    Headline figures for one programme (current by default), plus a summary of
+    the student's other programmes — e.g. a completed diploma before a top-up.
+    """
+    summary = summarize_enrollment(db, enrollment)
+    others = [
+        summarize_enrollment(db, e)
+        for e in current_user.enrollments
+        if e.id != enrollment.id
+    ]
 
     return {
         "name": current_user.name,
-        "index_number": current_user.index_number,
-        "cgpa": round(cgpa, 2),
-        "classification": classification,
-        "academic_standing": standing,
-        "academic_year": current_user.academic_year,
-        "programme": current_user.programme,
-        "level": current_user.level,
-        "role": current_user.role,  # ← ADDED
+        "role": current_user.role,
+        "enrollment_id": enrollment.id,
+        "index_number": enrollment.index_number,
+        "programme": enrollment.programme,
+        "award_type": enrollment.award_type,
+        "level": enrollment.current_level,
+        "academic_year": current_academic_year(),
+        "is_top_up": summary["is_top_up"],
+        "status": enrollment.status,
+        "cgpa": summary["cgpa"],
+        "classification": summary["classification"] or "No results yet",
+        "academic_standing": summary["academic_standing"] or "Good Standing",
+        "classification_bands": summary["classification_bands"],
+        "other_programmes": others,
+        "needs_review": summary["needs_review"] or any(o["needs_review"] for o in others),
     }

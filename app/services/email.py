@@ -1,5 +1,9 @@
 import os
+from html import escape
+
 import resend
+
+from app.config import FRONTEND_URL
 
 def send_reset_email(to_email: str, student_name: str, reset_token: str):
     """
@@ -7,8 +11,8 @@ def send_reset_email(to_email: str, student_name: str, reset_token: str):
     Works on Render free tier — no SMTP port blocking.
     """
     resend.api_key = os.getenv("RESEND_API_KEY", "").strip()
-    frontend_url = os.getenv("FRONTEND_URL", "https://gradeiq-upsa.vercel.app")
-    reset_link = f"{frontend_url}/reset-password?token={reset_token}"
+    reset_link = f"{FRONTEND_URL}/reset-password?token={reset_token}"
+    student_name = escape(student_name)
 
     html_body = f"""
     <!DOCTYPE html>
@@ -89,7 +93,9 @@ def send_reset_email(to_email: str, student_name: str, reset_token: str):
     """
 
     params = {
-        "from": "GradeIQ UPSA <onboarding@resend.dev>",
+        # Resend's onboarding@resend.dev sender only delivers to the Resend account owner.
+        # Set EMAIL_FROM to an address on a domain verified in Resend to reach students.
+        "from": os.getenv("EMAIL_FROM", "GradeIQ UPSA <onboarding@resend.dev>"),
         "to": [to_email],
         "subject": "Reset Your GradeIQ UPSA Password",
         "html": html_body,

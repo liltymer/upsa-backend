@@ -23,3 +23,11 @@ build/
 # OS
 .DS_Store
 Thumbs.db
+# Local SQLite
+*.db
+
+# Test / tooling caches
+.pytest_cache/
+.ruff_cache/
+.env.*
+!.env.example

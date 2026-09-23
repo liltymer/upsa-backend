@@ -17,7 +17,7 @@ def get_active_announcements(db: Session = Depends(get_db)):
     """
     return (
         db.query(Announcement)
-        .filter(Announcement.is_active == True)
+        .filter(Announcement.is_active.is_(True))
         .order_by(Announcement.created_at.desc())
         .limit(5)
         .all()

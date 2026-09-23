@@ -1,78 +1,69 @@
 from fastapi import APIRouter, Depends, HTTPException, status
-from sqlalchemy.orm import Session
+from sqlalchemy.orm import Session, selectinload
 from sqlalchemy import func
 from typing import List
-from datetime import datetime, timedelta
 
 from app.database import get_db
 from app.models.student import Student
 from app.models.result import Result
+from app.models.course import Course
+from app.models.enrollment import Enrollment
 from app.models.announcement import Announcement
+from app.models.password_reset import PasswordResetToken
 from app.schemas.announcement import (
     AnnouncementCreate,
     AnnouncementUpdate,
     AnnouncementResponse,
 )
-from app.services.auth import get_current_user
+from app.schemas.course import CourseCreate
+from app.services.auth import require_admin
+from app.utils.grading import CLASSIFICATION_BANDS, get_classification, truncate_gpa
 
 router = APIRouter(prefix="/admin", tags=["admin"])
-
-
-# ================================
-# ADMIN GUARD
-# ================================
-
-def require_admin(current_user: Student = Depends(get_current_user)):
-    if current_user.role != "admin":
-        raise HTTPException(
-            status_code=status.HTTP_403_FORBIDDEN,
-            detail="Admin access required."
-        )
-    return current_user
 
 
 # ================================
 # PLATFORM STATS
 # ================================
 
+def _current_enrollments(db: Session):
+    return (
+        db.query(Enrollment)
+        .join(Student, Student.id == Enrollment.student_id)
+        .filter(Student.role == "student", Enrollment.is_current.is_(True))
+    )
+
+
 @router.get("/stats")
 def get_platform_stats(
     db: Session = Depends(get_db),
     admin: Student = Depends(require_admin),
 ):
-    total_students = db.query(Student).filter(
-        Student.role == "student"
-    ).count()
-
-    today = datetime.utcnow().date()
-    week_ago = datetime.utcnow() - timedelta(days=7)
-    month_ago = datetime.utcnow() - timedelta(days=30)
-
-    # Students with results (active users)
+    total_students = db.query(Student).filter(Student.role == "student").count()
     active_users = db.query(Result.student_id).distinct().count()
-
-    # Total results entered
     total_results = db.query(Result).count()
-
-    # Total announcements
     total_announcements = db.query(Announcement).filter(
-        Announcement.is_active == True
+        Announcement.is_active.is_(True)
     ).count()
 
-    # Programme distribution
-    programme_stats = (
-        db.query(Student.programme, func.count(Student.id).label("count"))
-        .filter(Student.role == "student")
-        .group_by(Student.programme)
-        .all()
+    # Students with more than one programme (e.g. diploma → degree top-up)
+    top_up_students = (
+        db.query(Enrollment.student_id)
+        .group_by(Enrollment.student_id)
+        .having(func.count(Enrollment.id) > 1)
+        .count()
     )
 
-    # Level distribution
+    current = _current_enrollments(db).subquery()
+    programme_stats = (
+        db.query(current.c.programme, func.count(current.c.id))
+        .group_by(current.c.programme)
+        .all()
+    )
     level_stats = (
-        db.query(Student.level, func.count(Student.id).label("count"))
-        .filter(Student.role == "student")
-        .group_by(Student.level)
-        .order_by(Student.level)
+        db.query(current.c.current_level, func.count(current.c.id))
+        .group_by(current.c.current_level)
+        .order_by(current.c.current_level)
         .all()
     )
 
@@ -81,13 +72,14 @@ def get_platform_stats(
         "active_users": active_users,
         "total_results": total_results,
         "active_announcements": total_announcements,
+        "top_up_students": top_up_students,
         "programme_distribution": [
             {"programme": p, "count": c}
             for p, c in programme_stats
         ],
         "level_distribution": [
-            {"level": l, "count": c}
-            for l, c in level_stats
+            {"level": lvl, "count": c}
+            for lvl, c in level_stats
         ],
     }
 
@@ -103,27 +95,37 @@ def get_all_users(
 ):
     students = (
         db.query(Student)
+        .options(selectinload(Student.enrollments))
         .filter(Student.role == "student")
         .order_by(Student.id.desc())
         .all()
     )
 
-    return {
-        "total": len(students),
-        "students": [
-            {
-                "id": s.id,
-                "name": s.name,
-                "index_number": s.index_number,
-                "email": s.email,
-                "programme": s.programme,
-                "level": s.level,
-                "academic_year": s.academic_year,
-                # NO grades, NO results, NO CGPA
-            }
-            for s in students
-        ],
-    }
+    users = []
+    for s in students:
+        current = s.current_enrollment
+        users.append({
+            "id": s.id,
+            "name": s.name,
+            "email": s.email,
+            "index_number": current.index_number if current else None,
+            "programme": current.programme if current else None,
+            "level": current.current_level if current else None,
+            "academic_year": current.start_academic_year if current else None,
+            "programmes": [
+                {
+                    "index_number": e.index_number,
+                    "programme": e.programme,
+                    "award_type": e.award_type,
+                    "status": e.status,
+                    "is_current": e.is_current,
+                }
+                for e in s.enrollments
+            ],
+            # NO grades, NO results, NO CGPA
+        })
+
+    return {"total": len(users), "students": users}
 
 
 # ================================
@@ -142,17 +144,19 @@ def delete_user(
     ).first()
 
     if not student:
-        raise HTTPException(
-            status_code=404,
-            detail="Student not found."
-        )
+        raise HTTPException(status_code=404, detail="Student not found.")
 
-    # Delete their results first
+    name = student.name
+
+    # Remove dependent rows explicitly so this works on every database backend
+    db.query(PasswordResetToken).filter(PasswordResetToken.student_id == student_id).delete()
     db.query(Result).filter(Result.student_id == student_id).delete()
+    db.query(Enrollment).filter(Enrollment.student_id == student_id).delete()
+    db.expire(student)
     db.delete(student)
     db.commit()
 
-    return {"message": f"Student {student.name} deleted successfully."}
+    return {"message": f"Student {name} deleted successfully."}
 
 
 # ================================
@@ -164,71 +168,64 @@ def get_anonymous_analytics(
     db: Session = Depends(get_db),
     admin: Student = Depends(require_admin),
 ):
-    from app.utils.gpa import calculate_cgpa
+    """
+    Classification and risk counts over each student's CURRENT programme.
+    Diploma and degree classes are counted separately (Distinction/Credit vs First Class …).
+    """
+    enrollments = _current_enrollments(db).all()
 
-    students = db.query(Student).filter(
-        Student.role == "student"
-    ).all()
-
-    if not students:
-        return {
-            "total_analysed": 0,
-            "classification_distribution": {},
-            "risk_distribution": {},
-            "average_cgpa": 0,
-        }
-
-    classifications = {
-        "First Class": 0,
-        "Second Class Upper": 0,
-        "Second Class Lower": 0,
-        "Third Class": 0,
-        "Pass": 0,
-        "Fail": 0,
-        "No Data": 0,
+    # One grouped query instead of one query per student
+    totals_by_enrollment = {
+        eid: (points or 0.0, credits or 0)
+        for eid, points, credits in (
+            db.query(
+                Result.enrollment_id,
+                func.sum(Result.grade_point * Result.credit_hours),
+                func.sum(Result.credit_hours),
+            )
+            .group_by(Result.enrollment_id)
+            .all()
+        )
     }
+
+    classifications = {"degree": {}, "diploma": {}}
+    for award_type, bands in CLASSIFICATION_BANDS.items():
+        classifications[award_type] = {band["label"]: 0 for band in bands}
+        classifications[award_type]["No Data"] = 0
 
     risk_levels = {"Low": 0, "Medium": 0, "High": 0, "No Data": 0}
     cgpa_values = []
 
-    for student in students:
-        cgpa = calculate_cgpa(db, student.id)
-
-        if cgpa == 0.0:
-            classifications["No Data"] += 1
+    for e in enrollments:
+        points, credits = totals_by_enrollment.get(e.id, (0.0, 0))
+        if not credits:
+            classifications[e.award_type]["No Data"] += 1
             risk_levels["No Data"] += 1
             continue
 
+        cgpa = truncate_gpa(points, credits)
         cgpa_values.append(cgpa)
+        label = get_classification(cgpa, e.award_type)
+        classifications[e.award_type][label] += 1
 
-        # Classification
-        if cgpa >= 3.6:
-            classifications["First Class"] += 1
-        elif cgpa >= 3.0:
-            classifications["Second Class Upper"] += 1
-        elif cgpa >= 2.5:
-            classifications["Second Class Lower"] += 1
-        elif cgpa >= 2.0:
-            classifications["Third Class"] += 1
-        elif cgpa >= 1.0:
-            classifications["Pass"] += 1
-        else:
-            classifications["Fail"] += 1
-
-        # Risk
         if cgpa >= 3.0:
             risk_levels["Low"] += 1
-        elif cgpa >= 2.5:
+        elif cgpa >= 2.0 and label != "Pass":
             risk_levels["Medium"] += 1
         else:
             risk_levels["High"] += 1
 
-    avg_cgpa = round(sum(cgpa_values) / len(cgpa_values), 2) if cgpa_values else 0
+    # Combined view for existing dashboard widgets
+    combined = {}
+    for per_type in classifications.values():
+        for label, count in per_type.items():
+            combined[label] = combined.get(label, 0) + count
 
     return {
-        "total_analysed": len(students),
-        "average_cgpa": avg_cgpa,
-        "classification_distribution": classifications,
+        "total_analysed": len(enrollments),
+        "average_cgpa": truncate_gpa(sum(cgpa_values), len(cgpa_values)) if cgpa_values else 0,
+        "classification_distribution": combined,
+        "classification_by_award_type": classifications,
         "risk_distribution": risk_levels,
     }
 
@@ -320,7 +317,6 @@ def get_all_courses(
     db: Session = Depends(get_db),
     admin: Student = Depends(require_admin),
 ):
-    from app.models.course import Course
     courses = db.query(Course).order_by(Course.code).all()
     return {
         "total": len(courses),
@@ -338,19 +334,26 @@ def get_all_courses(
     }
 
 
-@router.post("/courses")
+@router.post("/courses", status_code=status.HTTP_201_CREATED)
 def create_course(
-    data: dict,
+    data: CourseCreate,
     db: Session = Depends(get_db),
     admin: Student = Depends(require_admin),
 ):
-    from app.models.course import Course
+    code = data.code.upper().strip()
+
+    if db.query(Course).filter(Course.code == code).first():
+        raise HTTPException(
+            status_code=status.HTTP_409_CONFLICT,
+            detail=f"Course {code} already exists."
+        )
+
     course = Course(
-        code=data.get("code", "").upper().strip(),
-        name=data.get("name", "").strip(),
-        credit_hours=int(data.get("credit_hours", 3)),
-        programme=data.get("programme"),
-        level=data.get("level"),
+        code=code,
+        name=data.name.strip(),
+        credit_hours=data.credit_hours,
+        programme=data.programme,
+        level=data.level,
     )
     db.add(course)
     db.commit()
@@ -364,7 +367,6 @@ def delete_course(
     db: Session = Depends(get_db),
     admin: Student = Depends(require_admin),
 ):
-    from app.models.course import Course
     course = db.query(Course).filter(Course.id == course_id).first()
     if not course:
         raise HTTPException(status_code=404, detail="Course not found.")

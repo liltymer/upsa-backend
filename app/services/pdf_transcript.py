@@ -1,188 +1,131 @@
-from reportlab.lib.pagesizes import letter
-from reportlab.lib import colors
-from reportlab.platypus import (
-    SimpleDocTemplate, Table, TableStyle,
-    Paragraph, Spacer
-)
-from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
-from reportlab.lib.units import inch
+from datetime import date
 from io import BytesIO
+from xml.sax.saxutils import escape
+
+from reportlab.lib import colors
+from reportlab.lib.pagesizes import A4
+from reportlab.lib.styles import ParagraphStyle, getSampleStyleSheet
+from reportlab.lib.units import mm
+from reportlab.platypus import KeepTogether, Paragraph, SimpleDocTemplate, Spacer, Table, TableStyle
+
+NAVY = colors.HexColor("#1F3864")
+LIGHT = colors.HexColor("#DCE3EE")
+GRID = colors.HexColor("#000000")
 
 
-def create_transcript_pdf(transcript_data: dict) -> BytesIO:
+def _fmt(value: float) -> str:
+    return f"{value:.2f}"
+
+
+def create_transcript_pdf(transcript: dict) -> BytesIO:
     """
-    Generates a clean, structured academic transcript PDF.
-    Returns a BytesIO buffer ready to be served as a file response.
+    Builds an unofficial transcript PDF for one programme, laid out like the
+    UPSA transcript: per-semester tables with TCR / TGP / GPA / CGPA.
     """
-
     buffer = BytesIO()
-
     doc = SimpleDocTemplate(
-        buffer,
-        pagesize=letter,
-        rightMargin=inch,
-        leftMargin=inch,
-        topMargin=inch,
-        bottomMargin=inch
+        buffer, pagesize=A4,
+        leftMargin=15 * mm, rightMargin=15 * mm, topMargin=15 * mm, bottomMargin=15 * mm,
+        title=f"Transcript - {transcript['index_number'] or transcript['student_name']}",
     )
-
+    width = doc.width
     styles = getSampleStyleSheet()
+    title = ParagraphStyle("t", parent=styles["Title"], fontName="Times-Bold", fontSize=16, textColor=NAVY, spaceAfter=2)
+    subtitle = ParagraphStyle("s", parent=styles["Normal"], fontName="Times-Bold", fontSize=10, alignment=1, spaceAfter=8)
+    heading = ParagraphStyle("h", parent=styles["Normal"], fontName="Times-Bold", fontSize=10.5, textColor=NAVY,
+                             alignment=1, spaceBefore=10, spaceAfter=4)
+    cell = ParagraphStyle("c", parent=styles["Normal"], fontName="Times-Roman", fontSize=8.5, alignment=1, leading=10)
+    small = ParagraphStyle("sm", parent=styles["Normal"], fontName="Times-Italic", fontSize=8, alignment=1,
+                           textColor=colors.grey)
 
-    # Custom styles
-    title_style = ParagraphStyle(
-        "Title",
-        parent=styles["Heading1"],
-        fontSize=18,
-        spaceAfter=6,
-        textColor=colors.HexColor("#081C46"),
-        alignment=1  # centre
-    )
-
-    subtitle_style = ParagraphStyle(
-        "Subtitle",
-        parent=styles["Normal"],
-        fontSize=11,
-        spaceAfter=4,
-        textColor=colors.HexColor("#1227E2"),
-        alignment=1
-    )
-
-    section_style = ParagraphStyle(
-        "Section",
-        parent=styles["Heading2"],
-        fontSize=12,
-        spaceBefore=14,
-        spaceAfter=6,
-        textColor=colors.HexColor("#081C46")
-    )
-
-    normal_style = styles["Normal"]
-    normal_style.fontSize = 10
-
-    elements = []
-
-    # -------------------------
-    # HEADER
-    # -------------------------
-
-    elements.append(Paragraph("University of Professional Studies, Accra", title_style))
-    elements.append(Paragraph("Unofficial Academic Transcript", subtitle_style))
-    elements.append(Spacer(1, 0.2 * inch))
-
-    # Student info table
-    info_data = [
-        ["Student Name:", transcript_data["student_name"]],
-        ["Index Number:", transcript_data["index_number"]],
-        ["Final CGPA:", str(transcript_data["cgpa"])],
+    elements = [
+        Paragraph("UNIVERSITY OF PROFESSIONAL STUDIES, ACCRA", title),
+        Paragraph("UNOFFICIAL TRANSCRIPT OF ACADEMIC RECORD", subtitle),
+        Table([[""]], colWidths=[width], rowHeights=[4], style=[("BACKGROUND", (0, 0), (-1, -1), colors.black)]),
+        Spacer(1, 8),
     ]
 
-    info_table = Table(info_data, colWidths=[2 * inch, 4 * inch])
-    info_table.setStyle(TableStyle([
-        ("FONTNAME", (0, 0), (0, -1), "Helvetica-Bold"),
-        ("FONTNAME", (1, 0), (1, -1), "Helvetica"),
-        ("FONTSIZE", (0, 0), (-1, -1), 10),
-        ("BOTTOMPADDING", (0, 0), (-1, -1), 6),
-        ("TEXTCOLOR", (0, 0), (0, -1), colors.HexColor("#081C46")),
+    info = Table(
+        [
+            ["Name:", Paragraph(escape(transcript["student_name"]), cell),
+             "Student Number:", transcript["index_number"] or "-"],
+            ["Programme:", Paragraph(escape(transcript["programme"]), cell),
+             "Period:", transcript["period"]],
+        ],
+        colWidths=[width * 0.18, width * 0.34, width * 0.2, width * 0.28],
+    )
+    info.setStyle(TableStyle([
+        ("GRID", (0, 0), (-1, -1), 0.5, GRID),
+        ("FONTNAME", (0, 0), (-1, -1), "Times-Roman"),
+        ("FONTNAME", (0, 0), (0, -1), "Times-Bold"),
+        ("FONTNAME", (2, 0), (2, -1), "Times-Bold"),
+        ("FONTSIZE", (0, 0), (-1, -1), 9),
+        ("ALIGN", (0, 0), (-1, -1), "CENTER"),
+        ("VALIGN", (0, 0), (-1, -1), "MIDDLE"),
     ]))
+    elements.append(info)
 
-    elements.append(info_table)
-    elements.append(Spacer(1, 0.3 * inch))
+    col_widths = [width * 0.14, width * 0.46, width * 0.13, width * 0.1, width * 0.17]
 
-    # -------------------------
-    # SEMESTER RECORDS
-    # -------------------------
-
-    for semester in transcript_data["transcript"]:
-
-        elements.append(
-            Paragraph(
-                f"Year {semester['year']} — Semester {semester['semester']}",
-                section_style
-            )
-        )
-
-        # Table header + rows
-        table_data = [["Course Code", "Course Title", "Credits", "Grade", "Grade Point"]]
-
-        for course in semester["courses"]:
-            table_data.append([
-                course["course_code"],
-                course["course_title"],
-                str(course["credits"]),
-                course["grade"],
-                str(course["grade_point"])
+    for sem in transcript["transcript"]:
+        rows = [["Code", "Course Title", "Credits", "Grade", "Grade Points"]]
+        for c in sem["courses"]:
+            rows.append([
+                c["course_code"], Paragraph(escape(c["course_title"]), cell),
+                _fmt(c["credits"]), c["grade"], _fmt(c["grade_value"]),
             ])
-
-        # Semester GPA row
-        table_data.append([
-            "", "", "", "Semester GPA:", str(semester["semester_gpa"])
-        ])
-
-        col_widths = [1.1 * inch, 2.6 * inch, 0.7 * inch, 0.9 * inch, 1.0 * inch]
-
-        semester_table = Table(table_data, colWidths=col_widths)
-        semester_table.setStyle(TableStyle([
-            # Header row
-            ("BACKGROUND", (0, 0), (-1, 0), colors.HexColor("#1227E2")),
+        table = Table(rows, colWidths=col_widths, repeatRows=1)
+        table.setStyle(TableStyle([
+            ("BACKGROUND", (0, 0), (-1, 0), NAVY),
             ("TEXTCOLOR", (0, 0), (-1, 0), colors.white),
-            ("FONTNAME", (0, 0), (-1, 0), "Helvetica-Bold"),
-            ("FONTSIZE", (0, 0), (-1, 0), 10),
-            ("ALIGN", (0, 0), (-1, 0), "CENTER"),
-
-            # Data rows
-            ("FONTNAME", (0, 1), (-1, -2), "Helvetica"),
-            ("FONTSIZE", (0, 1), (-1, -2), 9),
-            ("ROWBACKGROUNDS", (0, 1), (-1, -2),
-             [colors.HexColor("#F5F7FF"), colors.white]),
-            ("ALIGN", (2, 1), (-1, -2), "CENTER"),
-
-            # GPA summary row
-            ("FONTNAME", (0, -1), (-1, -1), "Helvetica-Bold"),
-            ("FONTSIZE", (0, -1), (-1, -1), 9),
-            ("ALIGN", (3, -1), (-1, -1), "RIGHT"),
-            ("TOPPADDING", (0, -1), (-1, -1), 6),
-
-            # Grid
-            ("GRID", (0, 0), (-1, -2), 0.4, colors.HexColor("#D0D7FF")),
-            ("LINEABOVE", (0, -1), (-1, -1), 1, colors.HexColor("#1227E2")),
-
-            ("BOTTOMPADDING", (0, 0), (-1, -1), 6),
-            ("TOPPADDING", (0, 0), (-1, -1), 6),
-            ("LEFTPADDING", (0, 0), (-1, -1), 8),
-            ("RIGHTPADDING", (0, 0), (-1, -1), 8),
+            ("FONTNAME", (0, 0), (-1, 0), "Times-Bold"),
+            ("FONTNAME", (0, 1), (-1, -1), "Times-Roman"),
+            ("FONTSIZE", (0, 0), (-1, -1), 8.5),
+            ("ALIGN", (0, 0), (-1, -1), "CENTER"),
+            ("VALIGN", (0, 0), (-1, -1), "MIDDLE"),
+            ("GRID", (0, 0), (-1, -1), 0.5, GRID),
         ]))
 
-        elements.append(semester_table)
-        elements.append(Spacer(1, 0.15 * inch))
+        summary = Table(
+            [[f"TCR: {_fmt(sem['total_credits'])}", f"TGP: {_fmt(sem['total_grade_points'])}",
+              f"GPA: {_fmt(sem['semester_gpa'])}", f"CGPA: {_fmt(sem['cgpa'])}"]],
+            colWidths=[width / 4] * 4,
+        )
+        summary.setStyle(TableStyle([
+            ("BACKGROUND", (0, 0), (-1, -1), LIGHT),
+            ("GRID", (0, 0), (-1, -1), 0.5, GRID),
+            ("FONTNAME", (0, 0), (-1, -1), "Times-Bold"),
+            ("FONTSIZE", (0, 0), (-1, -1), 8.5),
+            ("ALIGN", (0, 0), (-1, -1), "CENTER"),
+        ]))
 
-    # -------------------------
-    # FINAL CGPA SUMMARY
-    # -------------------------
+        elements.append(KeepTogether([
+            Paragraph(escape(sem["title"]), heading), table, Spacer(1, 4), summary,
+        ]))
 
-    elements.append(Spacer(1, 0.2 * inch))
-
-    summary_data = [
-        ["Final CGPA", str(transcript_data["cgpa"])]
-    ]
-
-    summary_table = Table(summary_data, colWidths=[2 * inch, 4 * inch])
-    summary_table.setStyle(TableStyle([
-        ("BACKGROUND", (0, 0), (-1, -1), colors.HexColor("#081C46")),
-        ("TEXTCOLOR", (0, 0), (-1, -1), colors.white),
-        ("FONTNAME", (0, 0), (-1, -1), "Helvetica-Bold"),
-        ("FONTSIZE", (0, 0), (-1, -1), 12),
+    standing = Table(
+        [[f"Cumulative Credits: {_fmt(transcript['total_credits'])}",
+          f"Cumulative Grade Points: {_fmt(transcript['total_grade_points'])}",
+          f"CGPA: {_fmt(transcript['cgpa'])}",
+          f"Class: {transcript['classification'] or '-'}"]],
+        colWidths=[width * 0.24, width * 0.3, width * 0.16, width * 0.3],
+    )
+    standing.setStyle(TableStyle([
+        ("BACKGROUND", (0, 0), (-1, -1), LIGHT),
+        ("GRID", (0, 0), (-1, -1), 0.5, GRID),
+        ("FONTNAME", (0, 0), (-1, -1), "Times-Bold"),
+        ("FONTSIZE", (0, 0), (-1, -1), 8.5),
         ("ALIGN", (0, 0), (-1, -1), "CENTER"),
-        ("TOPPADDING", (0, 0), (-1, -1), 10),
-        ("BOTTOMPADDING", (0, 0), (-1, -1), 10),
     ]))
-
-    elements.append(summary_table)
-
-    # -------------------------
-    # BUILD PDF
-    # -------------------------
+    elements += [
+        Paragraph("Overall Cumulative Standing", heading), standing, Spacer(1, 14),
+        Paragraph(
+            "Generated by GradeIQ UPSA from results entered by the student. "
+            f"Not an official university document. Printed on {date.today():%A, %B %d, %Y}.",
+            small,
+        ),
+    ]
 
     doc.build(elements)
     buffer.seek(0)
-
     return buffer

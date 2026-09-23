@@ -2,8 +2,8 @@ from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 
 from app.database import get_db
-from app.services.auth import get_current_user
-from app.models.student import Student
+from app.models.enrollment import Enrollment
+from app.services.enrollments import get_enrollment
 from app.services.risk_engine import analyze_academic_risk
 
 router = APIRouter(prefix="/risk", tags=["Academic Risk"])
@@ -12,12 +12,9 @@ router = APIRouter(prefix="/risk", tags=["Academic Risk"])
 @router.get("/me")
 def get_risk_analysis(
     db: Session = Depends(get_db),
-    current_user: Student = Depends(get_current_user)
+    enrollment: Enrollment = Depends(get_enrollment),
 ):
-
-    analysis = analyze_academic_risk(db, current_user.id)
-
     return {
-        "student_id": current_user.id,
-        "risk_analysis": analysis
+        "enrollment_id": enrollment.id,
+        "risk_analysis": analyze_academic_risk(db, enrollment),
     }

@@ -1,15 +1,22 @@
+import hashlib
+import logging
 import secrets
 from datetime import datetime, timedelta, timezone
 
-from fastapi import APIRouter, Depends, HTTPException, status
+from fastapi import APIRouter, Depends, HTTPException
+from sqlalchemy import func
 from sqlalchemy.orm import Session
-from pydantic import BaseModel
+from pydantic import BaseModel, EmailStr
 
+from app.config import PASSWORD_MIN_LENGTH
 from app.database import get_db
 from app.models.student import Student
 from app.models.password_reset import PasswordResetToken
 from app.services.email import send_reset_email
 from app.services.auth import hash_password
+from app.services.rate_limit import rate_limit
+
+logger = logging.getLogger(__name__)
 
 router = APIRouter(prefix="/auth", tags=["Password Reset"])
 
@@ -19,7 +26,19 @@ router = APIRouter(prefix="/auth", tags=["Password Reset"])
 # ================================
 
 class ForgotPasswordRequest(BaseModel):
-    email: str
+    email: EmailStr
+
+
+def is_expired(expires_at: datetime) -> bool:
+    # Postgres returns timezone-aware values; SQLite (local/tests) returns naive UTC
+    if expires_at.tzinfo is None:
+        expires_at = expires_at.replace(tzinfo=timezone.utc)
+    return expires_at < datetime.now(timezone.utc)
+
+
+def hash_token(token: str) -> str:
+    """Reset tokens are stored as SHA-256 so a database leak cannot be used to reset passwords."""
+    return hashlib.sha256(token.encode()).hexdigest()
 
 
 class ResetPasswordRequest(BaseModel):
@@ -31,7 +50,10 @@ class ResetPasswordRequest(BaseModel):
 # FORGOT PASSWORD
 # ================================
 
-@router.post("/forgot-password")
+@router.post(
+    "/forgot-password",
+    dependencies=[Depends(rate_limit("forgot-password", limit=5, window_seconds=900))],
+)
 def forgot_password(
     data: ForgotPasswordRequest,
     db: Session = Depends(get_db),
@@ -42,7 +64,7 @@ def forgot_password(
     Always returns success to prevent email enumeration.
     """
     student = db.query(Student).filter(
-        Student.email == data.email
+        func.lower(Student.email) == data.email.strip().lower()
     ).first()
 
     # Always return success — never reveal if email exists
@@ -54,7 +76,7 @@ def forgot_password(
     # Invalidate any existing unused tokens for this student
     db.query(PasswordResetToken).filter(
         PasswordResetToken.student_id == student.id,
-        PasswordResetToken.is_used == False,
+        PasswordResetToken.is_used.is_(False),
     ).delete()
     db.commit()
 
@@ -64,7 +86,7 @@ def forgot_password(
 
     reset_token = PasswordResetToken(
         student_id=student.id,
-        token=token,
+        token=hash_token(token),
         expires_at=expires_at,
     )
     db.add(reset_token)
@@ -77,9 +99,9 @@ def forgot_password(
             student_name=student.name,
             reset_token=token,
         )
-    except Exception as e:
+    except Exception:
         # Don't expose email errors to user
-        print(f"Email error: {e}")
+        logger.exception("Failed to send password reset email to student %s", student.id)
 
     return {
         "message": "If that email is registered, a reset link has been sent."
@@ -90,15 +112,18 @@ def forgot_password(
 # VERIFY TOKEN
 # ================================
 
-@router.get("/verify-reset-token/{token}")
+@router.get(
+    "/verify-reset-token/{token}",
+    dependencies=[Depends(rate_limit("verify-reset", limit=30, window_seconds=900))],
+)
 def verify_reset_token(token: str, db: Session = Depends(get_db)):
     """
     Checks if a reset token is valid and not expired.
     Called by the frontend before showing the new password form.
     """
     reset_token = db.query(PasswordResetToken).filter(
-        PasswordResetToken.token == token,
-        PasswordResetToken.is_used == False,
+        PasswordResetToken.token == hash_token(token),
+        PasswordResetToken.is_used.is_(False),
     ).first()
 
     if not reset_token:
@@ -107,7 +132,7 @@ def verify_reset_token(token: str, db: Session = Depends(get_db)):
             detail="Invalid or expired reset link."
         )
 
-    if reset_token.expires_at < datetime.now(timezone.utc):
+    if is_expired(reset_token.expires_at):
         raise HTTPException(
             status_code=400,
             detail="This reset link has expired. Please request a new one."
@@ -120,7 +145,10 @@ def verify_reset_token(token: str, db: Session = Depends(get_db)):
 # RESET PASSWORD
 # ================================
 
-@router.post("/reset-password")
+@router.post(
+    "/reset-password",
+    dependencies=[Depends(rate_limit("reset-password", limit=10, window_seconds=900))],
+)
 def reset_password(
     data: ResetPasswordRequest,
     db: Session = Depends(get_db),
@@ -129,15 +157,15 @@ def reset_password(
     Accepts a token and new password.
     Updates the student's password and marks the token as used.
     """
-    if len(data.new_password) < 6:
+    if len(data.new_password) < PASSWORD_MIN_LENGTH:
         raise HTTPException(
             status_code=400,
-            detail="Password must be at least 6 characters."
+            detail=f"Password must be at least {PASSWORD_MIN_LENGTH} characters."
         )
 
     reset_token = db.query(PasswordResetToken).filter(
-        PasswordResetToken.token == data.token,
-        PasswordResetToken.is_used == False,
+        PasswordResetToken.token == hash_token(data.token),
+        PasswordResetToken.is_used.is_(False),
     ).first()
 
     if not reset_token:
@@ -146,7 +174,7 @@ def reset_password(
             detail="Invalid or expired reset link."
         )
 
-    if reset_token.expires_at < datetime.now(timezone.utc):
+    if is_expired(reset_token.expires_at):
         raise HTTPException(
             status_code=400,
             detail="This reset link has expired. Please request a new one."

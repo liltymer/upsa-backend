@@ -1,93 +1,47 @@
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException, Query
 from sqlalchemy.orm import Session
-from typing import List
 
 from app.database import get_db
-from app.services.auth import get_current_user
-from app.models.student import Student
+from app.models.enrollment import Enrollment
+from app.schemas.projection import SimulateRequest
+from app.services.enrollments import get_enrollment
 from app.services.projection_engine import simulate_future_cgpa, calculate_target_grade
-from app.schemas.projection import ProjectedCourse
 
 router = APIRouter(prefix="/projection", tags=["GPA Projection"])
 
 
-# ===============================
-# SIMULATE FUTURE CGPA
-# ===============================
-
 @router.post("/simulate")
 def simulate_projection(
-    projected_courses: List[ProjectedCourse],
+    payload: SimulateRequest,
     db: Session = Depends(get_db),
-    current_user: Student = Depends(get_current_user)
+    enrollment: Enrollment = Depends(get_enrollment),
 ):
     """
-    Student inputs hypothetical future courses with expected
-    grade points. Returns what their CGPA would become.
-    Does NOT save anything to the database.
+    Hypothetical future courses with expected grade points → the programme's
+    projected CGPA. Nothing is saved.
     """
-
-    if not projected_courses:
-        raise HTTPException(
-            status_code=400,
-            detail="Provide at least one projected course."
-        )
-
-    courses = [course.dict() for course in projected_courses]
-
-    projected_cgpa = simulate_future_cgpa(
-        db,
-        current_user.id,
-        courses
-    )
-
+    courses = [course.model_dump() for course in payload.projected_courses]
     return {
-        "student": current_user.name,
+        "enrollment_id": enrollment.id,
         "projected_courses": len(courses),
-        "projected_cgpa": projected_cgpa,
-        "note": "This is a simulation only. No data has been saved."
+        **simulate_future_cgpa(db, enrollment, courses),
+        "note": "This is a simulation only. No data has been saved.",
     }
 
 
-# ===============================
-# TARGET GRADE CALCULATOR
-# ===============================
-
 @router.get("/target")
 def target_grade_calculator(
-    target_cgpa: float,
-    remaining_credits: int,
+    target_cgpa: float = Query(ge=0.0, le=4.0),
+    remaining_credits: int = Query(gt=0, le=200),
     db: Session = Depends(get_db),
-    current_user: Student = Depends(get_current_user)
+    enrollment: Enrollment = Depends(get_enrollment),
 ):
     """
-    Reverse projection — tells the student exactly what grade
-    they need to achieve their target CGPA given how many
-    credits they have left.
-
     Example: GET /projection/target?target_cgpa=3.6&remaining_credits=30
     """
-
-    if not (0.0 <= target_cgpa <= 4.0):
-        raise HTTPException(
-            status_code=400,
-            detail="Target CGPA must be between 0.0 and 4.0"
-        )
-
-    if remaining_credits <= 0:
-        raise HTTPException(
-            status_code=400,
-            detail="Remaining credits must be greater than 0"
-        )
-
-    result = calculate_target_grade(
-        db,
-        current_user.id,
-        target_cgpa,
-        remaining_credits
-    )
-
+    if target_cgpa <= 0:
+        raise HTTPException(status_code=400, detail="Target CGPA must be greater than 0.")
     return {
-        "student": current_user.name,
-        **result
+        "enrollment_id": enrollment.id,
+        **calculate_target_grade(db, enrollment, target_cgpa, remaining_credits),
     }

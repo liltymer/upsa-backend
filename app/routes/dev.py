@@ -2,11 +2,18 @@ from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 
 from app.database import get_db
+from app.models.enrollment import Enrollment
 from app.models.result import Result
-from app.models.student import Student
-from app.utils.grading import grade_to_point
+from app.services.auth import require_admin
+from app.utils.grading import format_academic_year, grade_to_point, parse_academic_year
 
-router = APIRouter(prefix="/dev", tags=["Dev"])
+# Only mounted when ENVIRONMENT=development (see app/main.py),
+# and even then restricted to admins.
+router = APIRouter(
+    prefix="/dev",
+    tags=["Dev"],
+    dependencies=[Depends(require_admin)],
+)
 
 
 @router.post("/seed")
@@ -21,14 +28,21 @@ def seed(db: Session = Depends(get_db)):
     db.query(Result).delete()
     db.commit()
 
-    # Get first student
-    student = db.query(Student).first()
+    # Current programme of the first registered student
+    enrollment = (
+        db.query(Enrollment)
+        .filter(Enrollment.is_current.is_(True))
+        .order_by(Enrollment.id)
+        .first()
+    )
 
-    if not student:
+    if not enrollment:
         return {
             "status": "No students found.",
             "message": "Register a student first, then run seed again."
         }
+    student = enrollment.student
+    start_year = parse_academic_year(enrollment.start_academic_year)
 
     # Sample results — UPSA style, grade only, no scores
     sample_results = [
@@ -108,12 +122,13 @@ def seed(db: Session = Depends(get_db)):
 
         result = Result(
             student_id=student.id,
+            enrollment_id=enrollment.id,
             course_code=entry["course_code"],
             course_name=entry["course_name"],
             credit_hours=entry["credit_hours"],
             grade=entry["grade"],
             grade_point=grade_point,
-            year=entry["year"],
+            academic_year=format_academic_year(start_year + entry["year"] - 1),
             semester=entry["semester"],
         )
         db.add(result)
@@ -124,8 +139,8 @@ def seed(db: Session = Depends(get_db)):
     return {
         "status": "Seeded successfully.",
         "student": student.name,
-        "programme": student.programme,
-        "level": student.level,
+        "programme": enrollment.programme,
+        "level": enrollment.current_level,
         "semesters_seeded": 2,
         "results_created": created,
         "note": "All grades are UPSA-style — no scores."
