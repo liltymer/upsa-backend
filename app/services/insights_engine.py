@@ -11,6 +11,7 @@ from sqlalchemy.orm import Session
 
 from app.models.enrollment import Enrollment
 from app.models.result import Result
+from app.services.stage_engine import academic_stage
 from app.utils.gpa import semester_summaries, totals
 from app.utils.grading import (
     CLASSIFICATION_BANDS,
@@ -193,6 +194,7 @@ def generate_insights(db: Session, enrollment: Enrollment, remaining_credits: Op
 
     actions = _actions(enrollment, cgpa, classification, next_band, target, latest, previous,
                        pulling_down, areas, summaries, estimate)
+    stage = academic_stage(enrollment, points, credits, cgpa, classification, next_band, estimate, remaining)
 
     return {
         "enrollment_id": enrollment.id,
@@ -225,6 +227,7 @@ def generate_insights(db: Session, enrollment: Enrollment, remaining_credits: Op
         "target": target,
         "estimate": estimate,
         "actions": actions,
+        "stage": stage,
     }
 
 
