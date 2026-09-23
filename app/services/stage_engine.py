@@ -56,7 +56,7 @@ def academic_stage(enrollment, points, credits, cgpa, classification, next_band,
 
     # Every semester of the programme recorded
     if estimate["remaining_semesters"] == 0:
-        stage.update(key="complete", title=f"All semesters of your {award_word} recorded")
+        stage.update(key="complete", title=f"{award_word.capitalize()} completed")
         say(f"You finished with {classification} ({cgpa:.2f}). This is final unless a result changes.")
         if award == "diploma" and not any(e.award_type == "degree" for e in others):
             say("Topping up to a degree? Add it from your Profile. Your diploma result stays in your history.")

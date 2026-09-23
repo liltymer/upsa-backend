@@ -46,7 +46,8 @@ def test_final_year(client):
 def test_complete_diploma_suggests_top_up(client):
     headers = diploma_student(client)
     st = stage(client, headers)
-    assert st["key"] == "complete" and "Credit (2.88)" in st["messages"][0]
+    assert st["key"] == "complete" and st["title"] == "Diploma completed"
+    assert "Credit (2.88)" in st["messages"][0]
     assert any("Topping up" in m for m in st["messages"])
 
 
@@ -66,3 +67,19 @@ def test_messages_have_no_dashes(client):
     headers = diploma_student(client)
     text = " ".join(stage(client, headers)["messages"])
     assert "—" not in text and "–" not in text
+
+
+def test_level_label_shows_completed(client):
+    headers = diploma_student(client)
+    dash = client.get("/dashboard/me", headers=headers).json()
+    assert dash["level_label"] == "Completed" and dash["completed"] is True
+    enr = client.get("/enrollments/me", headers=headers).json()["enrollments"][0]
+    assert enr["level_label"] == "Completed"
+
+
+def test_level_label_in_progress(client):
+    register(client, programme=BSC_IT, level=200, academic_year="2025/2026")
+    headers = login(client)
+    add_result(client, headers, "BIT101", "B", 3, "2025/2026", 1)
+    dash = client.get("/dashboard/me", headers=headers).json()
+    assert dash["level_label"] == "Level 200" and dash["completed"] is False

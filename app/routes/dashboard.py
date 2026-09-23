@@ -37,6 +37,8 @@ def get_my_dashboard(
         "programme": enrollment.programme,
         "award_type": enrollment.award_type,
         "level": enrollment.current_level,
+        "level_label": summary["level_label"],
+        "completed": summary["completed"],
         "academic_year": current_academic_year(),
         "is_top_up": summary["is_top_up"],
         "status": enrollment.status,

@@ -79,12 +79,23 @@ def index_number_taken(db: Session, index_number: str, exclude_enrollment_id: Op
     return db.query(query.exists()).scalar()
 
 
+def expected_semesters(enrollment: Enrollment) -> int:
+    """Semesters from the entry level to the final level of the award (two per level)."""
+    return ((MAX_LEVEL[enrollment.award_type] - enrollment.entry_level) // 100 + 1) * 2
+
+
+def is_programme_complete(enrollment: Enrollment, semesters_recorded: int) -> bool:
+    """Marked completed, or every semester of the programme has results."""
+    return enrollment.status == "completed" or semesters_recorded >= expected_semesters(enrollment)
+
+
 def summarize_enrollment(db: Session, enrollment: Enrollment) -> dict:
     """Programme details plus its own CGPA and classification."""
     results = db.query(Result).filter(Result.enrollment_id == enrollment.id).all()
     points, credits = totals(results)
     cgpa = truncate_gpa(points, credits)
     semesters = {(r.academic_year, r.semester) for r in results}
+    complete = is_programme_complete(enrollment, len(semesters))
 
     return {
         "id": enrollment.id,
@@ -93,6 +104,9 @@ def summarize_enrollment(db: Session, enrollment: Enrollment) -> dict:
         "award_type": enrollment.award_type,
         "entry_level": enrollment.entry_level,
         "current_level": enrollment.current_level,
+        "completed": complete,
+        # What to show where a level would go: "Level 200" or "Completed"
+        "level_label": "Completed" if complete else f"Level {enrollment.current_level}",
         "start_academic_year": enrollment.start_academic_year,
         "status": enrollment.status,
         "is_current": enrollment.is_current,
