@@ -47,6 +47,8 @@ def test_target_uses_estimate_or_override(client):
     body = client.get("/insights/me", headers=headers).json()
     # A diploma runs four semesters and all four are recorded
     assert body["estimate"]["remaining_semesters"] == 0 and body["target"] is None
+    # A finished programme is not asked for more results
+    assert all(a["kind"] != "update" for a in body["actions"])
 
     body = client.get("/insights/me", headers=headers, params={"remaining_credits": 30}).json()
     t = body["target"]

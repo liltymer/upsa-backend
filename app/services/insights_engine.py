@@ -161,7 +161,8 @@ def generate_insights(db: Session, enrollment: Enrollment, remaining_credits: Op
             "max_possible_cgpa": truncate_gpa(points + 4.0 * remaining, credits + remaining),
         }
 
-    actions = _actions(enrollment, cgpa, classification, next_band, target, latest, previous, pulling_down, areas, summaries)
+    actions = _actions(enrollment, cgpa, classification, next_band, target, latest, previous,
+                       pulling_down, areas, summaries, estimate)
 
     return {
         "enrollment_id": enrollment.id,
@@ -198,7 +199,7 @@ def generate_insights(db: Session, enrollment: Enrollment, remaining_credits: Op
 
 
 def _actions(enrollment, cgpa, classification, next_band, target, latest, previous,
-             pulling_down, areas, summaries) -> list[dict]:
+             pulling_down, areas, summaries, estimate) -> list[dict]:
     """Up to three plain next steps, most important first."""
     actions = []
 
@@ -273,7 +274,8 @@ def _actions(enrollment, cgpa, classification, next_band, target, latest, previo
     # Remind students to keep their record current
     last_year = summaries[-1]["academic_year"]
     now = current_academic_year()
-    if parse_academic_year(last_year) < parse_academic_year(now) and enrollment.status == "active":
+    semesters_left = estimate["remaining_semesters"] > 0
+    if parse_academic_year(last_year) < parse_academic_year(now) and enrollment.status == "active" and semesters_left:
         actions.append({
             "kind": "update",
             "title": f"Add your {now} results",
