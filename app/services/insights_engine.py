@@ -288,8 +288,8 @@ def _actions(enrollment, cgpa, classification, next_band, target, latest, previo
         weakest = min(weak_areas, key=lambda a: a["gpa"])
         actions.append({
             "kind": "area",
-            "title": f"Give {weakest['area']} courses extra attention",
-            "body": f"Your {weakest['area']} courses average {weakest['gpa']:.2f}, below your CGPA of {cgpa:.2f}.",
+            "title": f"Give your {weakest['label']} courses extra attention",
+            "body": f"Your {weakest['label']} courses ({weakest['area']}) average {weakest['gpa']:.2f}, below your CGPA of {cgpa:.2f}.",
             "link": "/results",
         })
     elif pulling_down:
