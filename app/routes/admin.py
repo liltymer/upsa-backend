@@ -19,6 +19,7 @@ from app.schemas.announcement import (
     AnnouncementResponse,
 )
 from app.schemas.course import CourseCreate, CourseUpdate
+from app.services.admin_insights import admin_insights
 from app.services.course_suggestions import learned_courses
 from app.services.auth import require_admin
 from app.utils.grading import CLASSIFICATION_BANDS, PROBATION_THRESHOLD, get_classification, truncate_gpa
@@ -114,6 +115,8 @@ def get_all_users(
             "email": s.email,
             "role": s.role,
             "results_count": result_counts.get(s.id, 0),
+            "joined": s.created_at.isoformat() if s.created_at else None,
+            "last_active": s.last_login_at.isoformat() if s.last_login_at else None,
             "index_number": current.index_number if current else None,
             "programme": current.programme if current else None,
             "level": current.current_level if current else None,
@@ -547,3 +550,16 @@ def update_offering(
     offering.hidden = data.hidden
     db.commit()
     return {"message": f"{offering.course_code} {'hidden' if data.hidden else 'shown again'}."}
+
+
+# ================================
+# WHAT NEEDS ATTENTION
+# ================================
+
+@router.get("/insights")
+def get_admin_insights(
+    db: Session = Depends(get_db),
+    admin: Student = Depends(require_admin),
+):
+    """Activity over time, things that need attention, hardest courses and the top-up pipeline. Counts only."""
+    return admin_insights(db)

@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String
+from sqlalchemy import Column, DateTime, Integer, String, func
 from sqlalchemy.orm import relationship
 
 from app.database import Base
@@ -18,6 +18,9 @@ class Student(Base):
     # What the student wants to be called in greetings (names are ordered differently)
     preferred_name = Column(String(60), nullable=True)
     email = Column(String, unique=True, nullable=False, index=True)
+    # When the account was made and when it last signed in (admin activity figures)
+    created_at = Column(DateTime(timezone=True), server_default=func.now())
+    last_login_at = Column(DateTime(timezone=True), nullable=True)
     password_hash = Column(String, nullable=False)
 
     # Role

@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Float, ForeignKey, Integer, String
+from sqlalchemy import Column, DateTime, Float, ForeignKey, Integer, String, func
 from sqlalchemy.orm import relationship
 
 from app.database import Base
@@ -23,7 +23,10 @@ class Result(Base):
 
     # Grade: entered directly by student (no score)
     grade = Column(String, nullable=False)            # e.g. A, B+, B, B-, C+, C, C-, D, F
-    grade_point = Column(Float, nullable=False)       # derived from grade on save
+    grade_point = Column(Float, nullable=False)
+
+    # When it was entered (not the semester it belongs to)
+    created_at = Column(DateTime(timezone=True), server_default=func.now())       # derived from grade on save
 
     student = relationship("Student", back_populates="results")
     enrollment = relationship("Enrollment", back_populates="results")
