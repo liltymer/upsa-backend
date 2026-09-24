@@ -428,12 +428,6 @@
    "semester": 1
   },
   {
-   "code": "BBA301",
-   "name": "Organisational Behaviour",
-   "level": 300,
-   "semester": 1
-  },
-  {
    "code": "BBAF202",
    "name": "Investment Fundamentals",
    "level": 200,
@@ -1496,12 +1490,6 @@
    "semester": 1
   },
   {
-   "code": "BRFM308",
-   "name": "Fundamentals of Building Construction and Management",
-   "level": 300,
-   "semester": 2
-  },
-  {
    "code": "BRMF301",
    "name": "Customary Land Law",
    "level": 300,
@@ -2394,12 +2382,6 @@
   {
    "programme": "Bachelor of Arts in Communication Studies",
    "level": 300,
-   "semester": 1,
-   "code": "BPRM303"
-  },
-  {
-   "programme": "Bachelor of Arts in Communication Studies",
-   "level": 300,
    "semester": 2,
    "code": "BACS302"
   },
@@ -2460,18 +2442,6 @@
   {
    "programme": "Bachelor of Arts in Public Relations Management",
    "level": 100,
-   "semester": 1,
-   "code": "PBPR101"
-  },
-  {
-   "programme": "Bachelor of Arts in Public Relations Management",
-   "level": 100,
-   "semester": 1,
-   "code": "PBPR107"
-  },
-  {
-   "programme": "Bachelor of Arts in Public Relations Management",
-   "level": 100,
    "semester": 2,
    "code": "BPRM102"
   },
@@ -2479,37 +2449,7 @@
    "programme": "Bachelor of Arts in Public Relations Management",
    "level": 100,
    "semester": 2,
-   "code": "BPRM104"
-  },
-  {
-   "programme": "Bachelor of Arts in Public Relations Management",
-   "level": 100,
-   "semester": 2,
    "code": "BPRM106"
-  },
-  {
-   "programme": "Bachelor of Arts in Public Relations Management",
-   "level": 100,
-   "semester": 2,
-   "code": "PBPR104"
-  },
-  {
-   "programme": "Bachelor of Arts in Public Relations Management",
-   "level": 100,
-   "semester": 2,
-   "code": "PBPR106"
-  },
-  {
-   "programme": "Bachelor of Arts in Public Relations Management",
-   "level": 200,
-   "semester": 1,
-   "code": "PBPR207"
-  },
-  {
-   "programme": "Bachelor of Arts in Public Relations Management",
-   "level": 200,
-   "semester": 1,
-   "code": "PBPR209"
   },
   {
    "programme": "Bachelor of Arts in Public Relations Management",
@@ -2534,30 +2474,6 @@
    "level": 200,
    "semester": 2,
    "code": "BPRM208"
-  },
-  {
-   "programme": "Bachelor of Arts in Public Relations Management",
-   "level": 200,
-   "semester": 2,
-   "code": "PBPR202"
-  },
-  {
-   "programme": "Bachelor of Arts in Public Relations Management",
-   "level": 200,
-   "semester": 2,
-   "code": "PBPR206"
-  },
-  {
-   "programme": "Bachelor of Arts in Public Relations Management",
-   "level": 200,
-   "semester": 2,
-   "code": "PBPR208"
-  },
-  {
-   "programme": "Bachelor of Arts in Public Relations Management",
-   "level": 200,
-   "semester": 2,
-   "code": "PBPR212"
   },
   {
    "programme": "Bachelor of Arts in Public Relations Management",
@@ -2598,140 +2514,14 @@
   {
    "programme": "Bachelor of Arts in Public Relations Management",
    "level": 300,
-   "semester": 1,
-   "code": "PBPR301"
-  },
-  {
-   "programme": "Bachelor of Arts in Public Relations Management",
-   "level": 300,
-   "semester": 1,
-   "code": "PBPR303"
-  },
-  {
-   "programme": "Bachelor of Arts in Public Relations Management",
-   "level": 300,
-   "semester": 1,
-   "code": "PBPR309"
-  },
-  {
-   "programme": "Bachelor of Arts in Public Relations Management",
-   "level": 300,
    "semester": 2,
    "code": "BPRM302"
-  },
-  {
-   "programme": "Bachelor of Arts in Public Relations Management",
-   "level": 300,
-   "semester": 2,
-   "code": "PBPR302"
-  },
-  {
-   "programme": "Bachelor of Arts in Public Relations Management",
-   "level": 300,
-   "semester": 2,
-   "code": "PBPR304"
-  },
-  {
-   "programme": "Bachelor of Arts in Public Relations Management",
-   "level": 300,
-   "semester": 2,
-   "code": "PBPR306"
-  },
-  {
-   "programme": "Bachelor of Arts in Public Relations Management",
-   "level": 300,
-   "semester": 2,
-   "code": "PBPR308"
-  },
-  {
-   "programme": "Bachelor of Arts in Public Relations Management",
-   "level": 300,
-   "semester": 2,
-   "code": "PBPR312"
   },
   {
    "programme": "Bachelor of Arts in Public Relations Management",
    "level": 400,
    "semester": 1,
    "code": "BBBA409"
-  },
-  {
-   "programme": "Bachelor of Arts in Public Relations Management",
-   "level": 400,
-   "semester": 1,
-   "code": "PBPR401"
-  },
-  {
-   "programme": "Bachelor of Arts in Public Relations Management",
-   "level": 400,
-   "semester": 1,
-   "code": "PBPR403"
-  },
-  {
-   "programme": "Bachelor of Arts in Public Relations Management",
-   "level": 400,
-   "semester": 1,
-   "code": "PBPR405"
-  },
-  {
-   "programme": "Bachelor of Arts in Public Relations Management",
-   "level": 400,
-   "semester": 1,
-   "code": "PBPR407"
-  },
-  {
-   "programme": "Bachelor of Arts in Public Relations Management",
-   "level": 400,
-   "semester": 1,
-   "code": "PBPR409"
-  },
-  {
-   "programme": "Bachelor of Arts in Public Relations Management",
-   "level": 400,
-   "semester": 1,
-   "code": "PBPR411"
-  },
-  {
-   "programme": "Bachelor of Arts in Public Relations Management",
-   "level": 400,
-   "semester": 1,
-   "code": "PBPR413"
-  },
-  {
-   "programme": "Bachelor of Arts in Public Relations Management",
-   "level": 400,
-   "semester": 2,
-   "code": "PBPR402"
-  },
-  {
-   "programme": "Bachelor of Arts in Public Relations Management",
-   "level": 400,
-   "semester": 2,
-   "code": "PBPR404"
-  },
-  {
-   "programme": "Bachelor of Arts in Public Relations Management",
-   "level": 400,
-   "semester": 2,
-   "code": "PBPR406"
-  },
-  {
-   "programme": "Bachelor of Arts in Public Relations Management",
-   "level": 400,
-   "semester": 2,
-   "code": "PBPR408"
-  },
-  {
-   "programme": "Bachelor of Arts in Public Relations Management",
-   "level": 400,
-   "semester": 2,
-   "code": "PBPR412"
-  },
-  {
-   "programme": "Bachelor of Arts in Public Relations Management",
-   "level": 400,
-   "semester": 2,
-   "code": "PBPR414"
   },
   {
    "programme": "Bachelor of Business Administration",
@@ -2744,12 +2534,6 @@
    "level": 300,
    "semester": 1,
    "code": "BACT307"
-  },
-  {
-   "programme": "Bachelor of Business Administration",
-   "level": 300,
-   "semester": 1,
-   "code": "BBA301"
   },
   {
    "programme": "Bachelor of Business Administration",
@@ -3733,37 +3517,7 @@
    "programme": "Bachelor of Science in Information Technology",
    "level": 100,
    "semester": 2,
-   "code": "BITM104"
-  },
-  {
-   "programme": "Bachelor of Science in Information Technology",
-   "level": 100,
-   "semester": 2,
    "code": "BSIT102"
-  },
-  {
-   "programme": "Bachelor of Science in Information Technology",
-   "level": 200,
-   "semester": 1,
-   "code": "BITM201"
-  },
-  {
-   "programme": "Bachelor of Science in Information Technology",
-   "level": 200,
-   "semester": 1,
-   "code": "BITM203"
-  },
-  {
-   "programme": "Bachelor of Science in Information Technology",
-   "level": 200,
-   "semester": 2,
-   "code": "BITM202"
-  },
-  {
-   "programme": "Bachelor of Science in Information Technology",
-   "level": 200,
-   "semester": 2,
-   "code": "BITM204"
   },
   {
    "programme": "Bachelor of Science in Information Technology",
@@ -3788,24 +3542,6 @@
    "level": 300,
    "semester": 1,
    "code": "BCPC207"
-  },
-  {
-   "programme": "Bachelor of Science in Information Technology",
-   "level": 300,
-   "semester": 1,
-   "code": "BITM301"
-  },
-  {
-   "programme": "Bachelor of Science in Information Technology",
-   "level": 300,
-   "semester": 1,
-   "code": "BITM307"
-  },
-  {
-   "programme": "Bachelor of Science in Information Technology",
-   "level": 300,
-   "semester": 1,
-   "code": "BITM309"
   },
   {
    "programme": "Bachelor of Science in Information Technology",
@@ -3836,24 +3572,6 @@
    "level": 300,
    "semester": 1,
    "code": "BSIT309"
-  },
-  {
-   "programme": "Bachelor of Science in Information Technology",
-   "level": 300,
-   "semester": 2,
-   "code": "BITM302"
-  },
-  {
-   "programme": "Bachelor of Science in Information Technology",
-   "level": 300,
-   "semester": 2,
-   "code": "BITM304"
-  },
-  {
-   "programme": "Bachelor of Science in Information Technology",
-   "level": 300,
-   "semester": 2,
-   "code": "BITM306"
   },
   {
    "programme": "Bachelor of Science in Information Technology",
@@ -3908,36 +3626,6 @@
    "level": 400,
    "semester": 1,
    "code": "BSIT409"
-  },
-  {
-   "programme": "Bachelor of Science in Information Technology",
-   "level": 400,
-   "semester": 2,
-   "code": "BITM402"
-  },
-  {
-   "programme": "Bachelor of Science in Information Technology",
-   "level": 400,
-   "semester": 2,
-   "code": "BITM404"
-  },
-  {
-   "programme": "Bachelor of Science in Information Technology",
-   "level": 400,
-   "semester": 2,
-   "code": "BITM406"
-  },
-  {
-   "programme": "Bachelor of Science in Information Technology",
-   "level": 400,
-   "semester": 2,
-   "code": "BITM408"
-  },
-  {
-   "programme": "Bachelor of Science in Information Technology",
-   "level": 400,
-   "semester": 2,
-   "code": "BITM412"
   },
   {
    "programme": "Bachelor of Science in Logistics and Transport Management",
@@ -4058,12 +3746,6 @@
    "level": 300,
    "semester": 1,
    "code": "BRMF305"
-  },
-  {
-   "programme": "Bachelor of Science in Real Estate Management and Finance",
-   "level": 300,
-   "semester": 2,
-   "code": "BRFM308"
   },
   {
    "programme": "Bachelor of Science in Real Estate Management and Finance",
