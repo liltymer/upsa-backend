@@ -22,7 +22,8 @@ from app.utils.grading import level_for_academic_year
 LEARN_THRESHOLD = 2
 
 
-def _learned(db: Session, programme: str, level: int, semester: int) -> dict[str, dict]:
+def learned_courses(db: Session, programme: str, level: int, semester: int, min_students: int = LEARN_THRESHOLD) -> dict[str, dict]:
+    """Courses students on this programme recorded for a level and semester, with how many students did."""
     rows = (
         db.query(Result, Enrollment)
         .join(Enrollment, Result.enrollment_id == Enrollment.id)
@@ -38,9 +39,13 @@ def _learned(db: Session, programme: str, level: int, semester: int) -> dict[str
         entry["names"][result.course_name] += 1
         entry["credits"][result.credit_hours] += 1
     return {
-        code: {"name": e["names"].most_common(1)[0][0], "credit_hours": e["credits"].most_common(1)[0][0]}
+        code: {
+            "name": e["names"].most_common(1)[0][0],
+            "credit_hours": e["credits"].most_common(1)[0][0],
+            "students": len(e["students"]),
+        }
         for code, e in seen.items()
-        if len(e["students"]) >= LEARN_THRESHOLD
+        if len(e["students"]) >= min_students
     }
 
 
@@ -59,7 +64,7 @@ def suggest_courses(db: Session, enrollment: Enrollment, academic_year: str, sem
     )
     hidden = {o.course_code for o in offerings if o.hidden}
     listed = {o.course_code for o in offerings if not o.hidden}
-    learned = {code: v for code, v in _learned(db, programme, level, semester).items() if code not in hidden}
+    learned = {code: v for code, v in learned_courses(db, programme, level, semester).items() if code not in hidden}
 
     codes = listed | set(learned)
     catalogue = {c.code: c for c in db.query(Course).filter(Course.code.in_(codes)).all()} if codes else {}
