@@ -36,6 +36,20 @@ class ResultCreate(BaseModel):
     enrollment_id: Optional[int] = Field(None, description="Defaults to the current programme")
 
 
+class SemesterCourse(BaseModel):
+    course_code: str = Field(min_length=1, max_length=20)
+    course_name: str = Field(min_length=1, max_length=200)
+    credit_hours: int = Field(ge=1, le=12)
+    grade: str
+
+
+class SemesterCreate(BaseModel):
+    academic_year: str = Field(description='e.g. "2024/2025"')
+    semester: Literal[1, 2]
+    enrollment_id: Optional[int] = Field(None, description="Defaults to the current programme")
+    courses: list[SemesterCourse] = Field(min_length=1, max_length=15)
+
+
 class ResultUpdate(BaseModel):
     """Every field is optional: results in completed programmes can still be corrected."""
     grade: Optional[str] = None
@@ -164,6 +178,61 @@ def create_result(
     db.refresh(result)
 
     return {"message": "Result added successfully.", **serialize(result, enrollment)}
+
+
+@router.post("/semester", status_code=status.HTTP_201_CREATED)
+def create_semester(
+    payload: SemesterCreate,
+    db: Session = Depends(get_db),
+    current_user: Student = Depends(get_current_user),
+):
+    """
+    Adds every course from one result slip at once. Either all of them are saved
+    or none are, so a semester is never left half entered.
+    """
+    enrollment = get_enrollment(payload.enrollment_id, db, current_user)
+    academic_year = validate_academic_year(enrollment, payload.academic_year)
+
+    results, codes = [], set()
+    for course in payload.courses:
+        code = course.course_code.strip().upper()
+        if code in codes:
+            raise HTTPException(status_code=400, detail=f"{code} is listed twice. Remove one of them.")
+        codes.add(code)
+        grade = normalize_grade(course.grade)
+        results.append(Result(
+            student_id=current_user.id,
+            enrollment_id=enrollment.id,
+            course_code=code,
+            course_name=course.course_name.strip(),
+            credit_hours=course.credit_hours,
+            grade=grade,
+            grade_point=grade_to_point(grade),
+            academic_year=academic_year,
+            semester=payload.semester,
+        ))
+
+    clashes = sorted(
+        code for (code,) in db.query(Result.course_code).filter(
+            Result.enrollment_id == enrollment.id,
+            Result.academic_year == academic_year,
+            Result.semester == payload.semester,
+            Result.course_code.in_(codes),
+        )
+    )
+    if clashes:
+        raise HTTPException(
+            status_code=status.HTTP_409_CONFLICT,
+            detail=f"Already recorded for this semester: {', '.join(clashes)}. Remove them here or edit the existing entries.",
+        )
+
+    db.add_all(results)
+    db.commit()
+    count = len(results)
+    return {
+        "message": f"Saved {count} course{'s' if count != 1 else ''}.",
+        "results": [serialize(r, enrollment) for r in results],
+    }
 
 
 # ================================

@@ -1,8 +1,8 @@
 from app.models.student import Student
 from app.models.enrollment import Enrollment
 from app.models.result import Result
-from app.models.course import Course
+from app.models.course import Course, CourseOffering
 from app.models.announcement import Announcement
 from app.models.password_reset import PasswordResetToken
 
-__all__ = ["Student", "Enrollment", "Result", "Course", "Announcement", "PasswordResetToken"]
+__all__ = ["Student", "Enrollment", "Result", "Course", "CourseOffering", "Announcement", "PasswordResetToken"]
