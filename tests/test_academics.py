@@ -7,12 +7,14 @@ def test_cgpa_and_classification_for_diploma(client, student_headers):
 
     cgpa = client.get("/gpa/cgpa", headers=student_headers).json()
     assert cgpa["cgpa"] == 3.5
-    assert cgpa["classification"] == "Credit"  # diploma band, not "Second Class Upper"
+    # Diploma band (handbook 4.11: Distinction from 3.50), not "Second Class Upper"
+    assert cgpa["classification"] == "Distinction"
 
+    add_result(client, student_headers, "C1", "C")
     risk = client.get("/risk/me", headers=student_headers).json()["risk_analysis"]
-    assert risk["classification"] == "Credit"
+    assert risk["cgpa"] == 2.83 and risk["classification"] == "Credit"
     assert risk["next_class"] == "Distinction"
-    assert risk["gap_to_next_class"] == 0.1
+    assert risk["gap_to_next_class"] == 0.67
 
 
 def test_degree_uses_degree_bands(client):

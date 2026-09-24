@@ -36,8 +36,8 @@ GRADE_SCALE = [
 AwardType = Literal["diploma", "degree"]
 
 # Highest band first. "min" is inclusive.
-# The official diploma chart lists Credit as 2.5-3.49 and Distinction from 3.6,
-# so 3.50-3.59 is treated as Credit.
+# Diploma bands follow the UPSA Undergraduate Students' Handbook, section 4.11:
+# Distinction 3.50-4.00, Credit 2.50-3.49 (Credit ends at 3.49 on UPSA's grading chart too).
 CLASSIFICATION_BANDS: dict[str, list[dict]] = {
     "degree": [
         {"label": "First Class",        "min": 3.6, "range": "3.60 - 4.00"},
@@ -48,8 +48,8 @@ CLASSIFICATION_BANDS: dict[str, list[dict]] = {
         {"label": "Fail",               "min": 0.0, "range": "below 1.00"},
     ],
     "diploma": [
-        {"label": "Distinction", "min": 3.6, "range": "3.60 - 4.00"},
-        {"label": "Credit",      "min": 2.5, "range": "2.50 - 3.59"},
+        {"label": "Distinction", "min": 3.5, "range": "3.50 - 4.00"},
+        {"label": "Credit",      "min": 2.5, "range": "2.50 - 3.49"},
         {"label": "Pass",        "min": 1.0, "range": "1.00 - 2.49"},
         {"label": "Fail",        "min": 0.0, "range": "below 1.00"},
     ],

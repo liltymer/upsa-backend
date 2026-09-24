@@ -14,7 +14,7 @@ def test_summary_matches_transcript(client):
     headers = diploma_student(client)
     body = client.get("/insights/me", headers=headers).json()
     s = body["summary"]
-    assert (s["cgpa"], s["classification"], s["next_class"], s["gap_to_next_class"]) == (2.88, "Credit", "Distinction", 0.72)
+    assert (s["cgpa"], s["classification"], s["next_class"], s["gap_to_next_class"]) == (2.88, "Credit", "Distinction", 0.62)
     assert (s["credits_completed"], s["courses_completed"], s["semesters_completed"]) == (72, 24, 4)
     assert (s["latest_gpa"], s["previous_gpa"], s["direction"]) == (3.13, 2.82, "improving")
     assert s["weakest_semester"]["gpa"] == 2.58 and s["best_semester"]["gpa"] == 3.13
