@@ -6,126 +6,220 @@ from reportlab.lib import colors
 from reportlab.lib.pagesizes import A4
 from reportlab.lib.styles import ParagraphStyle, getSampleStyleSheet
 from reportlab.lib.units import mm
-from reportlab.platypus import KeepTogether, Paragraph, SimpleDocTemplate, Spacer, Table, TableStyle
+from reportlab.pdfgen import canvas as pdf_canvas
+from reportlab.platypus import KeepTogether, PageBreak, Paragraph, SimpleDocTemplate, Spacer, Table, TableStyle
+
+from app.utils.grading import CLASSIFICATION_BANDS, GRADE_SCALE
 
 NAVY = colors.HexColor("#1F3864")
 LIGHT = colors.HexColor("#DCE3EE")
 GRID = colors.HexColor("#000000")
+WATERMARK = colors.Color(0.12, 0.22, 0.39, alpha=0.07)
+AWARD_NAMES = {"diploma": "Diploma", "degree": "Degree"}
 
 
 def _fmt(value: float) -> str:
     return f"{value:.2f}"
 
 
-def create_transcript_pdf(transcript: dict) -> BytesIO:
+def _numbered_canvas(footer_left: str):
+    """Canvas that stamps the UNOFFICIAL watermark and a 'Page X of Y' footer on every page."""
+
+    class NumberedCanvas(pdf_canvas.Canvas):
+        def __init__(self, *args, **kwargs):
+            super().__init__(*args, **kwargs)
+            self._pages = []
+
+        def showPage(self):
+            self._pages.append(dict(self.__dict__))
+            self._startPage()
+
+        def save(self):
+            total = len(self._pages)
+            for state in self._pages:
+                self.__dict__.update(state)
+                self._decorate(total)
+                super().showPage()
+            super().save()
+
+        def _decorate(self, total):
+            width, height = A4
+            self.saveState()
+            self.setFillColor(WATERMARK)
+            self.setFont("Helvetica-Bold", 96)
+            self.translate(width / 2, height / 2)
+            self.rotate(45)
+            self.drawCentredString(0, -30, "UNOFFICIAL")
+            self.restoreState()
+
+            self.saveState()
+            self.setFont("Times-Roman", 8)
+            self.setFillColor(colors.grey)
+            self.drawString(15 * mm, 9 * mm, footer_left)
+            self.drawRightString(width - 15 * mm, 9 * mm, f"Page {self._pageNumber} of {total}")
+            self.restoreState()
+
+    return NumberedCanvas
+
+
+def create_transcript_pdf(transcripts: dict | list[dict]) -> BytesIO:
     """
-    Builds an unofficial transcript PDF for one programme, laid out like the
-    UPSA transcript: per-semester tables with TCR / TGP / GPA / CGPA.
+    Builds an unofficial transcript PDF laid out like the UPSA transcript: per-semester
+    tables with TCR / TGP / GPA / CGPA. Pass one programme's transcript, or a list of them
+    for a top-up student's full history. Each programme keeps its own CGPA and class.
     """
+    programmes = [transcripts] if isinstance(transcripts, dict) else [t for t in transcripts if t["transcript"]]
+    first = programmes[0]
+    ident = first["index_number"] or first["student_name"]
     buffer = BytesIO()
     doc = SimpleDocTemplate(
         buffer, pagesize=A4,
-        leftMargin=15 * mm, rightMargin=15 * mm, topMargin=15 * mm, bottomMargin=15 * mm,
-        title=f"Transcript - {transcript['index_number'] or transcript['student_name']}",
+        leftMargin=15 * mm, rightMargin=15 * mm, topMargin=15 * mm, bottomMargin=18 * mm,
+        title=f"Unofficial transcript - {ident}",
+        author="GradeIQ UPSA",
     )
     width = doc.width
     styles = getSampleStyleSheet()
     title = ParagraphStyle("t", parent=styles["Title"], fontName="Times-Bold", fontSize=16, textColor=NAVY, spaceAfter=2)
-    subtitle = ParagraphStyle("s", parent=styles["Normal"], fontName="Times-Bold", fontSize=10, alignment=1, spaceAfter=8)
+    subtitle = ParagraphStyle("s", parent=styles["Normal"], fontName="Times-Bold", fontSize=10, alignment=1, spaceAfter=2)
+    note = ParagraphStyle("n", parent=styles["Normal"], fontName="Times-Italic", fontSize=8.5, alignment=1,
+                          textColor=colors.HexColor("#555555"), spaceAfter=8)
+    programme_head = ParagraphStyle("p", parent=styles["Normal"], fontName="Times-Bold", fontSize=12, textColor=NAVY,
+                                    spaceBefore=4, spaceAfter=6)
     heading = ParagraphStyle("h", parent=styles["Normal"], fontName="Times-Bold", fontSize=10.5, textColor=NAVY,
                              alignment=1, spaceBefore=10, spaceAfter=4)
-    cell = ParagraphStyle("c", parent=styles["Normal"], fontName="Times-Roman", fontSize=8.5, alignment=1, leading=10)
+    cell = ParagraphStyle("c", parent=styles["Normal"], fontName="Times-Roman", fontSize=8.5, alignment=0, leading=10)
+    cell_center = ParagraphStyle("cc", parent=cell, alignment=1)
     small = ParagraphStyle("sm", parent=styles["Normal"], fontName="Times-Italic", fontSize=8, alignment=1,
-                           textColor=colors.grey)
+                           textColor=colors.grey, leading=10)
 
     elements = [
         Paragraph("UNIVERSITY OF PROFESSIONAL STUDIES, ACCRA", title),
         Paragraph("UNOFFICIAL TRANSCRIPT OF ACADEMIC RECORD", subtitle),
-        Table([[""]], colWidths=[width], rowHeights=[4], style=[("BACKGROUND", (0, 0), (-1, -1), colors.black)]),
+        Paragraph("Student copy generated by GradeIQ UPSA. Not issued or verified by the university.", note),
+        Table([[""]], colWidths=[width], rowHeights=[3], style=[("BACKGROUND", (0, 0), (-1, -1), colors.black)]),
         Spacer(1, 8),
     ]
 
-    info = Table(
-        [
-            ["Name:", Paragraph(escape(transcript["student_name"]), cell),
-             "Student Number:", transcript["index_number"] or "-"],
-            ["Programme:", Paragraph(escape(transcript["programme"]), cell),
-             "Period:", transcript["period"]],
-        ],
-        colWidths=[width * 0.18, width * 0.34, width * 0.2, width * 0.28],
-    )
-    info.setStyle(TableStyle([
-        ("GRID", (0, 0), (-1, -1), 0.5, GRID),
-        ("FONTNAME", (0, 0), (-1, -1), "Times-Roman"),
-        ("FONTNAME", (0, 0), (0, -1), "Times-Bold"),
-        ("FONTNAME", (2, 0), (2, -1), "Times-Bold"),
-        ("FONTSIZE", (0, 0), (-1, -1), 9),
-        ("ALIGN", (0, 0), (-1, -1), "CENTER"),
-        ("VALIGN", (0, 0), (-1, -1), "MIDDLE"),
-    ]))
-    elements.append(info)
-
     col_widths = [width * 0.14, width * 0.46, width * 0.13, width * 0.1, width * 0.17]
-
-    for sem in transcript["transcript"]:
-        rows = [["Code", "Course Title", "Credits", "Grade", "Grade Points"]]
-        for c in sem["courses"]:
-            rows.append([
-                c["course_code"], Paragraph(escape(c["course_title"]), cell),
-                _fmt(c["credits"]), c["grade"], _fmt(c["grade_value"]),
-            ])
-        table = Table(rows, colWidths=col_widths, repeatRows=1)
-        table.setStyle(TableStyle([
-            ("BACKGROUND", (0, 0), (-1, 0), NAVY),
-            ("TEXTCOLOR", (0, 0), (-1, 0), colors.white),
-            ("FONTNAME", (0, 0), (-1, 0), "Times-Bold"),
-            ("FONTNAME", (0, 1), (-1, -1), "Times-Roman"),
-            ("FONTSIZE", (0, 0), (-1, -1), 8.5),
-            ("ALIGN", (0, 0), (-1, -1), "CENTER"),
-            ("VALIGN", (0, 0), (-1, -1), "MIDDLE"),
-            ("GRID", (0, 0), (-1, -1), 0.5, GRID),
-        ]))
-
-        summary = Table(
-            [[f"TCR: {_fmt(sem['total_credits'])}", f"TGP: {_fmt(sem['total_grade_points'])}",
-              f"GPA: {_fmt(sem['semester_gpa'])}", f"CGPA: {_fmt(sem['cgpa'])}"]],
-            colWidths=[width / 4] * 4,
-        )
-        summary.setStyle(TableStyle([
-            ("BACKGROUND", (0, 0), (-1, -1), LIGHT),
-            ("GRID", (0, 0), (-1, -1), 0.5, GRID),
-            ("FONTNAME", (0, 0), (-1, -1), "Times-Bold"),
-            ("FONTSIZE", (0, 0), (-1, -1), 8.5),
-            ("ALIGN", (0, 0), (-1, -1), "CENTER"),
-        ]))
-
-        elements.append(KeepTogether([
-            Paragraph(escape(sem["title"]), heading), table, Spacer(1, 4), summary,
-        ]))
-
-    standing = Table(
-        [[f"Cumulative Credits: {_fmt(transcript['total_credits'])}",
-          f"Cumulative Grade Points: {_fmt(transcript['total_grade_points'])}",
-          f"CGPA: {_fmt(transcript['cgpa'])}",
-          f"Class: {transcript['classification'] or '-'}"]],
-        colWidths=[width * 0.24, width * 0.3, width * 0.16, width * 0.3],
-    )
-    standing.setStyle(TableStyle([
+    summary_style = TableStyle([
         ("BACKGROUND", (0, 0), (-1, -1), LIGHT),
         ("GRID", (0, 0), (-1, -1), 0.5, GRID),
         ("FONTNAME", (0, 0), (-1, -1), "Times-Bold"),
         ("FONTSIZE", (0, 0), (-1, -1), 8.5),
         ("ALIGN", (0, 0), (-1, -1), "CENTER"),
-    ]))
-    elements += [
-        Paragraph("Overall Cumulative Standing", heading), standing, Spacer(1, 14),
+    ])
+
+    for index, transcript in enumerate(programmes):
+        if index:
+            elements.append(PageBreak())
+        if len(programmes) > 1:
+            award = AWARD_NAMES.get(transcript["award_type"], "Programme")
+            elements.append(Paragraph(f"Part {index + 1} of {len(programmes)}: {award}", programme_head))
+
+        info = Table(
+            [
+                ["Name:", Paragraph(escape(transcript["student_name"]), cell_center),
+                 "Student Number:", transcript["index_number"] or "-"],
+                ["Programme:", Paragraph(escape(transcript["programme"]), cell_center),
+                 "Period:", transcript["period"]],
+            ],
+            colWidths=[width * 0.18, width * 0.34, width * 0.2, width * 0.28],
+        )
+        info.setStyle(TableStyle([
+            ("GRID", (0, 0), (-1, -1), 0.5, GRID),
+            ("FONTNAME", (0, 0), (-1, -1), "Times-Roman"),
+            ("FONTNAME", (0, 0), (0, -1), "Times-Bold"),
+            ("FONTNAME", (2, 0), (2, -1), "Times-Bold"),
+            ("FONTSIZE", (0, 0), (-1, -1), 9),
+            ("ALIGN", (0, 0), (-1, -1), "CENTER"),
+            ("VALIGN", (0, 0), (-1, -1), "MIDDLE"),
+        ]))
+        elements.append(info)
+
+        for sem in transcript["transcript"]:
+            rows = [["Code", "Course Title", "Credits", "Grade", "Grade Points"]]
+            for c in sem["courses"]:
+                rows.append([
+                    c["course_code"], Paragraph(escape(c["course_title"]), cell),
+                    _fmt(c["credits"]), c["grade"], _fmt(c["grade_value"]),
+                ])
+            table = Table(rows, colWidths=col_widths, repeatRows=1)
+            table.setStyle(TableStyle([
+                ("BACKGROUND", (0, 0), (-1, 0), NAVY),
+                ("TEXTCOLOR", (0, 0), (-1, 0), colors.white),
+                ("FONTNAME", (0, 0), (-1, 0), "Times-Bold"),
+                ("FONTNAME", (0, 1), (-1, -1), "Times-Roman"),
+                ("FONTSIZE", (0, 0), (-1, -1), 8.5),
+                ("ALIGN", (0, 0), (-1, -1), "CENTER"),
+                ("ALIGN", (1, 0), (1, 0), "LEFT"),
+                ("VALIGN", (0, 0), (-1, -1), "MIDDLE"),
+                ("GRID", (0, 0), (-1, -1), 0.5, GRID),
+            ]))
+            summary = Table(
+                [[f"TCR: {_fmt(sem['total_credits'])}", f"TGP: {_fmt(sem['total_grade_points'])}",
+                  f"GPA: {_fmt(sem['semester_gpa'])}", f"CGPA: {_fmt(sem['cgpa'])}"]],
+                colWidths=[width / 4] * 4,
+                style=summary_style,
+            )
+            # A semester never splits across pages
+            elements.append(KeepTogether([
+                Paragraph(escape(sem["title"]), heading), table, Spacer(1, 4), summary,
+            ]))
+
+        standing = Table(
+            [[f"Cumulative Credits: {_fmt(transcript['total_credits'])}",
+              f"Cumulative Grade Points: {_fmt(transcript['total_grade_points'])}",
+              f"CGPA: {_fmt(transcript['cgpa'])}",
+              f"Class: {transcript['classification'] or '-'}"]],
+            colWidths=[width * 0.24, width * 0.3, width * 0.16, width * 0.3],
+            style=summary_style,
+        )
+        label = "Overall Cumulative Standing" if len(programmes) == 1 else f"{transcript['programme']}: Cumulative Standing"
+        elements.append(KeepTogether([Paragraph(escape(label), heading), standing]))
+
+    # Grading key: grade points, then the class bands for every award type in this document
+    key_style = TableStyle([
+        ("BACKGROUND", (0, 0), (-1, 0), NAVY),
+        ("TEXTCOLOR", (0, 0), (-1, 0), colors.white),
+        ("FONTNAME", (0, 0), (-1, 0), "Times-Bold"),
+        ("FONTNAME", (0, 1), (-1, -1), "Times-Roman"),
+        ("FONTSIZE", (0, 0), (-1, -1), 8),
+        ("ALIGN", (0, 0), (-1, -1), "CENTER"),
+        ("GRID", (0, 0), (-1, -1), 0.5, GRID),
+    ])
+    grades = Table(
+        [["Grade"] + [g["grade"] for g in GRADE_SCALE],
+         ["Marks (%)"] + [g["marks"] for g in GRADE_SCALE],
+         ["Grade point"] + [f"{g['grade_point']:.1f}" for g in GRADE_SCALE]],
+        colWidths=[width * 0.16] + [width * 0.84 / len(GRADE_SCALE)] * len(GRADE_SCALE),
+        style=key_style,
+    )
+    key = [Paragraph("Grading Key", heading), grades]
+    for award in dict.fromkeys(t["award_type"] for t in programmes):
+        bands = CLASSIFICATION_BANDS[award]
+        key += [
+            Spacer(1, 6),
+            Table(
+                [[f"{AWARD_NAMES[award]} class"] + [b["label"] for b in bands],
+                 ["CGPA"] + [b["range"] for b in bands]],
+                colWidths=[width * 0.16] + [width * 0.84 / len(bands)] * len(bands),
+                style=key_style,
+            ),
+        ]
+    key += [
+        Spacer(1, 10),
         Paragraph(
-            "Generated by GradeIQ UPSA from results entered by the student. "
-            f"Not an official university document. Printed on {date.today():%A, %B %d, %Y}.",
+            "TCR: total credits. TGP: total grade points. GPA and CGPA are cut off after two decimals, not rounded. "
+            "Generated by GradeIQ UPSA from results entered by the student and not verified by the university. "
+            "Request official transcripts from the UPSA Academic Affairs Directorate. "
+            f"Printed on {date.today():%A, %B %d, %Y}.",
             small,
         ),
     ]
+    elements.append(KeepTogether(key))
 
-    doc.build(elements)
+    footer = f"Unofficial transcript: {first['student_name']} ({ident})"
+    doc.build(elements, canvasmaker=_numbered_canvas(footer))
     buffer.seek(0)
     return buffer
