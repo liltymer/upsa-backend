@@ -9,20 +9,20 @@ def test_dev_routes_not_mounted_in_production(client, admin_headers):
 
 
 def test_course_creation_requires_admin(client, student_headers, admin_headers):
-    course = {"code": "dipt003", "name": "Programming I", "credit_hours": 3}
+    course = {"code": "zzz101", "name": "New Elective", "credit_hours": 3}
 
     assert client.post("/courses/", json=course).status_code == 401
     assert client.post("/courses/", json=course, headers=student_headers).status_code == 403
 
     res = client.post("/courses/", json=course, headers=admin_headers)
     assert res.status_code == 201
-    assert res.json()["code"] == "DIPT003"
+    assert res.json()["code"] == "ZZZ101"
 
     assert client.post("/courses/", json=course, headers=admin_headers).status_code == 409
 
 
 def test_admin_course_duplicate_returns_conflict(client, admin_headers):
-    course = {"code": "DIPC003", "name": "Business Management", "credit_hours": 3}
+    course = {"code": "ZZZ102", "name": "New Elective", "credit_hours": 3}
     assert client.post("/admin/courses", json=course, headers=admin_headers).status_code == 201
     assert client.post("/admin/courses", json=course, headers=admin_headers).status_code == 409
 

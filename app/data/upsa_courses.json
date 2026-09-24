@@ -1,0 +1,4837 @@
+{
+ "source": "UPSA teaching and examination timetables, upsa.edu.gh (2025/2026 and 2026/2027)",
+ "courses": [
+  {
+   "code": "BAAF202",
+   "name": "Principles of Accounting II",
+   "level": 200,
+   "semester": 2
+  },
+  {
+   "code": "BAAF302",
+   "name": "Cost and Management Accounting",
+   "level": 300,
+   "semester": 2
+  },
+  {
+   "code": "BAAF304",
+   "name": "Managerial Economics for Business",
+   "level": 300,
+   "semester": 2
+  },
+  {
+   "code": "BAAF402",
+   "name": "International Trade Finance",
+   "level": 400,
+   "semester": 2
+  },
+  {
+   "code": "BACS102",
+   "name": "Introduction to Journalism",
+   "level": 100,
+   "semester": 2
+  },
+  {
+   "code": "BACS104",
+   "name": "Introduction to Public Relations",
+   "level": 100,
+   "semester": 2
+  },
+  {
+   "code": "BACS106",
+   "name": "Introduction to Advertising",
+   "level": 100,
+   "semester": 2
+  },
+  {
+   "code": "BACS108",
+   "name": "History of Mass Media in Ghana",
+   "level": 100,
+   "semester": 2
+  },
+  {
+   "code": "BACS202",
+   "name": "Media & Communication Regulatory Institutions",
+   "level": 200,
+   "semester": 2
+  },
+  {
+   "code": "BACS204",
+   "name": "Digital Media Production",
+   "level": 200,
+   "semester": 2
+  },
+  {
+   "code": "BACS206",
+   "name": "Public Speaking & Presentation",
+   "level": 200,
+   "semester": 2
+  },
+  {
+   "code": "BACS302",
+   "name": "Communication Research",
+   "level": 300,
+   "semester": 2
+  },
+  {
+   "code": "BACS303",
+   "name": "Feature, Column & Editorial Writing",
+   "level": 300,
+   "semester": 1
+  },
+  {
+   "code": "BACS304",
+   "name": "Newspaper and Magazine Production",
+   "level": 300,
+   "semester": 2
+  },
+  {
+   "code": "BACS306",
+   "name": "Broadcast Production",
+   "level": 300,
+   "semester": 2
+  },
+  {
+   "code": "BACS308",
+   "name": "Advertising Copyright",
+   "level": 300,
+   "semester": 2
+  },
+  {
+   "code": "BACS312",
+   "name": "Creative Strategy and Execution",
+   "level": 300,
+   "semester": 2
+  },
+  {
+   "code": "BACS401",
+   "name": "Sustainable Journalism",
+   "level": 400,
+   "semester": 1
+  },
+  {
+   "code": "BACS403",
+   "name": "Website Design",
+   "level": 400,
+   "semester": 1
+  },
+  {
+   "code": "BACS405",
+   "name": "Photo Journalism",
+   "level": 400,
+   "semester": 1
+  },
+  {
+   "code": "BACS407",
+   "name": "Social Media Management",
+   "level": 400,
+   "semester": 1
+  },
+  {
+   "code": "BACT202",
+   "name": "Principles of Accounting II",
+   "level": 200,
+   "semester": 2
+  },
+  {
+   "code": "BACT301",
+   "name": "Cost and Management Accounting I",
+   "level": 300,
+   "semester": 1
+  },
+  {
+   "code": "BACT303",
+   "name": "Financial Reporting I",
+   "level": 300,
+   "semester": 1
+  },
+  {
+   "code": "BACT304",
+   "name": "Financial Reporting II",
+   "level": 300,
+   "semester": 2
+  },
+  {
+   "code": "BACT305",
+   "name": "Taxation",
+   "level": 300,
+   "semester": 1
+  },
+  {
+   "code": "BACT306",
+   "name": "Computerized Accounting Information Systems",
+   "level": 300,
+   "semester": 2
+  },
+  {
+   "code": "BACT307",
+   "name": "Financial Reporting",
+   "level": 300,
+   "semester": 1
+  },
+  {
+   "code": "BACT308",
+   "name": "Audit and Internal Review",
+   "level": 300,
+   "semester": 2
+  },
+  {
+   "code": "BACT309",
+   "name": "Cost & Management Accounting I",
+   "level": 300,
+   "semester": 1
+  },
+  {
+   "code": "BACT312",
+   "name": "Management Accounting for Business",
+   "level": 300,
+   "semester": 2
+  },
+  {
+   "code": "BACT314",
+   "name": "Cost and Management Accounting II",
+   "level": 300,
+   "semester": 2
+  },
+  {
+   "code": "BACT401",
+   "name": "Corporate Reporting I",
+   "level": 400,
+   "semester": 1
+  },
+  {
+   "code": "BACT402",
+   "name": "Corporate Reporting II",
+   "level": 400,
+   "semester": 2
+  },
+  {
+   "code": "BACT403",
+   "name": "Taxation & Fiscal Policy",
+   "level": 400,
+   "semester": 1
+  },
+  {
+   "code": "BACT404",
+   "name": "Financial Management",
+   "level": 400,
+   "semester": 2
+  },
+  {
+   "code": "BACT405",
+   "name": "Advanced Audit & Assurance",
+   "level": 400,
+   "semester": 1
+  },
+  {
+   "code": "BACT406",
+   "name": "Public Sector Accounting & Finance",
+   "level": 400,
+   "semester": 2
+  },
+  {
+   "code": "BACT408",
+   "name": "Performance Management",
+   "level": 400,
+   "semester": 2
+  },
+  {
+   "code": "BASC106",
+   "name": "Social Psychology",
+   "level": 100,
+   "semester": 2
+  },
+  {
+   "code": "BASC116",
+   "name": "Calculus I",
+   "level": 100,
+   "semester": 2
+  },
+  {
+   "code": "BASC118",
+   "name": "Introduction to Statistics & Probability II",
+   "level": 100,
+   "semester": 2
+  },
+  {
+   "code": "BASC206",
+   "name": "Life Contingency",
+   "level": 200,
+   "semester": 2
+  },
+  {
+   "code": "BASC212",
+   "name": "Actuarial Statistics",
+   "level": 200,
+   "semester": 2
+  },
+  {
+   "code": "BASC301",
+   "name": "Advertising & Media Planning",
+   "level": 300,
+   "semester": 1
+  },
+  {
+   "code": "BASC302",
+   "name": "Pension Planning & Administration",
+   "level": 300,
+   "semester": 2
+  },
+  {
+   "code": "BASC307",
+   "name": "Insurance Law",
+   "level": 300,
+   "semester": 1
+  },
+  {
+   "code": "BASC308",
+   "name": "Financial Economics",
+   "level": 300,
+   "semester": 2
+  },
+  {
+   "code": "BASC311",
+   "name": "Risk Theory",
+   "level": 300,
+   "semester": 1
+  },
+  {
+   "code": "BASC312",
+   "name": "Financial Systems",
+   "level": 300,
+   "semester": 2
+  },
+  {
+   "code": "BASC314",
+   "name": "Financial Reporting for Actuaries",
+   "level": 300,
+   "semester": 2
+  },
+  {
+   "code": "BASC316",
+   "name": "Actuarial Models",
+   "level": 300,
+   "semester": 2
+  },
+  {
+   "code": "BASC318",
+   "name": "Actuarial Risk Management I",
+   "level": 300,
+   "semester": 2
+  },
+  {
+   "code": "BASC402",
+   "name": "Pension Fund Management",
+   "level": 400,
+   "semester": 2
+  },
+  {
+   "code": "BASC404",
+   "name": "Actuarial Professional Practice",
+   "level": 400,
+   "semester": 2
+  },
+  {
+   "code": "BASC406",
+   "name": "Data & Machine Learning",
+   "level": 400,
+   "semester": 2
+  },
+  {
+   "code": "BASC407",
+   "name": "General Insurance",
+   "level": 400,
+   "semester": 1
+  },
+  {
+   "code": "BASC408",
+   "name": "Health Insurance",
+   "level": 400,
+   "semester": 2
+  },
+  {
+   "code": "BASC409",
+   "name": "Actuarial Application & Communication",
+   "level": 400,
+   "semester": 1
+  },
+  {
+   "code": "BASC411",
+   "name": "Actuarial Risk Management II",
+   "level": 400,
+   "semester": 1
+  },
+  {
+   "code": "BASC412",
+   "name": "Investment & Portfolio Management",
+   "level": 400,
+   "semester": 2
+  },
+  {
+   "code": "BATL202",
+   "name": "Principles of Transport Management",
+   "level": 200,
+   "semester": 2
+  },
+  {
+   "code": "BATL204",
+   "name": "Ethics & Sustainability",
+   "level": 200,
+   "semester": 2
+  },
+  {
+   "code": "BATL301",
+   "name": "Principles of Procurement Management",
+   "level": 300,
+   "semester": 1
+  },
+  {
+   "code": "BATL302",
+   "name": "Warehouse Management",
+   "level": 300,
+   "semester": 2
+  },
+  {
+   "code": "BATL303",
+   "name": "Haulage Transport",
+   "level": 300,
+   "semester": 1
+  },
+  {
+   "code": "BATL304",
+   "name": "Freight Forwarding Operations",
+   "level": 300,
+   "semester": 2
+  },
+  {
+   "code": "BATL305",
+   "name": "Passenger Transport",
+   "level": 300,
+   "semester": 1
+  },
+  {
+   "code": "BATL306",
+   "name": "Transportation Economics",
+   "level": 300,
+   "semester": 2
+  },
+  {
+   "code": "BATL403",
+   "name": "Traffic Management",
+   "level": 400,
+   "semester": 1
+  },
+  {
+   "code": "BATL405",
+   "name": "Supply Chain Modelling",
+   "level": 400,
+   "semester": 1
+  },
+  {
+   "code": "BBA301",
+   "name": "Organisational Behaviour",
+   "level": 300,
+   "semester": 1
+  },
+  {
+   "code": "BBAF202",
+   "name": "Investment Fundamentals",
+   "level": 200,
+   "semester": 2
+  },
+  {
+   "code": "BBAF302",
+   "name": "Corporate Finance II",
+   "level": 300,
+   "semester": 2
+  },
+  {
+   "code": "BBAF303",
+   "name": "Corporate Finance",
+   "level": 300,
+   "semester": 1
+  },
+  {
+   "code": "BBAF304",
+   "name": "Banking Operations",
+   "level": 300,
+   "semester": 2
+  },
+  {
+   "code": "BBAF305",
+   "name": "Financial Risk Management & Insurance",
+   "level": 300,
+   "semester": 1
+  },
+  {
+   "code": "BBAF306",
+   "name": "Regulatory and Legal Framework for Financial Institutions",
+   "level": 300,
+   "semester": 2
+  },
+  {
+   "code": "BBAF307",
+   "name": "Managerial Economics",
+   "level": 300,
+   "semester": 1
+  },
+  {
+   "code": "BBAF309",
+   "name": "Introduction to Corporate Finance",
+   "level": 300,
+   "semester": 1
+  },
+  {
+   "code": "BBAF311",
+   "name": "Banking Operations",
+   "level": 300,
+   "semester": 1
+  },
+  {
+   "code": "BBAF312",
+   "name": "Financial Risk Management and Insurance",
+   "level": 300,
+   "semester": 2
+  },
+  {
+   "code": "BBAF314",
+   "name": "Financial Reporting",
+   "level": 300,
+   "semester": 2
+  },
+  {
+   "code": "BBAF316",
+   "name": "Public Finance",
+   "level": 300,
+   "semester": 2
+  },
+  {
+   "code": "BBAF318",
+   "name": "Digital Banking and Fintech",
+   "level": 300,
+   "semester": 2
+  },
+  {
+   "code": "BBAF401",
+   "name": "Monetary Economics",
+   "level": 400,
+   "semester": 1
+  },
+  {
+   "code": "BBAF402",
+   "name": "International Trade Finance",
+   "level": 400,
+   "semester": 2
+  },
+  {
+   "code": "BBAF403",
+   "name": "Investment & Portfolio Management",
+   "level": 400,
+   "semester": 1
+  },
+  {
+   "code": "BBAF404",
+   "name": "Money and Capital Moarkets",
+   "level": 400,
+   "semester": 2
+  },
+  {
+   "code": "BBAF407",
+   "name": "Lending & Credit Management",
+   "level": 400,
+   "semester": 1
+  },
+  {
+   "code": "BBAF408",
+   "name": "Bank Management",
+   "level": 400,
+   "semester": 2
+  },
+  {
+   "code": "BBAF409",
+   "name": "Micro Finance Management",
+   "level": 400,
+   "semester": 1
+  },
+  {
+   "code": "BBAF411",
+   "name": "Financial Modelling",
+   "level": 400,
+   "semester": 1
+  },
+  {
+   "code": "BBAF412",
+   "name": "Business Analysis & Financial Policy",
+   "level": 400,
+   "semester": 2
+  },
+  {
+   "code": "BBAF413",
+   "name": "Financial Management",
+   "level": 400,
+   "semester": 1
+  },
+  {
+   "code": "BBAF414",
+   "name": "Project Finance",
+   "level": 400,
+   "semester": 2
+  },
+  {
+   "code": "BBAF415",
+   "name": "Treasury Management",
+   "level": 400,
+   "semester": 1
+  },
+  {
+   "code": "BBAF416",
+   "name": "Money, Banking and Financial Markets",
+   "level": 400,
+   "semester": 2
+  },
+  {
+   "code": "BBAF418",
+   "name": "Advanced Corporate Finance & Investment",
+   "level": 400,
+   "semester": 2
+  },
+  {
+   "code": "BBAF422",
+   "name": "Micro Finance Management",
+   "level": 400,
+   "semester": 2
+  },
+  {
+   "code": "BBBA202",
+   "name": "Organizational Behaviour",
+   "level": 200,
+   "semester": 2
+  },
+  {
+   "code": "BBBA301",
+   "name": "Organisational Behaviour",
+   "level": 300,
+   "semester": 1
+  },
+  {
+   "code": "BBBA302",
+   "name": "Management of Small and Medium Scale Enterprises",
+   "level": 300,
+   "semester": 2
+  },
+  {
+   "code": "BBBA304",
+   "name": "Operations Management",
+   "level": 300,
+   "semester": 2
+  },
+  {
+   "code": "BBBA306",
+   "name": "Company and Partnership Law",
+   "level": 300,
+   "semester": 2
+  },
+  {
+   "code": "BBBA308",
+   "name": "Human Resources Management",
+   "level": 300,
+   "semester": 2
+  },
+  {
+   "code": "BBBA401",
+   "name": "Public Administration",
+   "level": 400,
+   "semester": 1
+  },
+  {
+   "code": "BBBA402",
+   "name": "International Human Resources Management",
+   "level": 400,
+   "semester": 2
+  },
+  {
+   "code": "BBBA403",
+   "name": "Corporate Governance",
+   "level": 400,
+   "semester": 1
+  },
+  {
+   "code": "BBBA404",
+   "name": "Total Quality Management",
+   "level": 400,
+   "semester": 2
+  },
+  {
+   "code": "BBBA405",
+   "name": "Risk & Insurance Management",
+   "level": 400,
+   "semester": 1
+  },
+  {
+   "code": "BBBA406",
+   "name": "Supply Chain Management",
+   "level": 400,
+   "semester": 2
+  },
+  {
+   "code": "BBBA407",
+   "name": "Management of NGOs",
+   "level": 400,
+   "semester": 1
+  },
+  {
+   "code": "BBBA408",
+   "name": "Environmental Management",
+   "level": 400,
+   "semester": 2
+  },
+  {
+   "code": "BBBA409",
+   "name": "Project Management",
+   "level": 400,
+   "semester": 1
+  },
+  {
+   "code": "BBBA412",
+   "name": "E-commerce",
+   "level": 400,
+   "semester": 2
+  },
+  {
+   "code": "BBEC102",
+   "name": "Introduction to Macroeconomics",
+   "level": 100,
+   "semester": 2
+  },
+  {
+   "code": "BBEC204",
+   "name": "Economy of Ghana",
+   "level": 200,
+   "semester": 2
+  },
+  {
+   "code": "BBEC206",
+   "name": "Statistics for Economists",
+   "level": 200,
+   "semester": 2
+  },
+  {
+   "code": "BBEC208",
+   "name": "Elements of Macroeconomics",
+   "level": 200,
+   "semester": 2
+  },
+  {
+   "code": "BBEC301",
+   "name": "Intermediate Microeconomics",
+   "level": 300,
+   "semester": 1
+  },
+  {
+   "code": "BBEC302",
+   "name": "Intermediate Macroeconomics",
+   "level": 300,
+   "semester": 2
+  },
+  {
+   "code": "BBEC303",
+   "name": "Applied Mathematics for Economists",
+   "level": 300,
+   "semester": 1
+  },
+  {
+   "code": "BBEC304",
+   "name": "Development Economics",
+   "level": 300,
+   "semester": 2
+  },
+  {
+   "code": "BBEC306",
+   "name": "Trade Finance",
+   "level": 300,
+   "semester": 2
+  },
+  {
+   "code": "BBEC307",
+   "name": "Monetary Economics",
+   "level": 300,
+   "semester": 1
+  },
+  {
+   "code": "BBEC401",
+   "name": "Advanced Microeconomics",
+   "level": 400,
+   "semester": 1
+  },
+  {
+   "code": "BBEC402",
+   "name": "Advanced Macroeconomics",
+   "level": 400,
+   "semester": 2
+  },
+  {
+   "code": "BBEC403",
+   "name": "Labour Economics",
+   "level": 400,
+   "semester": 1
+  },
+  {
+   "code": "BBEC404",
+   "name": "Game Theory & Business Applications",
+   "level": 400,
+   "semester": 2
+  },
+  {
+   "code": "BBEC405",
+   "name": "Energy Economics",
+   "level": 400,
+   "semester": 1
+  },
+  {
+   "code": "BBEC406",
+   "name": "Financial Economics",
+   "level": 400,
+   "semester": 2
+  },
+  {
+   "code": "BBEC408",
+   "name": "Labour Economics",
+   "level": 400,
+   "semester": 2
+  },
+  {
+   "code": "BBEC412",
+   "name": "Energy Economics",
+   "level": 400,
+   "semester": 2
+  },
+  {
+   "code": "BCAD108",
+   "name": "Business French",
+   "level": 100,
+   "semester": 2
+  },
+  {
+   "code": "BCPC108",
+   "name": "Introduction to Management",
+   "level": 100,
+   "semester": 2
+  },
+  {
+   "code": "BCPC112",
+   "name": "Introduction to Business Statistics",
+   "level": 100,
+   "semester": 2
+  },
+  {
+   "code": "BCPC114",
+   "name": "Introduction to Computer Application II",
+   "level": 100,
+   "semester": 2
+  },
+  {
+   "code": "BCPC118",
+   "name": "Economics for Business",
+   "level": 100,
+   "semester": 2
+  },
+  {
+   "code": "BCPC201",
+   "name": "Information Systems",
+   "level": 200,
+   "semester": 1
+  },
+  {
+   "code": "BCPC202",
+   "name": "Global Dimension of Business",
+   "level": 200,
+   "semester": 2
+  },
+  {
+   "code": "BCPC203",
+   "name": "Introduction to Business Finance",
+   "level": 200,
+   "semester": 1
+  },
+  {
+   "code": "BCPC204",
+   "name": "Principles of Accounting",
+   "level": 200,
+   "semester": 2
+  },
+  {
+   "code": "BCPC205",
+   "name": "Elements of Marketing",
+   "level": 200,
+   "semester": 1
+  },
+  {
+   "code": "BCPC206",
+   "name": "Introduction to Total Quality Management",
+   "level": 200,
+   "semester": 2
+  },
+  {
+   "code": "BCPC207",
+   "name": "Principles of Leadership",
+   "level": 200,
+   "semester": 1
+  },
+  {
+   "code": "BCPC208",
+   "name": "Quantitative Methods",
+   "level": 200,
+   "semester": 2
+  },
+  {
+   "code": "BCPC209",
+   "name": "Legal Environment of Business",
+   "level": 200,
+   "semester": 1
+  },
+  {
+   "code": "BCPC212",
+   "name": "Business Ethics",
+   "level": 200,
+   "semester": 2
+  },
+  {
+   "code": "BCPC214",
+   "name": "Business Law II",
+   "level": 200,
+   "semester": 2
+  },
+  {
+   "code": "BCPC218",
+   "name": "Introduction to Computer Technology",
+   "level": 200,
+   "semester": 2
+  },
+  {
+   "code": "BCPC301",
+   "name": "Research Methods",
+   "level": 300,
+   "semester": 1
+  },
+  {
+   "code": "BCPC303",
+   "name": "Entrepreneurship Development",
+   "level": 300,
+   "semester": 1
+  },
+  {
+   "code": "BCPC304",
+   "name": "Business Ethics",
+   "level": 300,
+   "semester": 2
+  },
+  {
+   "code": "BCPC403",
+   "name": "Business Policy & Strategy",
+   "level": 400,
+   "semester": 1
+  },
+  {
+   "code": "BDSA102",
+   "name": "Database Management",
+   "level": 100,
+   "semester": 2
+  },
+  {
+   "code": "BDSA104",
+   "name": "Programming with Python",
+   "level": 100,
+   "semester": 2
+  },
+  {
+   "code": "BDSA106",
+   "name": "Linear Algebra in Data Science",
+   "level": 100,
+   "semester": 2
+  },
+  {
+   "code": "BDSA108",
+   "name": "Web Design & Development",
+   "level": 100,
+   "semester": 2
+  },
+  {
+   "code": "BGEC102",
+   "name": "Scholarly Writing",
+   "level": 100,
+   "semester": 2
+  },
+  {
+   "code": "BGEC104",
+   "name": "Introduction to Environmental Management",
+   "level": 100,
+   "semester": 2
+  },
+  {
+   "code": "BGEC106",
+   "name": "Logic and Critical Thinking",
+   "level": 100,
+   "semester": 2
+  },
+  {
+   "code": "BGEC113",
+   "name": "Introduction to Environmental Management",
+   "level": 100,
+   "semester": 1
+  },
+  {
+   "code": "BGEG101",
+   "name": "Communication Skills",
+   "level": 100,
+   "semester": 1
+  },
+  {
+   "code": "BITM104",
+   "name": "Programming Fundamentals",
+   "level": 100,
+   "semester": 2
+  },
+  {
+   "code": "BITM201",
+   "name": "Computer Networks",
+   "level": 200,
+   "semester": 1
+  },
+  {
+   "code": "BITM202",
+   "name": "Operating Systems",
+   "level": 200,
+   "semester": 2
+  },
+  {
+   "code": "BITM203",
+   "name": "Web Development Technologies",
+   "level": 200,
+   "semester": 1
+  },
+  {
+   "code": "BITM204",
+   "name": "Database Management System I",
+   "level": 200,
+   "semester": 2
+  },
+  {
+   "code": "BITM301",
+   "name": "Programming",
+   "level": 300,
+   "semester": 1
+  },
+  {
+   "code": "BITM302",
+   "name": "Management Information Systems",
+   "level": 300,
+   "semester": 2
+  },
+  {
+   "code": "BITM304",
+   "name": "Business Systems Analysis and Design",
+   "level": 300,
+   "semester": 2
+  },
+  {
+   "code": "BITM306",
+   "name": "IT Sourcing and Procurement",
+   "level": 300,
+   "semester": 2
+  },
+  {
+   "code": "BITM307",
+   "name": "Data Communication and Computer Networks",
+   "level": 300,
+   "semester": 1
+  },
+  {
+   "code": "BITM309",
+   "name": "Research Methods in IT",
+   "level": 300,
+   "semester": 1
+  },
+  {
+   "code": "BITM402",
+   "name": "Professional Computing Practice",
+   "level": 400,
+   "semester": 2
+  },
+  {
+   "code": "BITM404",
+   "name": "Information Management",
+   "level": 400,
+   "semester": 2
+  },
+  {
+   "code": "BITM406",
+   "name": "Computer & Network Security",
+   "level": 400,
+   "semester": 2
+  },
+  {
+   "code": "BITM408",
+   "name": "Software Quality Management",
+   "level": 400,
+   "semester": 2
+  },
+  {
+   "code": "BITM412",
+   "name": "Mobile Web Development",
+   "level": 400,
+   "semester": 2
+  },
+  {
+   "code": "BLAW102",
+   "name": "Legal Method",
+   "level": 100,
+   "semester": 2
+  },
+  {
+   "code": "BLAW104",
+   "name": "Constitutional Law of Ghana II",
+   "level": 100,
+   "semester": 2
+  },
+  {
+   "code": "BLAW106",
+   "name": "Criminal Law II",
+   "level": 100,
+   "semester": 2
+  },
+  {
+   "code": "BLAW108",
+   "name": "Law of Contract II",
+   "level": 100,
+   "semester": 2
+  },
+  {
+   "code": "BLAW112",
+   "name": "Legal Writing and Reasoning",
+   "level": 100,
+   "semester": 2
+  },
+  {
+   "code": "BLAW206",
+   "name": "Law of Torts II",
+   "level": 200,
+   "semester": 2
+  },
+  {
+   "code": "BLAW208",
+   "name": "Information Technology Law",
+   "level": 200,
+   "semester": 2
+  },
+  {
+   "code": "BLAW211",
+   "name": "Public International Law I",
+   "level": 200,
+   "semester": 1
+  },
+  {
+   "code": "BLAW212",
+   "name": "Public International Law II",
+   "level": 200,
+   "semester": 2
+  },
+  {
+   "code": "BLAW213",
+   "name": "Law and Accountable Institutions I",
+   "level": 200,
+   "semester": 1
+  },
+  {
+   "code": "BLAW214",
+   "name": "Law and Accountable Institutions II",
+   "level": 200,
+   "semester": 2
+  },
+  {
+   "code": "BLAW223",
+   "name": "Private International Law I",
+   "level": 200,
+   "semester": 1
+  },
+  {
+   "code": "BLAW224",
+   "name": "Company Law",
+   "level": 200,
+   "semester": 2
+  },
+  {
+   "code": "BLAW232",
+   "name": "Mooting & Practical Lawyering II",
+   "level": 200,
+   "semester": 2
+  },
+  {
+   "code": "BLAW305",
+   "name": "Law of Taxation I",
+   "level": 300,
+   "semester": 1
+  },
+  {
+   "code": "BLAW306",
+   "name": "Law of Taxation II",
+   "level": 300,
+   "semester": 2
+  },
+  {
+   "code": "BLAW308",
+   "name": "Commercial Law II",
+   "level": 300,
+   "semester": 2
+  },
+  {
+   "code": "BLAW309",
+   "name": "Labour and Employment Law I",
+   "level": 300,
+   "semester": 1
+  },
+  {
+   "code": "BLAW311",
+   "name": "Law of Immovable Property I",
+   "level": 300,
+   "semester": 1
+  },
+  {
+   "code": "BLAW312",
+   "name": "Labour and Employment Law",
+   "level": 300,
+   "semester": 2
+  },
+  {
+   "code": "BLAW314",
+   "name": "Law of Immovable Property II",
+   "level": 300,
+   "semester": 2
+  },
+  {
+   "code": "BLAW315",
+   "name": "Human Rights Law I",
+   "level": 300,
+   "semester": 1
+  },
+  {
+   "code": "BLAW316",
+   "name": "Alternative Dispute Resolution",
+   "level": 300,
+   "semester": 2
+  },
+  {
+   "code": "BLAW317",
+   "name": "Financial Service Regulation I",
+   "level": 300,
+   "semester": 1
+  },
+  {
+   "code": "BLAW319",
+   "name": "Law Clinic I",
+   "level": 300,
+   "semester": 1
+  },
+  {
+   "code": "BLAW322",
+   "name": "Energy Law II",
+   "level": 300,
+   "semester": 2
+  },
+  {
+   "code": "BLAW328",
+   "name": "Financial Services Regulations",
+   "level": 300,
+   "semester": 2
+  },
+  {
+   "code": "BLAW332",
+   "name": "Human Rights Law II",
+   "level": 300,
+   "semester": 2
+  },
+  {
+   "code": "BLAW344",
+   "name": "Law Clinic II",
+   "level": 300,
+   "semester": 2
+  },
+  {
+   "code": "BLAW401",
+   "name": "Equity and Succession Law II",
+   "level": 400,
+   "semester": 1
+  },
+  {
+   "code": "BLAW402",
+   "name": "Law of Equity and Succession",
+   "level": 400,
+   "semester": 2
+  },
+  {
+   "code": "BLAW403",
+   "name": "Jurisprudence I",
+   "level": 400,
+   "semester": 1
+  },
+  {
+   "code": "BLAW404",
+   "name": "Jurisprudence",
+   "level": 400,
+   "semester": 2
+  },
+  {
+   "code": "BLAW408",
+   "name": "Procurement",
+   "level": 400,
+   "semester": 2
+  },
+  {
+   "code": "BLAW412",
+   "name": "Environmental Law II",
+   "level": 400,
+   "semester": 2
+  },
+  {
+   "code": "BLAW414",
+   "name": "Law of Natural Resources II",
+   "level": 400,
+   "semester": 2
+  },
+  {
+   "code": "BLAW415",
+   "name": "Intellectual Property Law I",
+   "level": 400,
+   "semester": 1
+  },
+  {
+   "code": "BLAW416",
+   "name": "Intellectual Property Law",
+   "level": 400,
+   "semester": 2
+  },
+  {
+   "code": "BLAW419",
+   "name": "International Trade & Investment Law I",
+   "level": 400,
+   "semester": 1
+  },
+  {
+   "code": "BLAW421",
+   "name": "Competition and Consumer Protection I",
+   "level": 400,
+   "semester": 1
+  },
+  {
+   "code": "BLAW422",
+   "name": "International Trade and Investment Law",
+   "level": 400,
+   "semester": 2
+  },
+  {
+   "code": "BLAW424",
+   "name": "Competition and Consumer Protection Law II",
+   "level": 400,
+   "semester": 2
+  },
+  {
+   "code": "BMKT301",
+   "name": "Understanding Customer Dynamics",
+   "level": 300,
+   "semester": 1
+  },
+  {
+   "code": "BMKT302",
+   "name": "Marketing Research",
+   "level": 300,
+   "semester": 2
+  },
+  {
+   "code": "BMKT303",
+   "name": "Integrated Marketing Communication",
+   "level": 300,
+   "semester": 1
+  },
+  {
+   "code": "BMKT304",
+   "name": "Sales Management",
+   "level": 300,
+   "semester": 2
+  },
+  {
+   "code": "BMKT305",
+   "name": "Marketing Management",
+   "level": 300,
+   "semester": 1
+  },
+  {
+   "code": "BMKT306",
+   "name": "Services Marketing",
+   "level": 300,
+   "semester": 2
+  },
+  {
+   "code": "BMKT308",
+   "name": "Digital Marketing",
+   "level": 300,
+   "semester": 2
+  },
+  {
+   "code": "BMKT401",
+   "name": "Strategic Marketing Planning",
+   "level": 400,
+   "semester": 1
+  },
+  {
+   "code": "BMKT402",
+   "name": "Retail Management",
+   "level": 400,
+   "semester": 2
+  },
+  {
+   "code": "BMKT403",
+   "name": "Brands Management",
+   "level": 400,
+   "semester": 1
+  },
+  {
+   "code": "BMKT404",
+   "name": "Tourism Marketing",
+   "level": 400,
+   "semester": 2
+  },
+  {
+   "code": "BMKT405",
+   "name": "Social Marketing",
+   "level": 400,
+   "semester": 1
+  },
+  {
+   "code": "BMKT406",
+   "name": "Marketing of Financial Service",
+   "level": 400,
+   "semester": 2
+  },
+  {
+   "code": "BMKT411",
+   "name": "International Marketing",
+   "level": 400,
+   "semester": 1
+  },
+  {
+   "code": "BPRM102",
+   "name": "Introduction to Theories of Public Relations",
+   "level": 100,
+   "semester": 2
+  },
+  {
+   "code": "BPRM104",
+   "name": "Introduction to Theories of Public Relations",
+   "level": 100,
+   "semester": 2
+  },
+  {
+   "code": "BPRM106",
+   "name": "Internal Communications",
+   "level": 100,
+   "semester": 2
+  },
+  {
+   "code": "BPRM202",
+   "name": "Organizational Behaviour",
+   "level": 200,
+   "semester": 2
+  },
+  {
+   "code": "BPRM204",
+   "name": "Communication Theories",
+   "level": 200,
+   "semester": 2
+  },
+  {
+   "code": "BPRM206",
+   "name": "Mass Media and Society",
+   "level": 200,
+   "semester": 2
+  },
+  {
+   "code": "BPRM208",
+   "name": "Multimedia Writing for Public Relation",
+   "level": 200,
+   "semester": 2
+  },
+  {
+   "code": "BPRM301",
+   "name": "Public Relations Strategy & Campaign Planning",
+   "level": 300,
+   "semester": 1
+  },
+  {
+   "code": "BPRM302",
+   "name": "Conflict Resolution in Public Relations",
+   "level": 300,
+   "semester": 2
+  },
+  {
+   "code": "BPRM303",
+   "name": "Integrated Marketing Communication",
+   "level": 300,
+   "semester": 1
+  },
+  {
+   "code": "BPRM305",
+   "name": "Public Relations in Practice",
+   "level": 300,
+   "semester": 1
+  },
+  {
+   "code": "BPRM307",
+   "name": "Public Relations Research Methods",
+   "level": 300,
+   "semester": 1
+  },
+  {
+   "code": "BPRM309",
+   "name": "History of Mass Media in Africa",
+   "level": 300,
+   "semester": 1
+  },
+  {
+   "code": "BRFM308",
+   "name": "Fundamentals of Building Construction and Management",
+   "level": 300,
+   "semester": 2
+  },
+  {
+   "code": "BRMF301",
+   "name": "Customary Land Law",
+   "level": 300,
+   "semester": 1
+  },
+  {
+   "code": "BRMF302",
+   "name": "Real Estate Law",
+   "level": 300,
+   "semester": 2
+  },
+  {
+   "code": "BRMF303",
+   "name": "Introduction to Real Estate Management",
+   "level": 300,
+   "semester": 1
+  },
+  {
+   "code": "BRMF304",
+   "name": "Real Estate Economics",
+   "level": 300,
+   "semester": 2
+  },
+  {
+   "code": "BRMF305",
+   "name": "Introduction to Urban Admin & Planning",
+   "level": 300,
+   "semester": 1
+  },
+  {
+   "code": "BRMF306",
+   "name": "Introduction to Bills of Quantities",
+   "level": 300,
+   "semester": 2
+  },
+  {
+   "code": "BRMF308",
+   "name": "Fundamentals of Building Construction and Management",
+   "level": 300,
+   "semester": 2
+  },
+  {
+   "code": "BRMF401",
+   "name": "Property Risk Management & Insurance",
+   "level": 400,
+   "semester": 1
+  },
+  {
+   "code": "BRMF402",
+   "name": "Real Estate Marketing & Brokerage",
+   "level": 400,
+   "semester": 2
+  },
+  {
+   "code": "BRMF403",
+   "name": "Principles of Valuation I",
+   "level": 400,
+   "semester": 1
+  },
+  {
+   "code": "BRMF404",
+   "name": "Principles of Valuation",
+   "level": 400,
+   "semester": 2
+  },
+  {
+   "code": "BRMF405",
+   "name": "Real Estate Finance & Investment",
+   "level": 400,
+   "semester": 1
+  },
+  {
+   "code": "BRMF406",
+   "name": "Real Estate Finance & Investment II",
+   "level": 400,
+   "semester": 2
+  },
+  {
+   "code": "BRMF407",
+   "name": "Introduction to Property Management",
+   "level": 400,
+   "semester": 1
+  },
+  {
+   "code": "BRMF408",
+   "name": "Contemporary Issues in Real Estate Development",
+   "level": 400,
+   "semester": 2
+  },
+  {
+   "code": "BRMF409",
+   "name": "Property Rating & Taxation",
+   "level": 400,
+   "semester": 1
+  },
+  {
+   "code": "BRMF412",
+   "name": "Procurement & Contract Management",
+   "level": 400,
+   "semester": 2
+  },
+  {
+   "code": "BSIT102",
+   "name": "Programming Fundamentals",
+   "level": 100,
+   "semester": 2
+  },
+  {
+   "code": "BSIT202",
+   "name": "Computer Hardware Systems",
+   "level": 200,
+   "semester": 2
+  },
+  {
+   "code": "BSIT204",
+   "name": "Database Management System I",
+   "level": 200,
+   "semester": 2
+  },
+  {
+   "code": "BSIT206",
+   "name": "Electronic Business",
+   "level": 200,
+   "semester": 2
+  },
+  {
+   "code": "BSIT301",
+   "name": "Programming",
+   "level": 300,
+   "semester": 1
+  },
+  {
+   "code": "BSIT302",
+   "name": "Business Systems Analysis and Design",
+   "level": 300,
+   "semester": 2
+  },
+  {
+   "code": "BSIT303",
+   "name": "Database Management Systems II",
+   "level": 300,
+   "semester": 1
+  },
+  {
+   "code": "BSIT304",
+   "name": "Strategic Information Systems",
+   "level": 300,
+   "semester": 2
+  },
+  {
+   "code": "BSIT305",
+   "name": "Web Development II",
+   "level": 300,
+   "semester": 1
+  },
+  {
+   "code": "BSIT306",
+   "name": "IT Strategy & Policy",
+   "level": 300,
+   "semester": 2
+  },
+  {
+   "code": "BSIT307",
+   "name": "Research Methods in IT",
+   "level": 300,
+   "semester": 1
+  },
+  {
+   "code": "BSIT309",
+   "name": "Information Systems Security",
+   "level": 300,
+   "semester": 1
+  },
+  {
+   "code": "BSIT401",
+   "name": "Network and Systems Administration",
+   "level": 400,
+   "semester": 1
+  },
+  {
+   "code": "BSIT403",
+   "name": "Systems Audit & Control",
+   "level": 400,
+   "semester": 1
+  },
+  {
+   "code": "BSIT405",
+   "name": "IT Service Management",
+   "level": 400,
+   "semester": 1
+  },
+  {
+   "code": "BSIT407",
+   "name": "IT Project Management",
+   "level": 400,
+   "semester": 1
+  },
+  {
+   "code": "BSIT409",
+   "name": "IT Entrepreneurship",
+   "level": 400,
+   "semester": 1
+  },
+  {
+   "code": "DIPA007",
+   "name": "Financial Accounting",
+   "level": 100,
+   "semester": 1
+  },
+  {
+   "code": "DIPA052",
+   "name": "Management Accounting",
+   "level": 200,
+   "semester": 2
+  },
+  {
+   "code": "DIPA054",
+   "name": "Audit and Internal Review",
+   "level": 200,
+   "semester": 2
+  },
+  {
+   "code": "DIPA056",
+   "name": "Financial Accounting II",
+   "level": 200,
+   "semester": 2
+  },
+  {
+   "code": "DIPA058",
+   "name": "Public Sector Accounting",
+   "level": 200,
+   "semester": 2
+  },
+  {
+   "code": "DIPC001",
+   "name": "Business Communications",
+   "level": 100,
+   "semester": 1
+  },
+  {
+   "code": "DIPC002",
+   "name": "Human Resource Management",
+   "level": 100,
+   "semester": 2
+  },
+  {
+   "code": "DIPC003",
+   "name": "Business Management",
+   "level": 100,
+   "semester": 1
+  },
+  {
+   "code": "DIPC004",
+   "name": "Introduction to Business Statistics",
+   "level": 100,
+   "semester": 2
+  },
+  {
+   "code": "DIPC005",
+   "name": "Business Mathematics",
+   "level": 100,
+   "semester": 1
+  },
+  {
+   "code": "DIPC006",
+   "name": "Principles of Accounting",
+   "level": 100,
+   "semester": 2
+  },
+  {
+   "code": "DIPC007",
+   "name": "French Language",
+   "level": 100,
+   "semester": 1
+  },
+  {
+   "code": "DIPC008",
+   "name": "Principles of Economics",
+   "level": 100,
+   "semester": 2
+  },
+  {
+   "code": "DIPC011",
+   "name": "Philosophy and Logic",
+   "level": 100,
+   "semester": 1
+  },
+  {
+   "code": "DIPC012",
+   "name": "Principles of Marketing",
+   "level": 100,
+   "semester": 2
+  },
+  {
+   "code": "DIPC014",
+   "name": "Scholarly Writing",
+   "level": 100,
+   "semester": 2
+  },
+  {
+   "code": "DIPC051",
+   "name": "Business Research Methods",
+   "level": 200,
+   "semester": 1
+  },
+  {
+   "code": "DIPC052",
+   "name": "Introduction to Business Finance",
+   "level": 200,
+   "semester": 2
+  },
+  {
+   "code": "DIPC053",
+   "name": "Entrepreneurship Development",
+   "level": 200,
+   "semester": 1
+  },
+  {
+   "code": "DIPC054",
+   "name": "Introduction to Environmental Management",
+   "level": 200,
+   "semester": 2
+  },
+  {
+   "code": "DIPG052",
+   "name": "Project Management",
+   "level": 200,
+   "semester": 2
+  },
+  {
+   "code": "DIPG054",
+   "name": "Operations Management",
+   "level": 200,
+   "semester": 2
+  },
+  {
+   "code": "DIPG056",
+   "name": "Introduction to Public Administration",
+   "level": 200,
+   "semester": 2
+  },
+  {
+   "code": "DIPG057",
+   "name": "Public Administration",
+   "level": 200,
+   "semester": 1
+  },
+  {
+   "code": "DIPK052",
+   "name": "Brands Management",
+   "level": 200,
+   "semester": 2
+  },
+  {
+   "code": "DIPK054",
+   "name": "Digital Marketing",
+   "level": 200,
+   "semester": 2
+  },
+  {
+   "code": "DIPK056",
+   "name": "International Marketing",
+   "level": 200,
+   "semester": 2
+  },
+  {
+   "code": "DIPK058",
+   "name": "Sales Management",
+   "level": 200,
+   "semester": 2
+  },
+  {
+   "code": "DIPK062",
+   "name": "Integrated Marketing Communications",
+   "level": 200,
+   "semester": 2
+  },
+  {
+   "code": "DIPK064",
+   "name": "Principles of Advertising",
+   "level": 200,
+   "semester": 2
+  },
+  {
+   "code": "DIPL002",
+   "name": "Legal Environment of Business",
+   "level": 100,
+   "semester": 2
+  },
+  {
+   "code": "DIPL052",
+   "name": "Company and Partnership Law",
+   "level": 200,
+   "semester": 2
+  },
+  {
+   "code": "DIPL055",
+   "name": "Legal Environment of Business",
+   "level": 200,
+   "semester": 1
+  },
+  {
+   "code": "DIPL062",
+   "name": "Computer and Information Security",
+   "level": 200,
+   "semester": 2
+  },
+  {
+   "code": "DIPR002",
+   "name": "Principles of Public Relations",
+   "level": 100,
+   "semester": 2
+  },
+  {
+   "code": "DIPR004",
+   "name": "Public Relations Writing",
+   "level": 100,
+   "semester": 2
+  },
+  {
+   "code": "DIPR006",
+   "name": "Public Relations Functions",
+   "level": 100,
+   "semester": 2
+  },
+  {
+   "code": "DIPR008",
+   "name": "Public Speaking and Presentation",
+   "level": 100,
+   "semester": 2
+  },
+  {
+   "code": "DIPR012",
+   "name": "Public Relations Workshop",
+   "level": 100,
+   "semester": 2
+  },
+  {
+   "code": "DIPR052",
+   "name": "Events Management",
+   "level": 200,
+   "semester": 2
+  },
+  {
+   "code": "DIPR054",
+   "name": "Digital Media in Public Relations",
+   "level": 200,
+   "semester": 2
+  },
+  {
+   "code": "DIPR055",
+   "name": "Public Relations Law and Ethics",
+   "level": 200,
+   "semester": 1
+  },
+  {
+   "code": "DIPR056",
+   "name": "Political Communications",
+   "level": 200,
+   "semester": 2
+  },
+  {
+   "code": "DIPT001",
+   "name": "Computer Application in Business",
+   "level": 100,
+   "semester": 1
+  },
+  {
+   "code": "DIPT002",
+   "name": "Electronic Business Systems",
+   "level": 100,
+   "semester": 2
+  },
+  {
+   "code": "DIPT003",
+   "name": "Programming I",
+   "level": 100,
+   "semester": 1
+  },
+  {
+   "code": "DIPT004",
+   "name": "Computer Hardware Systems I",
+   "level": 100,
+   "semester": 2
+  },
+  {
+   "code": "DIPT006",
+   "name": "Introduction to Web Development",
+   "level": 100,
+   "semester": 2
+  },
+  {
+   "code": "DIPT008",
+   "name": "Programming II",
+   "level": 100,
+   "semester": 2
+  },
+  {
+   "code": "DIPT009",
+   "name": "Introduction to Information Technology",
+   "level": 100,
+   "semester": 1
+  },
+  {
+   "code": "DIPT052",
+   "name": "Essentials of Information Technology Project Management",
+   "level": 200,
+   "semester": 2
+  },
+  {
+   "code": "DIPT053",
+   "name": "Essentials of Information Planning and Design",
+   "level": 200,
+   "semester": 1
+  },
+  {
+   "code": "DIPT054",
+   "name": "Networking Development and Management",
+   "level": 200,
+   "semester": 2
+  },
+  {
+   "code": "DIPT055",
+   "name": "Computer Hardware Systems II",
+   "level": 200,
+   "semester": 1
+  },
+  {
+   "code": "DIPT056",
+   "name": "IT Service Management",
+   "level": 200,
+   "semester": 2
+  },
+  {
+   "code": "DIPT057",
+   "name": "Introduction to Management Information Systems",
+   "level": 200,
+   "semester": 1
+  },
+  {
+   "code": "DIPT058",
+   "name": "Introduction to Management Information Systems",
+   "level": 200,
+   "semester": 2
+  },
+  {
+   "code": "DIPT062",
+   "name": "Computer and Information Security",
+   "level": 200,
+   "semester": 2
+  },
+  {
+   "code": "PBBS302",
+   "name": "Entrepreneurship Development",
+   "level": 300,
+   "semester": 2
+  },
+  {
+   "code": "PBPR101",
+   "name": "Introduction to Mass Communication",
+   "level": 100,
+   "semester": 1
+  },
+  {
+   "code": "PBPR104",
+   "name": "Public Relation II",
+   "level": 100,
+   "semester": 2
+  },
+  {
+   "code": "PBPR106",
+   "name": "English Language II",
+   "level": 100,
+   "semester": 2
+  },
+  {
+   "code": "PBPR107",
+   "name": "Theories of Public Relations",
+   "level": 100,
+   "semester": 1
+  },
+  {
+   "code": "PBPR202",
+   "name": "Applied Political Science",
+   "level": 200,
+   "semester": 2
+  },
+  {
+   "code": "PBPR206",
+   "name": "Communication Theories",
+   "level": 200,
+   "semester": 2
+  },
+  {
+   "code": "PBPR207",
+   "name": "Media Law",
+   "level": 200,
+   "semester": 1
+  },
+  {
+   "code": "PBPR208",
+   "name": "History of Mass Media in Africa",
+   "level": 200,
+   "semester": 2
+  },
+  {
+   "code": "PBPR209",
+   "name": "Public Relations Workshop",
+   "level": 200,
+   "semester": 1
+  },
+  {
+   "code": "PBPR212",
+   "name": "Mass Media and Society",
+   "level": 200,
+   "semester": 2
+  },
+  {
+   "code": "PBPR301",
+   "name": "Integrated Marketing Communication",
+   "level": 300,
+   "semester": 1
+  },
+  {
+   "code": "PBPR302",
+   "name": "Integrated Marketing Communication II",
+   "level": 300,
+   "semester": 2
+  },
+  {
+   "code": "PBPR303",
+   "name": "Public Relations in Practice",
+   "level": 300,
+   "semester": 1
+  },
+  {
+   "code": "PBPR304",
+   "name": "Public Relations Research",
+   "level": 300,
+   "semester": 2
+  },
+  {
+   "code": "PBPR306",
+   "name": "Public Relations in Higher Education",
+   "level": 300,
+   "semester": 2
+  },
+  {
+   "code": "PBPR308",
+   "name": "Media Relations",
+   "level": 300,
+   "semester": 2
+  },
+  {
+   "code": "PBPR309",
+   "name": "Public Relations Planning and Strategy",
+   "level": 300,
+   "semester": 1
+  },
+  {
+   "code": "PBPR312",
+   "name": "Issues and Crises Management",
+   "level": 300,
+   "semester": 2
+  },
+  {
+   "code": "PBPR401",
+   "name": "Public Speaking & Presentation",
+   "level": 400,
+   "semester": 1
+  },
+  {
+   "code": "PBPR402",
+   "name": "Public Relations Strategy & Campaign Planning",
+   "level": 400,
+   "semester": 2
+  },
+  {
+   "code": "PBPR403",
+   "name": "New Media & Public Relations",
+   "level": 400,
+   "semester": 1
+  },
+  {
+   "code": "PBPR404",
+   "name": "Speech Writing",
+   "level": 400,
+   "semester": 2
+  },
+  {
+   "code": "PBPR405",
+   "name": "Technical Writing",
+   "level": 400,
+   "semester": 1
+  },
+  {
+   "code": "PBPR406",
+   "name": "Development Communication",
+   "level": 400,
+   "semester": 2
+  },
+  {
+   "code": "PBPR407",
+   "name": "Public Relations Ethics",
+   "level": 400,
+   "semester": 1
+  },
+  {
+   "code": "PBPR408",
+   "name": "Events Management & Protocol",
+   "level": 400,
+   "semester": 2
+  },
+  {
+   "code": "PBPR409",
+   "name": "Corporate Social Responsibility",
+   "level": 400,
+   "semester": 1
+  },
+  {
+   "code": "PBPR411",
+   "name": "International Public Relations",
+   "level": 400,
+   "semester": 1
+  },
+  {
+   "code": "PBPR412",
+   "name": "Employee Relations",
+   "level": 400,
+   "semester": 2
+  },
+  {
+   "code": "PBPR413",
+   "name": "Political Communication",
+   "level": 400,
+   "semester": 1
+  },
+  {
+   "code": "PBPR414",
+   "name": "Indigenous Communication",
+   "level": 400,
+   "semester": 2
+  },
+  {
+   "code": "PDBA116",
+   "name": "Principles of Accounting",
+   "level": 100,
+   "semester": 2
+  },
+  {
+   "code": "PDBA118",
+   "name": "Legal Environment of Business",
+   "level": 100,
+   "semester": 2
+  },
+  {
+   "code": "PDBA124",
+   "name": "Principles of Economics",
+   "level": 100,
+   "semester": 2
+  },
+  {
+   "code": "PDBA126",
+   "name": "Principles of Marketing",
+   "level": 100,
+   "semester": 2
+  },
+  {
+   "code": "PDBA208",
+   "name": "Sales Management",
+   "level": 200,
+   "semester": 2
+  },
+  {
+   "code": "PDBA234",
+   "name": "Introduction to Business Finance",
+   "level": 200,
+   "semester": 2
+  },
+  {
+   "code": "PDBA238",
+   "name": "Introduction to Environmental Management",
+   "level": 200,
+   "semester": 2
+  },
+  {
+   "code": "PDBA246",
+   "name": "Integrated Marketing Communication",
+   "level": 200,
+   "semester": 2
+  },
+  {
+   "code": "PDIM104",
+   "name": "Programming II",
+   "level": 100,
+   "semester": 2
+  },
+  {
+   "code": "PDIM204",
+   "name": "Networking Development and Management",
+   "level": 200,
+   "semester": 2
+  },
+  {
+   "code": "PDIM208",
+   "name": "Introduction to Management Information Systems",
+   "level": 200,
+   "semester": 2
+  },
+  {
+   "code": "PDIM212",
+   "name": "Computer and Information Security",
+   "level": 200,
+   "semester": 2
+  }
+ ],
+ "offerings": [
+  {
+   "programme": "Bachelor of Arts in Communication Studies",
+   "level": 100,
+   "semester": 2,
+   "code": "BACS102"
+  },
+  {
+   "programme": "Bachelor of Arts in Communication Studies",
+   "level": 100,
+   "semester": 2,
+   "code": "BACS104"
+  },
+  {
+   "programme": "Bachelor of Arts in Communication Studies",
+   "level": 100,
+   "semester": 2,
+   "code": "BACS106"
+  },
+  {
+   "programme": "Bachelor of Arts in Communication Studies",
+   "level": 100,
+   "semester": 2,
+   "code": "BACS108"
+  },
+  {
+   "programme": "Bachelor of Arts in Communication Studies",
+   "level": 200,
+   "semester": 2,
+   "code": "BACS202"
+  },
+  {
+   "programme": "Bachelor of Arts in Communication Studies",
+   "level": 200,
+   "semester": 2,
+   "code": "BACS204"
+  },
+  {
+   "programme": "Bachelor of Arts in Communication Studies",
+   "level": 200,
+   "semester": 2,
+   "code": "BACS206"
+  },
+  {
+   "programme": "Bachelor of Arts in Communication Studies",
+   "level": 300,
+   "semester": 1,
+   "code": "BACS303"
+  },
+  {
+   "programme": "Bachelor of Arts in Communication Studies",
+   "level": 300,
+   "semester": 1,
+   "code": "BASC301"
+  },
+  {
+   "programme": "Bachelor of Arts in Communication Studies",
+   "level": 300,
+   "semester": 1,
+   "code": "BCPC301"
+  },
+  {
+   "programme": "Bachelor of Arts in Communication Studies",
+   "level": 300,
+   "semester": 1,
+   "code": "BMKT303"
+  },
+  {
+   "programme": "Bachelor of Arts in Communication Studies",
+   "level": 300,
+   "semester": 1,
+   "code": "BPRM301"
+  },
+  {
+   "programme": "Bachelor of Arts in Communication Studies",
+   "level": 300,
+   "semester": 1,
+   "code": "BPRM303"
+  },
+  {
+   "programme": "Bachelor of Arts in Communication Studies",
+   "level": 300,
+   "semester": 2,
+   "code": "BACS302"
+  },
+  {
+   "programme": "Bachelor of Arts in Communication Studies",
+   "level": 300,
+   "semester": 2,
+   "code": "BACS304"
+  },
+  {
+   "programme": "Bachelor of Arts in Communication Studies",
+   "level": 300,
+   "semester": 2,
+   "code": "BACS306"
+  },
+  {
+   "programme": "Bachelor of Arts in Communication Studies",
+   "level": 300,
+   "semester": 2,
+   "code": "BACS308"
+  },
+  {
+   "programme": "Bachelor of Arts in Communication Studies",
+   "level": 300,
+   "semester": 2,
+   "code": "BACS312"
+  },
+  {
+   "programme": "Bachelor of Arts in Communication Studies",
+   "level": 400,
+   "semester": 1,
+   "code": "BACS401"
+  },
+  {
+   "programme": "Bachelor of Arts in Communication Studies",
+   "level": 400,
+   "semester": 1,
+   "code": "BACS403"
+  },
+  {
+   "programme": "Bachelor of Arts in Communication Studies",
+   "level": 400,
+   "semester": 1,
+   "code": "BACS405"
+  },
+  {
+   "programme": "Bachelor of Arts in Communication Studies",
+   "level": 400,
+   "semester": 1,
+   "code": "BACS407"
+  },
+  {
+   "programme": "Bachelor of Arts in Communication Studies",
+   "level": 400,
+   "semester": 1,
+   "code": "BMKT403"
+  },
+  {
+   "programme": "Bachelor of Arts in Public Relations Management",
+   "level": 100,
+   "semester": 1,
+   "code": "PBPR101"
+  },
+  {
+   "programme": "Bachelor of Arts in Public Relations Management",
+   "level": 100,
+   "semester": 1,
+   "code": "PBPR107"
+  },
+  {
+   "programme": "Bachelor of Arts in Public Relations Management",
+   "level": 100,
+   "semester": 2,
+   "code": "BPRM102"
+  },
+  {
+   "programme": "Bachelor of Arts in Public Relations Management",
+   "level": 100,
+   "semester": 2,
+   "code": "BPRM104"
+  },
+  {
+   "programme": "Bachelor of Arts in Public Relations Management",
+   "level": 100,
+   "semester": 2,
+   "code": "BPRM106"
+  },
+  {
+   "programme": "Bachelor of Arts in Public Relations Management",
+   "level": 100,
+   "semester": 2,
+   "code": "PBPR104"
+  },
+  {
+   "programme": "Bachelor of Arts in Public Relations Management",
+   "level": 100,
+   "semester": 2,
+   "code": "PBPR106"
+  },
+  {
+   "programme": "Bachelor of Arts in Public Relations Management",
+   "level": 200,
+   "semester": 1,
+   "code": "PBPR207"
+  },
+  {
+   "programme": "Bachelor of Arts in Public Relations Management",
+   "level": 200,
+   "semester": 1,
+   "code": "PBPR209"
+  },
+  {
+   "programme": "Bachelor of Arts in Public Relations Management",
+   "level": 200,
+   "semester": 2,
+   "code": "BPRM202"
+  },
+  {
+   "programme": "Bachelor of Arts in Public Relations Management",
+   "level": 200,
+   "semester": 2,
+   "code": "BPRM204"
+  },
+  {
+   "programme": "Bachelor of Arts in Public Relations Management",
+   "level": 200,
+   "semester": 2,
+   "code": "BPRM206"
+  },
+  {
+   "programme": "Bachelor of Arts in Public Relations Management",
+   "level": 200,
+   "semester": 2,
+   "code": "BPRM208"
+  },
+  {
+   "programme": "Bachelor of Arts in Public Relations Management",
+   "level": 200,
+   "semester": 2,
+   "code": "PBPR202"
+  },
+  {
+   "programme": "Bachelor of Arts in Public Relations Management",
+   "level": 200,
+   "semester": 2,
+   "code": "PBPR206"
+  },
+  {
+   "programme": "Bachelor of Arts in Public Relations Management",
+   "level": 200,
+   "semester": 2,
+   "code": "PBPR208"
+  },
+  {
+   "programme": "Bachelor of Arts in Public Relations Management",
+   "level": 200,
+   "semester": 2,
+   "code": "PBPR212"
+  },
+  {
+   "programme": "Bachelor of Arts in Public Relations Management",
+   "level": 300,
+   "semester": 1,
+   "code": "BCPC301"
+  },
+  {
+   "programme": "Bachelor of Arts in Public Relations Management",
+   "level": 300,
+   "semester": 1,
+   "code": "BPRM301"
+  },
+  {
+   "programme": "Bachelor of Arts in Public Relations Management",
+   "level": 300,
+   "semester": 1,
+   "code": "BPRM303"
+  },
+  {
+   "programme": "Bachelor of Arts in Public Relations Management",
+   "level": 300,
+   "semester": 1,
+   "code": "BPRM305"
+  },
+  {
+   "programme": "Bachelor of Arts in Public Relations Management",
+   "level": 300,
+   "semester": 1,
+   "code": "BPRM307"
+  },
+  {
+   "programme": "Bachelor of Arts in Public Relations Management",
+   "level": 300,
+   "semester": 1,
+   "code": "BPRM309"
+  },
+  {
+   "programme": "Bachelor of Arts in Public Relations Management",
+   "level": 300,
+   "semester": 1,
+   "code": "PBPR301"
+  },
+  {
+   "programme": "Bachelor of Arts in Public Relations Management",
+   "level": 300,
+   "semester": 1,
+   "code": "PBPR303"
+  },
+  {
+   "programme": "Bachelor of Arts in Public Relations Management",
+   "level": 300,
+   "semester": 1,
+   "code": "PBPR309"
+  },
+  {
+   "programme": "Bachelor of Arts in Public Relations Management",
+   "level": 300,
+   "semester": 2,
+   "code": "BPRM302"
+  },
+  {
+   "programme": "Bachelor of Arts in Public Relations Management",
+   "level": 300,
+   "semester": 2,
+   "code": "PBPR302"
+  },
+  {
+   "programme": "Bachelor of Arts in Public Relations Management",
+   "level": 300,
+   "semester": 2,
+   "code": "PBPR304"
+  },
+  {
+   "programme": "Bachelor of Arts in Public Relations Management",
+   "level": 300,
+   "semester": 2,
+   "code": "PBPR306"
+  },
+  {
+   "programme": "Bachelor of Arts in Public Relations Management",
+   "level": 300,
+   "semester": 2,
+   "code": "PBPR308"
+  },
+  {
+   "programme": "Bachelor of Arts in Public Relations Management",
+   "level": 300,
+   "semester": 2,
+   "code": "PBPR312"
+  },
+  {
+   "programme": "Bachelor of Arts in Public Relations Management",
+   "level": 400,
+   "semester": 1,
+   "code": "BBBA409"
+  },
+  {
+   "programme": "Bachelor of Arts in Public Relations Management",
+   "level": 400,
+   "semester": 1,
+   "code": "PBPR401"
+  },
+  {
+   "programme": "Bachelor of Arts in Public Relations Management",
+   "level": 400,
+   "semester": 1,
+   "code": "PBPR403"
+  },
+  {
+   "programme": "Bachelor of Arts in Public Relations Management",
+   "level": 400,
+   "semester": 1,
+   "code": "PBPR405"
+  },
+  {
+   "programme": "Bachelor of Arts in Public Relations Management",
+   "level": 400,
+   "semester": 1,
+   "code": "PBPR407"
+  },
+  {
+   "programme": "Bachelor of Arts in Public Relations Management",
+   "level": 400,
+   "semester": 1,
+   "code": "PBPR409"
+  },
+  {
+   "programme": "Bachelor of Arts in Public Relations Management",
+   "level": 400,
+   "semester": 1,
+   "code": "PBPR411"
+  },
+  {
+   "programme": "Bachelor of Arts in Public Relations Management",
+   "level": 400,
+   "semester": 1,
+   "code": "PBPR413"
+  },
+  {
+   "programme": "Bachelor of Arts in Public Relations Management",
+   "level": 400,
+   "semester": 2,
+   "code": "PBPR402"
+  },
+  {
+   "programme": "Bachelor of Arts in Public Relations Management",
+   "level": 400,
+   "semester": 2,
+   "code": "PBPR404"
+  },
+  {
+   "programme": "Bachelor of Arts in Public Relations Management",
+   "level": 400,
+   "semester": 2,
+   "code": "PBPR406"
+  },
+  {
+   "programme": "Bachelor of Arts in Public Relations Management",
+   "level": 400,
+   "semester": 2,
+   "code": "PBPR408"
+  },
+  {
+   "programme": "Bachelor of Arts in Public Relations Management",
+   "level": 400,
+   "semester": 2,
+   "code": "PBPR412"
+  },
+  {
+   "programme": "Bachelor of Arts in Public Relations Management",
+   "level": 400,
+   "semester": 2,
+   "code": "PBPR414"
+  },
+  {
+   "programme": "Bachelor of Business Administration",
+   "level": 200,
+   "semester": 2,
+   "code": "BBBA202"
+  },
+  {
+   "programme": "Bachelor of Business Administration",
+   "level": 300,
+   "semester": 1,
+   "code": "BACT307"
+  },
+  {
+   "programme": "Bachelor of Business Administration",
+   "level": 300,
+   "semester": 1,
+   "code": "BBA301"
+  },
+  {
+   "programme": "Bachelor of Business Administration",
+   "level": 300,
+   "semester": 1,
+   "code": "BBAF307"
+  },
+  {
+   "programme": "Bachelor of Business Administration",
+   "level": 300,
+   "semester": 1,
+   "code": "BBBA301"
+  },
+  {
+   "programme": "Bachelor of Business Administration",
+   "level": 300,
+   "semester": 1,
+   "code": "BCPC301"
+  },
+  {
+   "programme": "Bachelor of Business Administration",
+   "level": 300,
+   "semester": 1,
+   "code": "BCPC303"
+  },
+  {
+   "programme": "Bachelor of Business Administration",
+   "level": 300,
+   "semester": 2,
+   "code": "BBBA302"
+  },
+  {
+   "programme": "Bachelor of Business Administration",
+   "level": 300,
+   "semester": 2,
+   "code": "BBBA304"
+  },
+  {
+   "programme": "Bachelor of Business Administration",
+   "level": 300,
+   "semester": 2,
+   "code": "BBBA306"
+  },
+  {
+   "programme": "Bachelor of Business Administration",
+   "level": 300,
+   "semester": 2,
+   "code": "BBBA308"
+  },
+  {
+   "programme": "Bachelor of Business Administration",
+   "level": 400,
+   "semester": 1,
+   "code": "BBAF309"
+  },
+  {
+   "programme": "Bachelor of Business Administration",
+   "level": 400,
+   "semester": 1,
+   "code": "BBBA401"
+  },
+  {
+   "programme": "Bachelor of Business Administration",
+   "level": 400,
+   "semester": 1,
+   "code": "BBBA403"
+  },
+  {
+   "programme": "Bachelor of Business Administration",
+   "level": 400,
+   "semester": 1,
+   "code": "BBBA405"
+  },
+  {
+   "programme": "Bachelor of Business Administration",
+   "level": 400,
+   "semester": 1,
+   "code": "BBBA407"
+  },
+  {
+   "programme": "Bachelor of Business Administration",
+   "level": 400,
+   "semester": 1,
+   "code": "BBBA409"
+  },
+  {
+   "programme": "Bachelor of Business Administration",
+   "level": 400,
+   "semester": 1,
+   "code": "BCPC403"
+  },
+  {
+   "programme": "Bachelor of Business Administration",
+   "level": 400,
+   "semester": 2,
+   "code": "BBBA402"
+  },
+  {
+   "programme": "Bachelor of Business Administration",
+   "level": 400,
+   "semester": 2,
+   "code": "BBBA404"
+  },
+  {
+   "programme": "Bachelor of Business Administration",
+   "level": 400,
+   "semester": 2,
+   "code": "BBBA406"
+  },
+  {
+   "programme": "Bachelor of Business Administration",
+   "level": 400,
+   "semester": 2,
+   "code": "BBBA408"
+  },
+  {
+   "programme": "Bachelor of Business Administration",
+   "level": 400,
+   "semester": 2,
+   "code": "BBBA412"
+  },
+  {
+   "programme": "Bachelor of Laws (LLB)",
+   "level": 100,
+   "semester": 2,
+   "code": "BLAW102"
+  },
+  {
+   "programme": "Bachelor of Laws (LLB)",
+   "level": 100,
+   "semester": 2,
+   "code": "BLAW104"
+  },
+  {
+   "programme": "Bachelor of Laws (LLB)",
+   "level": 100,
+   "semester": 2,
+   "code": "BLAW106"
+  },
+  {
+   "programme": "Bachelor of Laws (LLB)",
+   "level": 100,
+   "semester": 2,
+   "code": "BLAW108"
+  },
+  {
+   "programme": "Bachelor of Laws (LLB)",
+   "level": 100,
+   "semester": 2,
+   "code": "BLAW112"
+  },
+  {
+   "programme": "Bachelor of Laws (LLB)",
+   "level": 200,
+   "semester": 1,
+   "code": "BLAW211"
+  },
+  {
+   "programme": "Bachelor of Laws (LLB)",
+   "level": 200,
+   "semester": 1,
+   "code": "BLAW213"
+  },
+  {
+   "programme": "Bachelor of Laws (LLB)",
+   "level": 200,
+   "semester": 1,
+   "code": "BLAW223"
+  },
+  {
+   "programme": "Bachelor of Laws (LLB)",
+   "level": 200,
+   "semester": 2,
+   "code": "BLAW206"
+  },
+  {
+   "programme": "Bachelor of Laws (LLB)",
+   "level": 200,
+   "semester": 2,
+   "code": "BLAW208"
+  },
+  {
+   "programme": "Bachelor of Laws (LLB)",
+   "level": 200,
+   "semester": 2,
+   "code": "BLAW212"
+  },
+  {
+   "programme": "Bachelor of Laws (LLB)",
+   "level": 200,
+   "semester": 2,
+   "code": "BLAW214"
+  },
+  {
+   "programme": "Bachelor of Laws (LLB)",
+   "level": 200,
+   "semester": 2,
+   "code": "BLAW224"
+  },
+  {
+   "programme": "Bachelor of Laws (LLB)",
+   "level": 200,
+   "semester": 2,
+   "code": "BLAW232"
+  },
+  {
+   "programme": "Bachelor of Laws (LLB)",
+   "level": 300,
+   "semester": 1,
+   "code": "BLAW305"
+  },
+  {
+   "programme": "Bachelor of Laws (LLB)",
+   "level": 300,
+   "semester": 1,
+   "code": "BLAW309"
+  },
+  {
+   "programme": "Bachelor of Laws (LLB)",
+   "level": 300,
+   "semester": 1,
+   "code": "BLAW311"
+  },
+  {
+   "programme": "Bachelor of Laws (LLB)",
+   "level": 300,
+   "semester": 1,
+   "code": "BLAW315"
+  },
+  {
+   "programme": "Bachelor of Laws (LLB)",
+   "level": 300,
+   "semester": 1,
+   "code": "BLAW317"
+  },
+  {
+   "programme": "Bachelor of Laws (LLB)",
+   "level": 300,
+   "semester": 1,
+   "code": "BLAW319"
+  },
+  {
+   "programme": "Bachelor of Laws (LLB)",
+   "level": 300,
+   "semester": 2,
+   "code": "BLAW306"
+  },
+  {
+   "programme": "Bachelor of Laws (LLB)",
+   "level": 300,
+   "semester": 2,
+   "code": "BLAW308"
+  },
+  {
+   "programme": "Bachelor of Laws (LLB)",
+   "level": 300,
+   "semester": 2,
+   "code": "BLAW312"
+  },
+  {
+   "programme": "Bachelor of Laws (LLB)",
+   "level": 300,
+   "semester": 2,
+   "code": "BLAW314"
+  },
+  {
+   "programme": "Bachelor of Laws (LLB)",
+   "level": 300,
+   "semester": 2,
+   "code": "BLAW316"
+  },
+  {
+   "programme": "Bachelor of Laws (LLB)",
+   "level": 300,
+   "semester": 2,
+   "code": "BLAW322"
+  },
+  {
+   "programme": "Bachelor of Laws (LLB)",
+   "level": 300,
+   "semester": 2,
+   "code": "BLAW328"
+  },
+  {
+   "programme": "Bachelor of Laws (LLB)",
+   "level": 300,
+   "semester": 2,
+   "code": "BLAW332"
+  },
+  {
+   "programme": "Bachelor of Laws (LLB)",
+   "level": 300,
+   "semester": 2,
+   "code": "BLAW344"
+  },
+  {
+   "programme": "Bachelor of Laws (LLB)",
+   "level": 400,
+   "semester": 1,
+   "code": "BLAW401"
+  },
+  {
+   "programme": "Bachelor of Laws (LLB)",
+   "level": 400,
+   "semester": 1,
+   "code": "BLAW403"
+  },
+  {
+   "programme": "Bachelor of Laws (LLB)",
+   "level": 400,
+   "semester": 1,
+   "code": "BLAW415"
+  },
+  {
+   "programme": "Bachelor of Laws (LLB)",
+   "level": 400,
+   "semester": 1,
+   "code": "BLAW419"
+  },
+  {
+   "programme": "Bachelor of Laws (LLB)",
+   "level": 400,
+   "semester": 1,
+   "code": "BLAW421"
+  },
+  {
+   "programme": "Bachelor of Laws (LLB)",
+   "level": 400,
+   "semester": 2,
+   "code": "BLAW402"
+  },
+  {
+   "programme": "Bachelor of Laws (LLB)",
+   "level": 400,
+   "semester": 2,
+   "code": "BLAW404"
+  },
+  {
+   "programme": "Bachelor of Laws (LLB)",
+   "level": 400,
+   "semester": 2,
+   "code": "BLAW408"
+  },
+  {
+   "programme": "Bachelor of Laws (LLB)",
+   "level": 400,
+   "semester": 2,
+   "code": "BLAW412"
+  },
+  {
+   "programme": "Bachelor of Laws (LLB)",
+   "level": 400,
+   "semester": 2,
+   "code": "BLAW414"
+  },
+  {
+   "programme": "Bachelor of Laws (LLB)",
+   "level": 400,
+   "semester": 2,
+   "code": "BLAW416"
+  },
+  {
+   "programme": "Bachelor of Laws (LLB)",
+   "level": 400,
+   "semester": 2,
+   "code": "BLAW422"
+  },
+  {
+   "programme": "Bachelor of Laws (LLB)",
+   "level": 400,
+   "semester": 2,
+   "code": "BLAW424"
+  },
+  {
+   "programme": "Bachelor of Science in Accounting",
+   "level": 200,
+   "semester": 2,
+   "code": "BACT202"
+  },
+  {
+   "programme": "Bachelor of Science in Accounting",
+   "level": 300,
+   "semester": 1,
+   "code": "BACT301"
+  },
+  {
+   "programme": "Bachelor of Science in Accounting",
+   "level": 300,
+   "semester": 1,
+   "code": "BACT303"
+  },
+  {
+   "programme": "Bachelor of Science in Accounting",
+   "level": 300,
+   "semester": 1,
+   "code": "BACT305"
+  },
+  {
+   "programme": "Bachelor of Science in Accounting",
+   "level": 300,
+   "semester": 1,
+   "code": "BACT307"
+  },
+  {
+   "programme": "Bachelor of Science in Accounting",
+   "level": 300,
+   "semester": 1,
+   "code": "BACT309"
+  },
+  {
+   "programme": "Bachelor of Science in Accounting",
+   "level": 300,
+   "semester": 1,
+   "code": "BBAF307"
+  },
+  {
+   "programme": "Bachelor of Science in Accounting",
+   "level": 300,
+   "semester": 1,
+   "code": "BCPC301"
+  },
+  {
+   "programme": "Bachelor of Science in Accounting",
+   "level": 300,
+   "semester": 1,
+   "code": "BCPC303"
+  },
+  {
+   "programme": "Bachelor of Science in Accounting",
+   "level": 300,
+   "semester": 2,
+   "code": "BACT304"
+  },
+  {
+   "programme": "Bachelor of Science in Accounting",
+   "level": 300,
+   "semester": 2,
+   "code": "BACT306"
+  },
+  {
+   "programme": "Bachelor of Science in Accounting",
+   "level": 300,
+   "semester": 2,
+   "code": "BACT308"
+  },
+  {
+   "programme": "Bachelor of Science in Accounting",
+   "level": 300,
+   "semester": 2,
+   "code": "BACT312"
+  },
+  {
+   "programme": "Bachelor of Science in Accounting",
+   "level": 300,
+   "semester": 2,
+   "code": "BACT314"
+  },
+  {
+   "programme": "Bachelor of Science in Accounting",
+   "level": 400,
+   "semester": 1,
+   "code": "BACT401"
+  },
+  {
+   "programme": "Bachelor of Science in Accounting",
+   "level": 400,
+   "semester": 1,
+   "code": "BACT403"
+  },
+  {
+   "programme": "Bachelor of Science in Accounting",
+   "level": 400,
+   "semester": 1,
+   "code": "BACT405"
+  },
+  {
+   "programme": "Bachelor of Science in Accounting",
+   "level": 400,
+   "semester": 1,
+   "code": "BBAF413"
+  },
+  {
+   "programme": "Bachelor of Science in Accounting",
+   "level": 400,
+   "semester": 1,
+   "code": "BBBA403"
+  },
+  {
+   "programme": "Bachelor of Science in Accounting",
+   "level": 400,
+   "semester": 1,
+   "code": "BCPC403"
+  },
+  {
+   "programme": "Bachelor of Science in Accounting",
+   "level": 400,
+   "semester": 2,
+   "code": "BACT402"
+  },
+  {
+   "programme": "Bachelor of Science in Accounting",
+   "level": 400,
+   "semester": 2,
+   "code": "BACT404"
+  },
+  {
+   "programme": "Bachelor of Science in Accounting",
+   "level": 400,
+   "semester": 2,
+   "code": "BACT406"
+  },
+  {
+   "programme": "Bachelor of Science in Accounting",
+   "level": 400,
+   "semester": 2,
+   "code": "BACT408"
+  },
+  {
+   "programme": "Bachelor of Science in Accounting and Finance",
+   "level": 300,
+   "semester": 1,
+   "code": "BACT303"
+  },
+  {
+   "programme": "Bachelor of Science in Accounting and Finance",
+   "level": 300,
+   "semester": 1,
+   "code": "BACT305"
+  },
+  {
+   "programme": "Bachelor of Science in Accounting and Finance",
+   "level": 300,
+   "semester": 1,
+   "code": "BBAF303"
+  },
+  {
+   "programme": "Bachelor of Science in Accounting and Finance",
+   "level": 300,
+   "semester": 1,
+   "code": "BBAF307"
+  },
+  {
+   "programme": "Bachelor of Science in Accounting and Finance",
+   "level": 300,
+   "semester": 1,
+   "code": "BCPC301"
+  },
+  {
+   "programme": "Bachelor of Science in Accounting and Finance",
+   "level": 300,
+   "semester": 1,
+   "code": "BCPC303"
+  },
+  {
+   "programme": "Bachelor of Science in Accounting and Finance",
+   "level": 400,
+   "semester": 1,
+   "code": "BACT401"
+  },
+  {
+   "programme": "Bachelor of Science in Accounting and Finance",
+   "level": 400,
+   "semester": 1,
+   "code": "BACT403"
+  },
+  {
+   "programme": "Bachelor of Science in Accounting and Finance",
+   "level": 400,
+   "semester": 1,
+   "code": "BACT405"
+  },
+  {
+   "programme": "Bachelor of Science in Accounting and Finance",
+   "level": 400,
+   "semester": 1,
+   "code": "BBAF401"
+  },
+  {
+   "programme": "Bachelor of Science in Accounting and Finance",
+   "level": 400,
+   "semester": 1,
+   "code": "BBAF411"
+  },
+  {
+   "programme": "Bachelor of Science in Accounting and Finance",
+   "level": 400,
+   "semester": 1,
+   "code": "BCPC403"
+  },
+  {
+   "programme": "Bachelor of Science in Actuarial Science",
+   "level": 300,
+   "semester": 1,
+   "code": "BASC307"
+  },
+  {
+   "programme": "Bachelor of Science in Actuarial Science",
+   "level": 300,
+   "semester": 1,
+   "code": "BASC311"
+  },
+  {
+   "programme": "Bachelor of Science in Actuarial Science",
+   "level": 300,
+   "semester": 1,
+   "code": "BBAF303"
+  },
+  {
+   "programme": "Bachelor of Science in Actuarial Science",
+   "level": 300,
+   "semester": 1,
+   "code": "BCPC303"
+  },
+  {
+   "programme": "Bachelor of Science in Actuarial Science",
+   "level": 400,
+   "semester": 1,
+   "code": "BASC407"
+  },
+  {
+   "programme": "Bachelor of Science in Actuarial Science",
+   "level": 400,
+   "semester": 1,
+   "code": "BASC409"
+  },
+  {
+   "programme": "Bachelor of Science in Actuarial Science",
+   "level": 400,
+   "semester": 1,
+   "code": "BASC411"
+  },
+  {
+   "programme": "Bachelor of Science in Applied Marketing",
+   "level": 300,
+   "semester": 1,
+   "code": "BBAF307"
+  },
+  {
+   "programme": "Bachelor of Science in Applied Marketing",
+   "level": 300,
+   "semester": 1,
+   "code": "BCPC301"
+  },
+  {
+   "programme": "Bachelor of Science in Applied Marketing",
+   "level": 300,
+   "semester": 1,
+   "code": "BCPC303"
+  },
+  {
+   "programme": "Bachelor of Science in Applied Marketing",
+   "level": 300,
+   "semester": 1,
+   "code": "BMKT301"
+  },
+  {
+   "programme": "Bachelor of Science in Applied Marketing",
+   "level": 300,
+   "semester": 1,
+   "code": "BMKT303"
+  },
+  {
+   "programme": "Bachelor of Science in Applied Marketing",
+   "level": 300,
+   "semester": 1,
+   "code": "BMKT305"
+  },
+  {
+   "programme": "Bachelor of Science in Applied Marketing",
+   "level": 300,
+   "semester": 2,
+   "code": "BMKT302"
+  },
+  {
+   "programme": "Bachelor of Science in Applied Marketing",
+   "level": 300,
+   "semester": 2,
+   "code": "BMKT304"
+  },
+  {
+   "programme": "Bachelor of Science in Applied Marketing",
+   "level": 300,
+   "semester": 2,
+   "code": "BMKT306"
+  },
+  {
+   "programme": "Bachelor of Science in Applied Marketing",
+   "level": 300,
+   "semester": 2,
+   "code": "BMKT308"
+  },
+  {
+   "programme": "Bachelor of Science in Applied Marketing",
+   "level": 400,
+   "semester": 1,
+   "code": "BCPC403"
+  },
+  {
+   "programme": "Bachelor of Science in Applied Marketing",
+   "level": 400,
+   "semester": 1,
+   "code": "BMKT301"
+  },
+  {
+   "programme": "Bachelor of Science in Applied Marketing",
+   "level": 400,
+   "semester": 1,
+   "code": "BMKT401"
+  },
+  {
+   "programme": "Bachelor of Science in Applied Marketing",
+   "level": 400,
+   "semester": 1,
+   "code": "BMKT403"
+  },
+  {
+   "programme": "Bachelor of Science in Applied Marketing",
+   "level": 400,
+   "semester": 1,
+   "code": "BMKT405"
+  },
+  {
+   "programme": "Bachelor of Science in Applied Marketing",
+   "level": 400,
+   "semester": 1,
+   "code": "BMKT411"
+  },
+  {
+   "programme": "Bachelor of Science in Applied Marketing",
+   "level": 400,
+   "semester": 2,
+   "code": "BMKT402"
+  },
+  {
+   "programme": "Bachelor of Science in Applied Marketing",
+   "level": 400,
+   "semester": 2,
+   "code": "BMKT404"
+  },
+  {
+   "programme": "Bachelor of Science in Applied Marketing",
+   "level": 400,
+   "semester": 2,
+   "code": "BMKT406"
+  },
+  {
+   "programme": "Bachelor of Science in Banking and Finance",
+   "level": 300,
+   "semester": 1,
+   "code": "BBAF303"
+  },
+  {
+   "programme": "Bachelor of Science in Banking and Finance",
+   "level": 300,
+   "semester": 1,
+   "code": "BBAF305"
+  },
+  {
+   "programme": "Bachelor of Science in Banking and Finance",
+   "level": 300,
+   "semester": 1,
+   "code": "BBAF307"
+  },
+  {
+   "programme": "Bachelor of Science in Banking and Finance",
+   "level": 300,
+   "semester": 1,
+   "code": "BBAF311"
+  },
+  {
+   "programme": "Bachelor of Science in Banking and Finance",
+   "level": 300,
+   "semester": 1,
+   "code": "BCPC301"
+  },
+  {
+   "programme": "Bachelor of Science in Banking and Finance",
+   "level": 300,
+   "semester": 1,
+   "code": "BCPC303"
+  },
+  {
+   "programme": "Bachelor of Science in Banking and Finance",
+   "level": 400,
+   "semester": 1,
+   "code": "BACT305"
+  },
+  {
+   "programme": "Bachelor of Science in Banking and Finance",
+   "level": 400,
+   "semester": 1,
+   "code": "BBAF403"
+  },
+  {
+   "programme": "Bachelor of Science in Banking and Finance",
+   "level": 400,
+   "semester": 1,
+   "code": "BBAF407"
+  },
+  {
+   "programme": "Bachelor of Science in Banking and Finance",
+   "level": 400,
+   "semester": 1,
+   "code": "BBAF411"
+  },
+  {
+   "programme": "Bachelor of Science in Banking and Finance",
+   "level": 400,
+   "semester": 1,
+   "code": "BBAF415"
+  },
+  {
+   "programme": "Bachelor of Science in Banking and Finance",
+   "level": 400,
+   "semester": 1,
+   "code": "BCPC403"
+  },
+  {
+   "programme": "Bachelor of Science in Business Economics",
+   "level": 100,
+   "semester": 2,
+   "code": "BBEC102"
+  },
+  {
+   "programme": "Bachelor of Science in Business Economics",
+   "level": 200,
+   "semester": 2,
+   "code": "BBEC204"
+  },
+  {
+   "programme": "Bachelor of Science in Business Economics",
+   "level": 200,
+   "semester": 2,
+   "code": "BBEC206"
+  },
+  {
+   "programme": "Bachelor of Science in Business Economics",
+   "level": 200,
+   "semester": 2,
+   "code": "BBEC208"
+  },
+  {
+   "programme": "Bachelor of Science in Business Economics",
+   "level": 300,
+   "semester": 1,
+   "code": "BBAF307"
+  },
+  {
+   "programme": "Bachelor of Science in Business Economics",
+   "level": 300,
+   "semester": 1,
+   "code": "BBAF309"
+  },
+  {
+   "programme": "Bachelor of Science in Business Economics",
+   "level": 300,
+   "semester": 1,
+   "code": "BBEC301"
+  },
+  {
+   "programme": "Bachelor of Science in Business Economics",
+   "level": 300,
+   "semester": 1,
+   "code": "BBEC303"
+  },
+  {
+   "programme": "Bachelor of Science in Business Economics",
+   "level": 300,
+   "semester": 1,
+   "code": "BBEC307"
+  },
+  {
+   "programme": "Bachelor of Science in Business Economics",
+   "level": 300,
+   "semester": 1,
+   "code": "BCPC301"
+  },
+  {
+   "programme": "Bachelor of Science in Business Economics",
+   "level": 300,
+   "semester": 2,
+   "code": "BBEC302"
+  },
+  {
+   "programme": "Bachelor of Science in Business Economics",
+   "level": 300,
+   "semester": 2,
+   "code": "BBEC304"
+  },
+  {
+   "programme": "Bachelor of Science in Business Economics",
+   "level": 300,
+   "semester": 2,
+   "code": "BBEC306"
+  },
+  {
+   "programme": "Bachelor of Science in Business Economics",
+   "level": 400,
+   "semester": 1,
+   "code": "BBAF409"
+  },
+  {
+   "programme": "Bachelor of Science in Business Economics",
+   "level": 400,
+   "semester": 1,
+   "code": "BBBA405"
+  },
+  {
+   "programme": "Bachelor of Science in Business Economics",
+   "level": 400,
+   "semester": 1,
+   "code": "BBEC401"
+  },
+  {
+   "programme": "Bachelor of Science in Business Economics",
+   "level": 400,
+   "semester": 1,
+   "code": "BBEC403"
+  },
+  {
+   "programme": "Bachelor of Science in Business Economics",
+   "level": 400,
+   "semester": 1,
+   "code": "BBEC405"
+  },
+  {
+   "programme": "Bachelor of Science in Business Economics",
+   "level": 400,
+   "semester": 2,
+   "code": "BBEC402"
+  },
+  {
+   "programme": "Bachelor of Science in Business Economics",
+   "level": 400,
+   "semester": 2,
+   "code": "BBEC404"
+  },
+  {
+   "programme": "Bachelor of Science in Business Economics",
+   "level": 400,
+   "semester": 2,
+   "code": "BBEC406"
+  },
+  {
+   "programme": "Bachelor of Science in Business Economics",
+   "level": 400,
+   "semester": 2,
+   "code": "BBEC408"
+  },
+  {
+   "programme": "Bachelor of Science in Business Economics",
+   "level": 400,
+   "semester": 2,
+   "code": "BBEC412"
+  },
+  {
+   "programme": "Bachelor of Science in Data Science and Analytics",
+   "level": 100,
+   "semester": 2,
+   "code": "BDSA102"
+  },
+  {
+   "programme": "Bachelor of Science in Data Science and Analytics",
+   "level": 100,
+   "semester": 2,
+   "code": "BDSA104"
+  },
+  {
+   "programme": "Bachelor of Science in Data Science and Analytics",
+   "level": 100,
+   "semester": 2,
+   "code": "BDSA106"
+  },
+  {
+   "programme": "Bachelor of Science in Data Science and Analytics",
+   "level": 100,
+   "semester": 2,
+   "code": "BDSA108"
+  },
+  {
+   "programme": "Bachelor of Science in Information Technology",
+   "level": 100,
+   "semester": 2,
+   "code": "BITM104"
+  },
+  {
+   "programme": "Bachelor of Science in Information Technology",
+   "level": 100,
+   "semester": 2,
+   "code": "BSIT102"
+  },
+  {
+   "programme": "Bachelor of Science in Information Technology",
+   "level": 200,
+   "semester": 1,
+   "code": "BITM201"
+  },
+  {
+   "programme": "Bachelor of Science in Information Technology",
+   "level": 200,
+   "semester": 1,
+   "code": "BITM203"
+  },
+  {
+   "programme": "Bachelor of Science in Information Technology",
+   "level": 200,
+   "semester": 2,
+   "code": "BITM202"
+  },
+  {
+   "programme": "Bachelor of Science in Information Technology",
+   "level": 200,
+   "semester": 2,
+   "code": "BITM204"
+  },
+  {
+   "programme": "Bachelor of Science in Information Technology",
+   "level": 200,
+   "semester": 2,
+   "code": "BSIT202"
+  },
+  {
+   "programme": "Bachelor of Science in Information Technology",
+   "level": 200,
+   "semester": 2,
+   "code": "BSIT204"
+  },
+  {
+   "programme": "Bachelor of Science in Information Technology",
+   "level": 200,
+   "semester": 2,
+   "code": "BSIT206"
+  },
+  {
+   "programme": "Bachelor of Science in Information Technology",
+   "level": 300,
+   "semester": 1,
+   "code": "BCPC207"
+  },
+  {
+   "programme": "Bachelor of Science in Information Technology",
+   "level": 300,
+   "semester": 1,
+   "code": "BITM301"
+  },
+  {
+   "programme": "Bachelor of Science in Information Technology",
+   "level": 300,
+   "semester": 1,
+   "code": "BITM307"
+  },
+  {
+   "programme": "Bachelor of Science in Information Technology",
+   "level": 300,
+   "semester": 1,
+   "code": "BITM309"
+  },
+  {
+   "programme": "Bachelor of Science in Information Technology",
+   "level": 300,
+   "semester": 1,
+   "code": "BSIT301"
+  },
+  {
+   "programme": "Bachelor of Science in Information Technology",
+   "level": 300,
+   "semester": 1,
+   "code": "BSIT303"
+  },
+  {
+   "programme": "Bachelor of Science in Information Technology",
+   "level": 300,
+   "semester": 1,
+   "code": "BSIT305"
+  },
+  {
+   "programme": "Bachelor of Science in Information Technology",
+   "level": 300,
+   "semester": 1,
+   "code": "BSIT307"
+  },
+  {
+   "programme": "Bachelor of Science in Information Technology",
+   "level": 300,
+   "semester": 1,
+   "code": "BSIT309"
+  },
+  {
+   "programme": "Bachelor of Science in Information Technology",
+   "level": 300,
+   "semester": 2,
+   "code": "BITM302"
+  },
+  {
+   "programme": "Bachelor of Science in Information Technology",
+   "level": 300,
+   "semester": 2,
+   "code": "BITM304"
+  },
+  {
+   "programme": "Bachelor of Science in Information Technology",
+   "level": 300,
+   "semester": 2,
+   "code": "BITM306"
+  },
+  {
+   "programme": "Bachelor of Science in Information Technology",
+   "level": 300,
+   "semester": 2,
+   "code": "BSIT302"
+  },
+  {
+   "programme": "Bachelor of Science in Information Technology",
+   "level": 300,
+   "semester": 2,
+   "code": "BSIT304"
+  },
+  {
+   "programme": "Bachelor of Science in Information Technology",
+   "level": 300,
+   "semester": 2,
+   "code": "BSIT306"
+  },
+  {
+   "programme": "Bachelor of Science in Information Technology",
+   "level": 400,
+   "semester": 1,
+   "code": "BCPC403"
+  },
+  {
+   "programme": "Bachelor of Science in Information Technology",
+   "level": 400,
+   "semester": 1,
+   "code": "BSIT401"
+  },
+  {
+   "programme": "Bachelor of Science in Information Technology",
+   "level": 400,
+   "semester": 1,
+   "code": "BSIT403"
+  },
+  {
+   "programme": "Bachelor of Science in Information Technology",
+   "level": 400,
+   "semester": 1,
+   "code": "BSIT405"
+  },
+  {
+   "programme": "Bachelor of Science in Information Technology",
+   "level": 400,
+   "semester": 1,
+   "code": "BSIT407"
+  },
+  {
+   "programme": "Bachelor of Science in Information Technology",
+   "level": 400,
+   "semester": 1,
+   "code": "BSIT409"
+  },
+  {
+   "programme": "Bachelor of Science in Information Technology",
+   "level": 400,
+   "semester": 2,
+   "code": "BITM402"
+  },
+  {
+   "programme": "Bachelor of Science in Information Technology",
+   "level": 400,
+   "semester": 2,
+   "code": "BITM404"
+  },
+  {
+   "programme": "Bachelor of Science in Information Technology",
+   "level": 400,
+   "semester": 2,
+   "code": "BITM406"
+  },
+  {
+   "programme": "Bachelor of Science in Information Technology",
+   "level": 400,
+   "semester": 2,
+   "code": "BITM408"
+  },
+  {
+   "programme": "Bachelor of Science in Information Technology",
+   "level": 400,
+   "semester": 2,
+   "code": "BITM412"
+  },
+  {
+   "programme": "Bachelor of Science in Logistics and Transport Management",
+   "level": 200,
+   "semester": 2,
+   "code": "BATL202"
+  },
+  {
+   "programme": "Bachelor of Science in Logistics and Transport Management",
+   "level": 200,
+   "semester": 2,
+   "code": "BATL204"
+  },
+  {
+   "programme": "Bachelor of Science in Logistics and Transport Management",
+   "level": 300,
+   "semester": 1,
+   "code": "BATL301"
+  },
+  {
+   "programme": "Bachelor of Science in Logistics and Transport Management",
+   "level": 300,
+   "semester": 1,
+   "code": "BATL303"
+  },
+  {
+   "programme": "Bachelor of Science in Logistics and Transport Management",
+   "level": 300,
+   "semester": 1,
+   "code": "BATL305"
+  },
+  {
+   "programme": "Bachelor of Science in Logistics and Transport Management",
+   "level": 300,
+   "semester": 1,
+   "code": "BCPC301"
+  },
+  {
+   "programme": "Bachelor of Science in Logistics and Transport Management",
+   "level": 300,
+   "semester": 1,
+   "code": "BCPC303"
+  },
+  {
+   "programme": "Bachelor of Science in Logistics and Transport Management",
+   "level": 300,
+   "semester": 2,
+   "code": "BATL302"
+  },
+  {
+   "programme": "Bachelor of Science in Logistics and Transport Management",
+   "level": 300,
+   "semester": 2,
+   "code": "BATL304"
+  },
+  {
+   "programme": "Bachelor of Science in Logistics and Transport Management",
+   "level": 300,
+   "semester": 2,
+   "code": "BATL306"
+  },
+  {
+   "programme": "Bachelor of Science in Logistics and Transport Management",
+   "level": 400,
+   "semester": 1,
+   "code": "BATL403"
+  },
+  {
+   "programme": "Bachelor of Science in Logistics and Transport Management",
+   "level": 400,
+   "semester": 1,
+   "code": "BATL405"
+  },
+  {
+   "programme": "Bachelor of Science in Logistics and Transport Management",
+   "level": 400,
+   "semester": 1,
+   "code": "BBBA405"
+  },
+  {
+   "programme": "Bachelor of Science in Logistics and Transport Management",
+   "level": 400,
+   "semester": 1,
+   "code": "BBBA409"
+  },
+  {
+   "programme": "Bachelor of Science in Logistics and Transport Management",
+   "level": 400,
+   "semester": 1,
+   "code": "BCPC403"
+  },
+  {
+   "programme": "Bachelor of Science in Real Estate Management and Finance",
+   "level": 300,
+   "semester": 1,
+   "code": "BCPC301"
+  },
+  {
+   "programme": "Bachelor of Science in Real Estate Management and Finance",
+   "level": 300,
+   "semester": 1,
+   "code": "BCPC303"
+  },
+  {
+   "programme": "Bachelor of Science in Real Estate Management and Finance",
+   "level": 300,
+   "semester": 1,
+   "code": "BRMF301"
+  },
+  {
+   "programme": "Bachelor of Science in Real Estate Management and Finance",
+   "level": 300,
+   "semester": 1,
+   "code": "BRMF303"
+  },
+  {
+   "programme": "Bachelor of Science in Real Estate Management and Finance",
+   "level": 300,
+   "semester": 1,
+   "code": "BRMF305"
+  },
+  {
+   "programme": "Bachelor of Science in Real Estate Management and Finance",
+   "level": 300,
+   "semester": 2,
+   "code": "BRFM308"
+  },
+  {
+   "programme": "Bachelor of Science in Real Estate Management and Finance",
+   "level": 300,
+   "semester": 2,
+   "code": "BRMF302"
+  },
+  {
+   "programme": "Bachelor of Science in Real Estate Management and Finance",
+   "level": 300,
+   "semester": 2,
+   "code": "BRMF304"
+  },
+  {
+   "programme": "Bachelor of Science in Real Estate Management and Finance",
+   "level": 300,
+   "semester": 2,
+   "code": "BRMF306"
+  },
+  {
+   "programme": "Bachelor of Science in Real Estate Management and Finance",
+   "level": 300,
+   "semester": 2,
+   "code": "BRMF308"
+  },
+  {
+   "programme": "Bachelor of Science in Real Estate Management and Finance",
+   "level": 400,
+   "semester": 1,
+   "code": "BRMF401"
+  },
+  {
+   "programme": "Bachelor of Science in Real Estate Management and Finance",
+   "level": 400,
+   "semester": 1,
+   "code": "BRMF403"
+  },
+  {
+   "programme": "Bachelor of Science in Real Estate Management and Finance",
+   "level": 400,
+   "semester": 1,
+   "code": "BRMF405"
+  },
+  {
+   "programme": "Bachelor of Science in Real Estate Management and Finance",
+   "level": 400,
+   "semester": 1,
+   "code": "BRMF407"
+  },
+  {
+   "programme": "Bachelor of Science in Real Estate Management and Finance",
+   "level": 400,
+   "semester": 1,
+   "code": "BRMF409"
+  },
+  {
+   "programme": "Bachelor of Science in Real Estate Management and Finance",
+   "level": 400,
+   "semester": 2,
+   "code": "BRMF402"
+  },
+  {
+   "programme": "Bachelor of Science in Real Estate Management and Finance",
+   "level": 400,
+   "semester": 2,
+   "code": "BRMF404"
+  },
+  {
+   "programme": "Bachelor of Science in Real Estate Management and Finance",
+   "level": 400,
+   "semester": 2,
+   "code": "BRMF406"
+  },
+  {
+   "programme": "Bachelor of Science in Real Estate Management and Finance",
+   "level": 400,
+   "semester": 2,
+   "code": "BRMF408"
+  },
+  {
+   "programme": "Bachelor of Science in Real Estate Management and Finance",
+   "level": 400,
+   "semester": 2,
+   "code": "BRMF412"
+  },
+  {
+   "programme": "Diploma in Accounting",
+   "level": 100,
+   "semester": 1,
+   "code": "DIPA007"
+  },
+  {
+   "programme": "Diploma in Accounting",
+   "level": 100,
+   "semester": 1,
+   "code": "DIPC001"
+  },
+  {
+   "programme": "Diploma in Accounting",
+   "level": 100,
+   "semester": 1,
+   "code": "DIPC003"
+  },
+  {
+   "programme": "Diploma in Accounting",
+   "level": 100,
+   "semester": 1,
+   "code": "DIPC005"
+  },
+  {
+   "programme": "Diploma in Accounting",
+   "level": 100,
+   "semester": 1,
+   "code": "DIPC007"
+  },
+  {
+   "programme": "Diploma in Accounting",
+   "level": 100,
+   "semester": 1,
+   "code": "DIPC011"
+  },
+  {
+   "programme": "Diploma in Accounting",
+   "level": 100,
+   "semester": 2,
+   "code": "DIPC002"
+  },
+  {
+   "programme": "Diploma in Accounting",
+   "level": 100,
+   "semester": 2,
+   "code": "DIPC004"
+  },
+  {
+   "programme": "Diploma in Accounting",
+   "level": 100,
+   "semester": 2,
+   "code": "DIPC006"
+  },
+  {
+   "programme": "Diploma in Accounting",
+   "level": 100,
+   "semester": 2,
+   "code": "DIPC008"
+  },
+  {
+   "programme": "Diploma in Accounting",
+   "level": 100,
+   "semester": 2,
+   "code": "DIPC012"
+  },
+  {
+   "programme": "Diploma in Accounting",
+   "level": 100,
+   "semester": 2,
+   "code": "DIPC014"
+  },
+  {
+   "programme": "Diploma in Accounting",
+   "level": 200,
+   "semester": 1,
+   "code": "DIPC051"
+  },
+  {
+   "programme": "Diploma in Accounting",
+   "level": 200,
+   "semester": 1,
+   "code": "DIPC053"
+  },
+  {
+   "programme": "Diploma in Accounting",
+   "level": 200,
+   "semester": 2,
+   "code": "DIPA052"
+  },
+  {
+   "programme": "Diploma in Accounting",
+   "level": 200,
+   "semester": 2,
+   "code": "DIPA054"
+  },
+  {
+   "programme": "Diploma in Accounting",
+   "level": 200,
+   "semester": 2,
+   "code": "DIPA056"
+  },
+  {
+   "programme": "Diploma in Accounting",
+   "level": 200,
+   "semester": 2,
+   "code": "DIPA058"
+  },
+  {
+   "programme": "Diploma in Accounting",
+   "level": 200,
+   "semester": 2,
+   "code": "DIPC052"
+  },
+  {
+   "programme": "Diploma in Accounting",
+   "level": 200,
+   "semester": 2,
+   "code": "DIPC054"
+  },
+  {
+   "programme": "Diploma in Information Technology Management",
+   "level": 100,
+   "semester": 1,
+   "code": "DIPC001"
+  },
+  {
+   "programme": "Diploma in Information Technology Management",
+   "level": 100,
+   "semester": 1,
+   "code": "DIPC003"
+  },
+  {
+   "programme": "Diploma in Information Technology Management",
+   "level": 100,
+   "semester": 1,
+   "code": "DIPC005"
+  },
+  {
+   "programme": "Diploma in Information Technology Management",
+   "level": 100,
+   "semester": 1,
+   "code": "DIPC007"
+  },
+  {
+   "programme": "Diploma in Information Technology Management",
+   "level": 100,
+   "semester": 1,
+   "code": "DIPC011"
+  },
+  {
+   "programme": "Diploma in Information Technology Management",
+   "level": 100,
+   "semester": 1,
+   "code": "DIPT001"
+  },
+  {
+   "programme": "Diploma in Information Technology Management",
+   "level": 100,
+   "semester": 1,
+   "code": "DIPT003"
+  },
+  {
+   "programme": "Diploma in Information Technology Management",
+   "level": 100,
+   "semester": 1,
+   "code": "DIPT009"
+  },
+  {
+   "programme": "Diploma in Information Technology Management",
+   "level": 100,
+   "semester": 2,
+   "code": "DIPC002"
+  },
+  {
+   "programme": "Diploma in Information Technology Management",
+   "level": 100,
+   "semester": 2,
+   "code": "DIPC004"
+  },
+  {
+   "programme": "Diploma in Information Technology Management",
+   "level": 100,
+   "semester": 2,
+   "code": "DIPC006"
+  },
+  {
+   "programme": "Diploma in Information Technology Management",
+   "level": 100,
+   "semester": 2,
+   "code": "DIPC008"
+  },
+  {
+   "programme": "Diploma in Information Technology Management",
+   "level": 100,
+   "semester": 2,
+   "code": "DIPC012"
+  },
+  {
+   "programme": "Diploma in Information Technology Management",
+   "level": 100,
+   "semester": 2,
+   "code": "DIPC014"
+  },
+  {
+   "programme": "Diploma in Information Technology Management",
+   "level": 100,
+   "semester": 2,
+   "code": "DIPT002"
+  },
+  {
+   "programme": "Diploma in Information Technology Management",
+   "level": 100,
+   "semester": 2,
+   "code": "DIPT004"
+  },
+  {
+   "programme": "Diploma in Information Technology Management",
+   "level": 100,
+   "semester": 2,
+   "code": "DIPT006"
+  },
+  {
+   "programme": "Diploma in Information Technology Management",
+   "level": 100,
+   "semester": 2,
+   "code": "DIPT008"
+  },
+  {
+   "programme": "Diploma in Information Technology Management",
+   "level": 200,
+   "semester": 1,
+   "code": "DIPC051"
+  },
+  {
+   "programme": "Diploma in Information Technology Management",
+   "level": 200,
+   "semester": 1,
+   "code": "DIPC053"
+  },
+  {
+   "programme": "Diploma in Information Technology Management",
+   "level": 200,
+   "semester": 1,
+   "code": "DIPT053"
+  },
+  {
+   "programme": "Diploma in Information Technology Management",
+   "level": 200,
+   "semester": 1,
+   "code": "DIPT055"
+  },
+  {
+   "programme": "Diploma in Information Technology Management",
+   "level": 200,
+   "semester": 1,
+   "code": "DIPT057"
+  },
+  {
+   "programme": "Diploma in Information Technology Management",
+   "level": 200,
+   "semester": 2,
+   "code": "DIPC052"
+  },
+  {
+   "programme": "Diploma in Information Technology Management",
+   "level": 200,
+   "semester": 2,
+   "code": "DIPC054"
+  },
+  {
+   "programme": "Diploma in Information Technology Management",
+   "level": 200,
+   "semester": 2,
+   "code": "DIPT052"
+  },
+  {
+   "programme": "Diploma in Information Technology Management",
+   "level": 200,
+   "semester": 2,
+   "code": "DIPT054"
+  },
+  {
+   "programme": "Diploma in Information Technology Management",
+   "level": 200,
+   "semester": 2,
+   "code": "DIPT056"
+  },
+  {
+   "programme": "Diploma in Information Technology Management",
+   "level": 200,
+   "semester": 2,
+   "code": "DIPT058"
+  },
+  {
+   "programme": "Diploma in Information Technology Management",
+   "level": 200,
+   "semester": 2,
+   "code": "DIPT062"
+  },
+  {
+   "programme": "Diploma in Management",
+   "level": 100,
+   "semester": 1,
+   "code": "DIPC001"
+  },
+  {
+   "programme": "Diploma in Management",
+   "level": 100,
+   "semester": 1,
+   "code": "DIPC003"
+  },
+  {
+   "programme": "Diploma in Management",
+   "level": 100,
+   "semester": 1,
+   "code": "DIPC005"
+  },
+  {
+   "programme": "Diploma in Management",
+   "level": 100,
+   "semester": 1,
+   "code": "DIPC007"
+  },
+  {
+   "programme": "Diploma in Management",
+   "level": 100,
+   "semester": 1,
+   "code": "DIPC011"
+  },
+  {
+   "programme": "Diploma in Management",
+   "level": 100,
+   "semester": 2,
+   "code": "DIPC002"
+  },
+  {
+   "programme": "Diploma in Management",
+   "level": 100,
+   "semester": 2,
+   "code": "DIPC004"
+  },
+  {
+   "programme": "Diploma in Management",
+   "level": 100,
+   "semester": 2,
+   "code": "DIPC006"
+  },
+  {
+   "programme": "Diploma in Management",
+   "level": 100,
+   "semester": 2,
+   "code": "DIPC008"
+  },
+  {
+   "programme": "Diploma in Management",
+   "level": 100,
+   "semester": 2,
+   "code": "DIPC012"
+  },
+  {
+   "programme": "Diploma in Management",
+   "level": 100,
+   "semester": 2,
+   "code": "DIPC014"
+  },
+  {
+   "programme": "Diploma in Management",
+   "level": 200,
+   "semester": 1,
+   "code": "DIPC051"
+  },
+  {
+   "programme": "Diploma in Management",
+   "level": 200,
+   "semester": 1,
+   "code": "DIPC053"
+  },
+  {
+   "programme": "Diploma in Management",
+   "level": 200,
+   "semester": 1,
+   "code": "DIPG057"
+  },
+  {
+   "programme": "Diploma in Management",
+   "level": 200,
+   "semester": 2,
+   "code": "DIPC052"
+  },
+  {
+   "programme": "Diploma in Management",
+   "level": 200,
+   "semester": 2,
+   "code": "DIPC054"
+  },
+  {
+   "programme": "Diploma in Management",
+   "level": 200,
+   "semester": 2,
+   "code": "DIPG052"
+  },
+  {
+   "programme": "Diploma in Management",
+   "level": 200,
+   "semester": 2,
+   "code": "DIPG054"
+  },
+  {
+   "programme": "Diploma in Management",
+   "level": 200,
+   "semester": 2,
+   "code": "DIPG056"
+  },
+  {
+   "programme": "Diploma in Marketing",
+   "level": 100,
+   "semester": 1,
+   "code": "DIPC001"
+  },
+  {
+   "programme": "Diploma in Marketing",
+   "level": 100,
+   "semester": 1,
+   "code": "DIPC003"
+  },
+  {
+   "programme": "Diploma in Marketing",
+   "level": 100,
+   "semester": 1,
+   "code": "DIPC005"
+  },
+  {
+   "programme": "Diploma in Marketing",
+   "level": 100,
+   "semester": 1,
+   "code": "DIPC007"
+  },
+  {
+   "programme": "Diploma in Marketing",
+   "level": 100,
+   "semester": 1,
+   "code": "DIPC011"
+  },
+  {
+   "programme": "Diploma in Marketing",
+   "level": 100,
+   "semester": 2,
+   "code": "DIPC002"
+  },
+  {
+   "programme": "Diploma in Marketing",
+   "level": 100,
+   "semester": 2,
+   "code": "DIPC004"
+  },
+  {
+   "programme": "Diploma in Marketing",
+   "level": 100,
+   "semester": 2,
+   "code": "DIPC006"
+  },
+  {
+   "programme": "Diploma in Marketing",
+   "level": 100,
+   "semester": 2,
+   "code": "DIPC008"
+  },
+  {
+   "programme": "Diploma in Marketing",
+   "level": 100,
+   "semester": 2,
+   "code": "DIPC012"
+  },
+  {
+   "programme": "Diploma in Marketing",
+   "level": 100,
+   "semester": 2,
+   "code": "DIPC014"
+  },
+  {
+   "programme": "Diploma in Marketing",
+   "level": 200,
+   "semester": 1,
+   "code": "DIPC051"
+  },
+  {
+   "programme": "Diploma in Marketing",
+   "level": 200,
+   "semester": 1,
+   "code": "DIPC053"
+  },
+  {
+   "programme": "Diploma in Marketing",
+   "level": 200,
+   "semester": 2,
+   "code": "DIPC052"
+  },
+  {
+   "programme": "Diploma in Marketing",
+   "level": 200,
+   "semester": 2,
+   "code": "DIPC054"
+  },
+  {
+   "programme": "Diploma in Marketing",
+   "level": 200,
+   "semester": 2,
+   "code": "DIPK052"
+  },
+  {
+   "programme": "Diploma in Marketing",
+   "level": 200,
+   "semester": 2,
+   "code": "DIPK054"
+  },
+  {
+   "programme": "Diploma in Marketing",
+   "level": 200,
+   "semester": 2,
+   "code": "DIPK056"
+  },
+  {
+   "programme": "Diploma in Marketing",
+   "level": 200,
+   "semester": 2,
+   "code": "DIPK058"
+  },
+  {
+   "programme": "Diploma in Marketing",
+   "level": 200,
+   "semester": 2,
+   "code": "DIPK062"
+  },
+  {
+   "programme": "Diploma in Marketing",
+   "level": 200,
+   "semester": 2,
+   "code": "DIPK064"
+  },
+  {
+   "programme": "Diploma in Public Relations",
+   "level": 100,
+   "semester": 1,
+   "code": "DIPC001"
+  },
+  {
+   "programme": "Diploma in Public Relations",
+   "level": 100,
+   "semester": 1,
+   "code": "DIPC003"
+  },
+  {
+   "programme": "Diploma in Public Relations",
+   "level": 100,
+   "semester": 1,
+   "code": "DIPC005"
+  },
+  {
+   "programme": "Diploma in Public Relations",
+   "level": 100,
+   "semester": 1,
+   "code": "DIPC007"
+  },
+  {
+   "programme": "Diploma in Public Relations",
+   "level": 100,
+   "semester": 1,
+   "code": "DIPC011"
+  },
+  {
+   "programme": "Diploma in Public Relations",
+   "level": 100,
+   "semester": 2,
+   "code": "DIPC002"
+  },
+  {
+   "programme": "Diploma in Public Relations",
+   "level": 100,
+   "semester": 2,
+   "code": "DIPC004"
+  },
+  {
+   "programme": "Diploma in Public Relations",
+   "level": 100,
+   "semester": 2,
+   "code": "DIPC006"
+  },
+  {
+   "programme": "Diploma in Public Relations",
+   "level": 100,
+   "semester": 2,
+   "code": "DIPC008"
+  },
+  {
+   "programme": "Diploma in Public Relations",
+   "level": 100,
+   "semester": 2,
+   "code": "DIPC012"
+  },
+  {
+   "programme": "Diploma in Public Relations",
+   "level": 100,
+   "semester": 2,
+   "code": "DIPC014"
+  },
+  {
+   "programme": "Diploma in Public Relations",
+   "level": 100,
+   "semester": 2,
+   "code": "DIPR002"
+  },
+  {
+   "programme": "Diploma in Public Relations",
+   "level": 100,
+   "semester": 2,
+   "code": "DIPR004"
+  },
+  {
+   "programme": "Diploma in Public Relations",
+   "level": 100,
+   "semester": 2,
+   "code": "DIPR006"
+  },
+  {
+   "programme": "Diploma in Public Relations",
+   "level": 100,
+   "semester": 2,
+   "code": "DIPR008"
+  },
+  {
+   "programme": "Diploma in Public Relations",
+   "level": 100,
+   "semester": 2,
+   "code": "DIPR012"
+  },
+  {
+   "programme": "Diploma in Public Relations",
+   "level": 200,
+   "semester": 1,
+   "code": "DIPC051"
+  },
+  {
+   "programme": "Diploma in Public Relations",
+   "level": 200,
+   "semester": 1,
+   "code": "DIPC053"
+  },
+  {
+   "programme": "Diploma in Public Relations",
+   "level": 200,
+   "semester": 1,
+   "code": "DIPR055"
+  },
+  {
+   "programme": "Diploma in Public Relations",
+   "level": 200,
+   "semester": 2,
+   "code": "DIPC052"
+  },
+  {
+   "programme": "Diploma in Public Relations",
+   "level": 200,
+   "semester": 2,
+   "code": "DIPC054"
+  },
+  {
+   "programme": "Diploma in Public Relations",
+   "level": 200,
+   "semester": 2,
+   "code": "DIPR052"
+  },
+  {
+   "programme": "Diploma in Public Relations",
+   "level": 200,
+   "semester": 2,
+   "code": "DIPR054"
+  },
+  {
+   "programme": "Diploma in Public Relations",
+   "level": 200,
+   "semester": 2,
+   "code": "DIPR056"
+  }
+ ]
+}

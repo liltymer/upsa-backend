@@ -15,7 +15,7 @@ from app.schemas.announcement import (
     AnnouncementUpdate,
     AnnouncementResponse,
 )
-from app.schemas.course import CourseCreate
+from app.schemas.course import CourseCreate, CourseUpdate
 from app.services.auth import require_admin
 from app.utils.grading import CLASSIFICATION_BANDS, get_classification, truncate_gpa
 
@@ -328,6 +328,8 @@ def get_all_courses(
                 "credit_hours": c.credit_hours,
                 "programme": c.programme,
                 "level": c.level,
+                "semester": c.semester,
+                "source": c.source,
             }
             for c in courses
         ],
@@ -354,11 +356,31 @@ def create_course(
         credit_hours=data.credit_hours,
         programme=data.programme,
         level=data.level,
+        semester=data.semester,
+        source="admin",
     )
     db.add(course)
     db.commit()
     db.refresh(course)
     return {"message": "Course created.", "id": course.id}
+
+
+@router.put("/courses/{course_id}")
+def update_course(
+    course_id: int,
+    data: CourseUpdate,
+    db: Session = Depends(get_db),
+    admin: Student = Depends(require_admin),
+):
+    """Correct a course's details. An admin-checked course counts as confirmed, credits included."""
+    course = db.query(Course).filter(Course.id == course_id).first()
+    if not course:
+        raise HTTPException(status_code=404, detail="Course not found.")
+    for field, value in data.model_dump(exclude_unset=True).items():
+        setattr(course, field, value.strip() if isinstance(value, str) else value)
+    course.source = "admin"
+    db.commit()
+    return {"message": f"{course.code} updated."}
 
 
 @router.delete("/courses/{course_id}")
