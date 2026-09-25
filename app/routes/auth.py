@@ -12,9 +12,9 @@ from app.models.enrollment import Enrollment
 from app.models.student import Student
 from app.schemas.enrollment import PreviousProgramme
 from app.services.auth import (
+    create_access_token,
     hash_password,
-    verify_password,
-    create_access_token
+    verify_and_update,
 )
 from app.services.enrollments import (
     index_number_taken,
@@ -185,18 +185,31 @@ def login(
         ).first()
         user = enrollment.student if enrollment else None
 
-    if not verify_password(form_data.password, user.password_hash if user else None):
+    valid, new_hash = verify_and_update(form_data.password, user.password_hash if user else None)
+    if not valid:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="Invalid email/index number or password.",
             headers={"WWW-Authenticate": "Bearer"},
         )
 
+    if new_hash:
+        user.password_hash = new_hash
     user.last_login_at = datetime.now(timezone.utc)
     db.commit()
     access_token = create_access_token({"sub": str(user.id)})
+    current = user.current_enrollment
 
     return {
         "access_token": access_token,
-        "token_type": "bearer"
+        "token_type": "bearer",
+        # What the app shows straight away, so it does not need a second request
+        "user": {
+            "name": user.name,
+            "preferred_name": user.preferred_name,
+            "role": user.role,
+            "index_number": current.index_number if current else None,
+            "programme": current.programme if current else None,
+            "level": current.current_level if current else None,
+        },
     }

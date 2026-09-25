@@ -26,9 +26,15 @@ ACCESS_TOKEN_EXPIRE_MINUTES = int(os.getenv("ACCESS_TOKEN_EXPIRE_MINUTES", 60))
 if not SECRET_KEY:
     raise RuntimeError("SECRET_KEY is not set in .env")
 
+# 11 rounds: above the recommended minimum of 10, and about half the time of 12
+# on a small server. Hashes made with other costs are replaced at the next sign-in.
+BCRYPT_ROUNDS = 11
 pwd_context = CryptContext(
     schemes=["bcrypt"],
-    deprecated="auto"
+    deprecated="auto",
+    bcrypt__default_rounds=BCRYPT_ROUNDS,
+    bcrypt__min_rounds=BCRYPT_ROUNDS,
+    bcrypt__max_rounds=BCRYPT_ROUNDS,
 )
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/auth/login")
@@ -58,6 +64,14 @@ def verify_password(plain_password: str, hashed_password: str | None) -> bool:
         pwd_context.verify(plain_password[:72], _DUMMY_HASH)
         return False
     return pwd_context.verify(plain_password[:72], hashed_password)
+
+
+def verify_and_update(plain_password: str, hashed_password: str | None) -> tuple[bool, str | None]:
+    """Like verify_password, and also returns a new hash when the stored one uses another cost."""
+    if hashed_password is None:
+        pwd_context.verify(plain_password[:72], _DUMMY_HASH)
+        return False, None
+    return pwd_context.verify_and_update(plain_password[:72], hashed_password)
 
 
 # ===============================
