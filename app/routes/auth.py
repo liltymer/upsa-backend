@@ -1,3 +1,5 @@
+from datetime import datetime, timezone
+
 from fastapi import APIRouter, Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordRequestForm
 from pydantic import BaseModel, EmailStr, Field
@@ -190,6 +192,8 @@ def login(
             headers={"WWW-Authenticate": "Bearer"},
         )
 
+    user.last_login_at = datetime.now(timezone.utc)
+    db.commit()
     access_token = create_access_token({"sub": str(user.id)})
 
     return {

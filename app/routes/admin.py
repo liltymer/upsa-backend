@@ -1,4 +1,7 @@
-from fastapi import APIRouter, Depends, HTTPException, status
+from typing import Literal, Optional
+
+from fastapi import APIRouter, Depends, HTTPException, Query, status
+from pydantic import BaseModel, Field
 from sqlalchemy.orm import Session, selectinload
 from sqlalchemy import func
 from typing import List
@@ -6,7 +9,7 @@ from typing import List
 from app.database import get_db
 from app.models.student import Student
 from app.models.result import Result
-from app.models.course import Course
+from app.models.course import Course, CourseOffering
 from app.models.enrollment import Enrollment
 from app.models.announcement import Announcement
 from app.models.password_reset import PasswordResetToken
@@ -16,8 +19,10 @@ from app.schemas.announcement import (
     AnnouncementResponse,
 )
 from app.schemas.course import CourseCreate, CourseUpdate
+from app.services.admin_insights import admin_insights
+from app.services.course_suggestions import learned_courses
 from app.services.auth import require_admin
-from app.utils.grading import CLASSIFICATION_BANDS, get_classification, truncate_gpa
+from app.utils.grading import CLASSIFICATION_BANDS, PROBATION_THRESHOLD, get_classification, truncate_gpa
 
 router = APIRouter(prefix="/admin", tags=["admin"])
 
@@ -96,10 +101,10 @@ def get_all_users(
     students = (
         db.query(Student)
         .options(selectinload(Student.enrollments))
-        .filter(Student.role == "student")
         .order_by(Student.id.desc())
         .all()
     )
+    result_counts = dict(db.query(Result.student_id, func.count(Result.id)).group_by(Result.student_id).all())
 
     users = []
     for s in students:
@@ -108,6 +113,10 @@ def get_all_users(
             "id": s.id,
             "name": s.name,
             "email": s.email,
+            "role": s.role,
+            "results_count": result_counts.get(s.id, 0),
+            "joined": s.created_at.isoformat() if s.created_at else None,
+            "last_active": s.last_login_at.isoformat() if s.last_login_at else None,
             "index_number": current.index_number if current else None,
             "programme": current.programme if current else None,
             "level": current.current_level if current else None,
@@ -193,14 +202,23 @@ def get_anonymous_analytics(
         classifications[award_type] = {band["label"]: 0 for band in bands}
         classifications[award_type]["No Data"] = 0
 
-    risk_levels = {"Low": 0, "Medium": 0, "High": 0, "No Data": 0}
+    # Standing by UPSA's rules: probation below 1.00, failed courses still to clear, or a clean record
+    standing = {"probation": 0, "failed_to_clear": 0, "clean": 0, "no_data": 0}
+    last_grades = {}
+    for eid, code, grade in (
+        db.query(Result.enrollment_id, Result.course_code, Result.grade)
+        .order_by(Result.academic_year, Result.semester, Result.id)
+        .all()
+    ):
+        last_grades.setdefault(eid, {})[code] = grade
+    ever_failed = {eid for (eid,) in db.query(Result.enrollment_id).filter(Result.grade.in_(["D", "F"])).distinct()}
     cgpa_values = []
 
     for e in enrollments:
         points, credits = totals_by_enrollment.get(e.id, (0.0, 0))
         if not credits:
             classifications[e.award_type]["No Data"] += 1
-            risk_levels["No Data"] += 1
+            standing["no_data"] += 1
             continue
 
         cgpa = truncate_gpa(points, credits)
@@ -208,12 +226,12 @@ def get_anonymous_analytics(
         label = get_classification(cgpa, e.award_type)
         classifications[e.award_type][label] += 1
 
-        if cgpa >= 3.0:
-            risk_levels["Low"] += 1
-        elif cgpa >= 2.0 and label != "Pass":
-            risk_levels["Medium"] += 1
-        else:
-            risk_levels["High"] += 1
+        if cgpa < PROBATION_THRESHOLD:
+            standing["probation"] += 1
+        elif "F" in last_grades.get(e.id, {}).values():
+            standing["failed_to_clear"] += 1
+        elif e.id not in ever_failed:
+            standing["clean"] += 1
 
     # Combined view for existing dashboard widgets
     combined = {}
@@ -226,7 +244,7 @@ def get_anonymous_analytics(
         "average_cgpa": truncate_gpa(sum(cgpa_values), len(cgpa_values)) if cgpa_values else 0,
         "classification_distribution": combined,
         "classification_by_award_type": classifications,
-        "risk_distribution": risk_levels,
+        "standing": standing,
     }
 
 
@@ -395,3 +413,153 @@ def delete_course(
     db.delete(course)
     db.commit()
     return {"message": "Course deleted."}
+
+
+# ================================
+# ROLES
+# ================================
+
+class RoleChange(BaseModel):
+    role: Literal["student", "admin"]
+
+
+@router.put("/users/{user_id}/role")
+def change_role(
+    user_id: int,
+    data: RoleChange,
+    db: Session = Depends(get_db),
+    admin: Student = Depends(require_admin),
+):
+    """Make someone an admin, or remove their admin rights. Nobody can change their own role."""
+    if user_id == admin.id:
+        raise HTTPException(status_code=400, detail="You cannot change your own role.")
+    user = db.query(Student).filter(Student.id == user_id).first()
+    if not user:
+        raise HTTPException(status_code=404, detail="User not found.")
+    user.role = data.role
+    db.commit()
+    verb = "is now an admin" if data.role == "admin" else "is no longer an admin"
+    return {"message": f"{user.name} {verb}.", "role": user.role}
+
+
+# ================================
+# PROGRAMME COURSE LISTS
+# ================================
+
+class OfferingCreate(BaseModel):
+    programme: str = Field(min_length=3, max_length=200)
+    level: int = Field(ge=100, le=400)
+    semester: int = Field(ge=1, le=2)
+    course_code: str = Field(min_length=2, max_length=20)
+    # Needed only when the course is not in the catalogue yet
+    course_name: Optional[str] = Field(None, min_length=2, max_length=200)
+    credit_hours: Optional[int] = Field(None, ge=1, le=12)
+    # True stores it hidden, so a course students keep entering stops being suggested
+    hidden: bool = False
+
+
+class OfferingUpdate(BaseModel):
+    hidden: bool
+
+
+@router.get("/offerings")
+def list_offerings(
+    programme: str = Query(..., min_length=3),
+    level: int = Query(..., ge=100, le=400),
+    semester: int = Query(..., ge=1, le=2),
+    db: Session = Depends(get_db),
+    admin: Student = Depends(require_admin),
+):
+    """
+    What students of one programme get pre-filled for a level and semester, plus the
+    courses students entered for it that are not on the list yet (with how many did).
+    """
+    offerings = (
+        db.query(CourseOffering)
+        .filter(func.lower(CourseOffering.programme) == programme.lower(),
+                CourseOffering.level == level, CourseOffering.semester == semester)
+        .order_by(CourseOffering.course_code)
+        .all()
+    )
+    catalogue = {c.code: c for c in db.query(Course).filter(Course.code.in_([o.course_code for o in offerings])).all()}
+    listed_codes = {o.course_code for o in offerings}
+    learned = learned_courses(db, programme, level, semester, min_students=1)
+    return {
+        "listed": [
+            {
+                "id": o.id,
+                "course_code": o.course_code,
+                "course_name": catalogue[o.course_code].name if o.course_code in catalogue else o.course_code,
+                "credit_hours": catalogue[o.course_code].credit_hours if o.course_code in catalogue else None,
+                "credits_confirmed": o.course_code in catalogue and catalogue[o.course_code].source != "timetable",
+                "source": o.source,
+                "hidden": o.hidden,
+                "students": learned.get(o.course_code, {}).get("students", 0),
+            }
+            for o in offerings
+        ],
+        "from_students": sorted(
+            ({"course_code": code, **v} for code, v in learned.items() if code not in listed_codes),
+            key=lambda c: (-c["students"], c["course_code"]),
+        ),
+    }
+
+
+@router.post("/offerings", status_code=status.HTTP_201_CREATED)
+def add_offering(
+    data: OfferingCreate,
+    db: Session = Depends(get_db),
+    admin: Student = Depends(require_admin),
+):
+    """Add a course to a programme's list for a level and semester."""
+    code = data.course_code.strip().upper()
+    course = db.query(Course).filter(Course.code == code).first()
+    if not course and not data.hidden:
+        if not data.course_name or not data.credit_hours:
+            raise HTTPException(status_code=400, detail=f"{code} is not in the catalogue yet. Give its title and credits.")
+        course = Course(code=code, name=data.course_name.strip(), credit_hours=data.credit_hours,
+                        level=data.level, semester=data.semester, source="admin")
+        db.add(course)
+    existing = db.query(CourseOffering).filter(
+        func.lower(CourseOffering.programme) == data.programme.lower(),
+        CourseOffering.level == data.level, CourseOffering.semester == data.semester,
+        CourseOffering.course_code == code,
+    ).first()
+    if existing:
+        if existing.hidden == data.hidden:
+            raise HTTPException(status_code=409, detail=f"{code} is already {'hidden' if data.hidden else 'on this list'}.")
+        existing.hidden = data.hidden
+    else:
+        db.add(CourseOffering(programme=data.programme.strip(), level=data.level, semester=data.semester,
+                              course_code=code, source="admin", hidden=data.hidden))
+    db.commit()
+    return {"message": f"{code} {'will no longer be suggested' if data.hidden else 'added to the list'}."}
+
+
+@router.put("/offerings/{offering_id}")
+def update_offering(
+    offering_id: int,
+    data: OfferingUpdate,
+    db: Session = Depends(get_db),
+    admin: Student = Depends(require_admin),
+):
+    """Hide a course from a programme's list (it also stops being suggested from students' entries), or show it again."""
+    offering = db.query(CourseOffering).filter(CourseOffering.id == offering_id).first()
+    if not offering:
+        raise HTTPException(status_code=404, detail="Course list entry not found.")
+    offering.hidden = data.hidden
+    db.commit()
+    return {"message": f"{offering.course_code} {'hidden' if data.hidden else 'shown again'}."}
+
+
+# ================================
+# WHAT NEEDS ATTENTION
+# ================================
+
+@router.get("/insights")
+def get_admin_insights(
+    db: Session = Depends(get_db),
+    admin: Student = Depends(require_admin),
+):
+    """Activity over time, things that need attention, hardest courses and the top-up pipeline. Counts only."""
+    return admin_insights(db)
