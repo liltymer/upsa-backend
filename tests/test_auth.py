@@ -1,4 +1,4 @@
-from tests.conftest import login, register
+from tests.conftest import PASSWORD, login, register
 
 
 def test_register_and_login_case_insensitive_email(client):
@@ -57,3 +57,25 @@ def test_reset_token_is_stored_hashed(client, db, no_real_email):
     assert client.post("/auth/login", data={"username": "ama@gmail.com", "password": "Brand-New-Pass-2"}).status_code == 200
     # single use
     assert client.post("/auth/reset-password", json={"token": raw, "new_password": "Again-New-Pass-3"}).status_code == 400
+
+
+def test_login_returns_user_summary(client, student_headers):
+    res = client.post("/auth/login", data={"username": "10212345", "password": PASSWORD})
+    assert res.status_code == 200
+    user = res.json()["user"]
+    assert user["name"] == "Ama Mensah" and user["role"] == "student" and user["index_number"] == "10212345"
+
+
+def test_old_password_hashes_upgrade_on_login(client, db, student_headers):
+    from passlib.context import CryptContext
+
+    from app.models.student import Student
+    from app.services.auth import BCRYPT_ROUNDS
+    student = db.query(Student).filter(Student.email == "ama@gmail.com").one()
+    student.password_hash = CryptContext(schemes=["bcrypt"], bcrypt__rounds=12).hash(PASSWORD)
+    db.commit()
+    assert client.post("/auth/login", data={"username": "ama@gmail.com", "password": PASSWORD}).status_code == 200
+    db.refresh(student)
+    assert student.password_hash.startswith(f"$2b${BCRYPT_ROUNDS}$")
+    # Still works after the upgrade
+    assert client.post("/auth/login", data={"username": "ama@gmail.com", "password": PASSWORD}).status_code == 200
