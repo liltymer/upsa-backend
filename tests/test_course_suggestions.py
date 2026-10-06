@@ -154,3 +154,12 @@ def test_admin_correction_confirms_credits(client, admin_headers):
 
 def test_students_cannot_edit_courses(client, student_headers):
     assert client.put("/admin/courses/1", headers=student_headers, json={"credit_hours": 4}).status_code == 403
+
+
+def test_october_2026_timetable_courses(client):
+    """Courses added from the timetables UPSA published in October 2026."""
+    headers = student(client, 9, programme="Bachelor of Laws (LLB)", level=200, year="2026/2027")
+    assert {"BLAW205", "BLAW221"} <= codes(suggest(client, headers, "2026/2027", 1))
+    catalogue = {c["code"]: c for c in client.get("/courses/").json()}
+    assert catalogue["DIPT059"]["name"] == "Essentials of IT Sourcing and Procurement"
+    assert len(catalogue) == 398
