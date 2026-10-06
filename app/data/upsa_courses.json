@@ -1,5 +1,5 @@
 {
- "source": "UPSA teaching and examination timetables, upsa.edu.gh (2025/2026 and 2026/2027)",
+ "source": "UPSA teaching and examination timetables, upsa.edu.gh (2025/2026 and 2026/2027, checked October 2026)",
  "courses": [
   {
    "code": "BAAF202",
@@ -290,6 +290,12 @@
    "semester": 2
   },
   {
+   "code": "BASC309",
+   "name": "Data Analytics",
+   "level": 300,
+   "semester": 1
+  },
+  {
    "code": "BASC311",
    "name": "Risk Theory",
    "level": 300,
@@ -324,6 +330,12 @@
    "name": "Pension Fund Management",
    "level": 400,
    "semester": 2
+  },
+  {
+   "code": "BASC403",
+   "name": "Life Insurance",
+   "level": 400,
+   "semester": 1
   },
   {
    "code": "BASC404",
@@ -1106,6 +1118,12 @@
    "semester": 2
   },
   {
+   "code": "BLAW205",
+   "name": "Law of Torts I",
+   "level": 200,
+   "semester": 1
+  },
+  {
    "code": "BLAW206",
    "name": "Law of Torts II",
    "level": 200,
@@ -1142,6 +1160,12 @@
    "semester": 2
   },
   {
+   "code": "BLAW221",
+   "name": "Commercial Law I",
+   "level": 200,
+   "semester": 1
+  },
+  {
    "code": "BLAW223",
    "name": "Private International Law I",
    "level": 200,
@@ -1150,6 +1174,12 @@
   {
    "code": "BLAW224",
    "name": "Company Law",
+   "level": 200,
+   "semester": 2
+  },
+  {
+   "code": "BLAW228",
+   "name": "Private International Law II",
    "level": 200,
    "semester": 2
   },
@@ -1196,6 +1226,12 @@
    "semester": 2
   },
   {
+   "code": "BLAW313",
+   "name": "Energy Law I",
+   "level": 300,
+   "semester": 1
+  },
+  {
    "code": "BLAW314",
    "name": "Law of Immovable Property II",
    "level": 300,
@@ -1226,6 +1262,12 @@
    "semester": 1
   },
   {
+   "code": "BLAW321",
+   "name": "Administrative Law",
+   "level": 300,
+   "semester": 1
+  },
+  {
    "code": "BLAW322",
    "name": "Energy Law II",
    "level": 300,
@@ -1242,6 +1284,12 @@
    "name": "Human Rights Law II",
    "level": 300,
    "semester": 2
+  },
+  {
+   "code": "BLAW335",
+   "name": "Human Rights Law I",
+   "level": 300,
+   "semester": 1
   },
   {
    "code": "BLAW344",
@@ -1284,6 +1332,12 @@
    "name": "Environmental Law II",
    "level": 400,
    "semester": 2
+  },
+  {
+   "code": "BLAW413",
+   "name": "Laws of Natural Resources I",
+   "level": 400,
+   "semester": 1
   },
   {
    "code": "BLAW414",
@@ -1898,10 +1952,22 @@
    "semester": 2
   },
   {
+   "code": "DIPR001",
+   "name": "English Language",
+   "level": 100,
+   "semester": 1
+  },
+  {
    "code": "DIPR002",
    "name": "Principles of Public Relations",
    "level": 100,
    "semester": 2
+  },
+  {
+   "code": "DIPR003",
+   "name": "Communication Skills",
+   "level": 100,
+   "semester": 1
   },
   {
    "code": "DIPR004",
@@ -1934,6 +2000,12 @@
    "semester": 2
   },
   {
+   "code": "DIPR053",
+   "name": "Public Relations Research Methods",
+   "level": 200,
+   "semester": 1
+  },
+  {
    "code": "DIPR054",
    "name": "Digital Media in Public Relations",
    "level": 200,
@@ -1950,6 +2022,12 @@
    "name": "Political Communications",
    "level": 200,
    "semester": 2
+  },
+  {
+   "code": "DIPR057",
+   "name": "Corporate Social Responsibility",
+   "level": 200,
+   "semester": 1
   },
   {
    "code": "DIPT001",
@@ -2034,6 +2112,12 @@
    "name": "Introduction to Management Information Systems",
    "level": 200,
    "semester": 2
+  },
+  {
+   "code": "DIPT059",
+   "name": "Essentials of IT Sourcing and Procurement",
+   "level": 200,
+   "semester": 1
   },
   {
    "code": "DIPT062",
@@ -2689,6 +2773,12 @@
    "programme": "Bachelor of Laws (LLB)",
    "level": 200,
    "semester": 1,
+   "code": "BLAW205"
+  },
+  {
+   "programme": "Bachelor of Laws (LLB)",
+   "level": 200,
+   "semester": 1,
    "code": "BLAW211"
   },
   {
@@ -2696,6 +2786,12 @@
    "level": 200,
    "semester": 1,
    "code": "BLAW213"
+  },
+  {
+   "programme": "Bachelor of Laws (LLB)",
+   "level": 200,
+   "semester": 1,
+   "code": "BLAW221"
   },
   {
    "programme": "Bachelor of Laws (LLB)",
@@ -2737,6 +2833,12 @@
    "programme": "Bachelor of Laws (LLB)",
    "level": 200,
    "semester": 2,
+   "code": "BLAW228"
+  },
+  {
+   "programme": "Bachelor of Laws (LLB)",
+   "level": 200,
+   "semester": 2,
    "code": "BLAW232"
   },
   {
@@ -2761,6 +2863,12 @@
    "programme": "Bachelor of Laws (LLB)",
    "level": 300,
    "semester": 1,
+   "code": "BLAW313"
+  },
+  {
+   "programme": "Bachelor of Laws (LLB)",
+   "level": 300,
+   "semester": 1,
    "code": "BLAW315"
   },
   {
@@ -2774,6 +2882,18 @@
    "level": 300,
    "semester": 1,
    "code": "BLAW319"
+  },
+  {
+   "programme": "Bachelor of Laws (LLB)",
+   "level": 300,
+   "semester": 1,
+   "code": "BLAW321"
+  },
+  {
+   "programme": "Bachelor of Laws (LLB)",
+   "level": 300,
+   "semester": 1,
+   "code": "BLAW335"
   },
   {
    "programme": "Bachelor of Laws (LLB)",
@@ -2840,6 +2960,12 @@
    "level": 400,
    "semester": 1,
    "code": "BLAW403"
+  },
+  {
+   "programme": "Bachelor of Laws (LLB)",
+   "level": 400,
+   "semester": 1,
+   "code": "BLAW413"
   },
   {
    "programme": "Bachelor of Laws (LLB)",
@@ -3133,6 +3259,12 @@
    "programme": "Bachelor of Science in Actuarial Science",
    "level": 300,
    "semester": 1,
+   "code": "BASC309"
+  },
+  {
+   "programme": "Bachelor of Science in Actuarial Science",
+   "level": 300,
+   "semester": 1,
    "code": "BASC311"
   },
   {
@@ -3146,6 +3278,12 @@
    "level": 300,
    "semester": 1,
    "code": "BCPC303"
+  },
+  {
+   "programme": "Bachelor of Science in Actuarial Science",
+   "level": 400,
+   "semester": 1,
+   "code": "BASC403"
   },
   {
    "programme": "Bachelor of Science in Actuarial Science",
@@ -4092,6 +4230,12 @@
   {
    "programme": "Diploma in Information Technology Management",
    "level": 200,
+   "semester": 1,
+   "code": "DIPT059"
+  },
+  {
+   "programme": "Diploma in Information Technology Management",
+   "level": 200,
    "semester": 2,
    "code": "DIPC052"
   },
@@ -4404,6 +4548,18 @@
   {
    "programme": "Diploma in Public Relations",
    "level": 100,
+   "semester": 1,
+   "code": "DIPR001"
+  },
+  {
+   "programme": "Diploma in Public Relations",
+   "level": 100,
+   "semester": 1,
+   "code": "DIPR003"
+  },
+  {
+   "programme": "Diploma in Public Relations",
+   "level": 100,
    "semester": 2,
    "code": "DIPC002"
   },
@@ -4483,7 +4639,19 @@
    "programme": "Diploma in Public Relations",
    "level": 200,
    "semester": 1,
+   "code": "DIPR053"
+  },
+  {
+   "programme": "Diploma in Public Relations",
+   "level": 200,
+   "semester": 1,
    "code": "DIPR055"
+  },
+  {
+   "programme": "Diploma in Public Relations",
+   "level": 200,
+   "semester": 1,
+   "code": "DIPR057"
   },
   {
    "programme": "Diploma in Public Relations",
