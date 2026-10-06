@@ -44,7 +44,7 @@ def test_degree_semester_is_prefilled(client):
 def test_diploma_semester_includes_common_courses(client):
     headers = student(client, 1, programme="Diploma in Information Technology Management")
     body = suggest(client, headers, "2025/2026", 1)
-    assert {"DIPT001", "DIPC001"} <= codes(body)
+    assert {"DIPT001", "DIPC009"} <= codes(body)
     assert not any(c.startswith("BSIT") for c in codes(body))
 
 
@@ -162,4 +162,14 @@ def test_october_2026_timetable_courses(client):
     assert {"BLAW205", "BLAW221"} <= codes(suggest(client, headers, "2026/2027", 1))
     catalogue = {c["code"]: c for c in client.get("/courses/").json()}
     assert catalogue["DIPT059"]["name"] == "Essentials of IT Sourcing and Procurement"
-    assert len(catalogue) == 398
+    assert len(catalogue) == 399
+
+
+def test_diploma_first_semester_2026_lists(client):
+    """Official 2026/2027 Diploma first-year timetable."""
+    it = student(client, 21, programme="Diploma in Information Technology Management", level=100, year="2026/2027")
+    assert codes(suggest(client, it, "2026/2027", 1)) == {"DIPC003", "DIPC005", "DIPC009", "DIPT001", "DIPT003"}
+    pr = student(client, 22, programme="Diploma in Public Relations", level=100, year="2026/2027")
+    assert codes(suggest(client, pr, "2026/2027", 1)) == {"DIPC001", "DIPC007", "DIPC009", "DIPC011", "DIPR001", "DIPR003"}
+    catalogue = {c["code"]: c for c in client.get("/courses/").json()}
+    assert catalogue["DIPC009"]["name"] == "Introduction to Information Technology"

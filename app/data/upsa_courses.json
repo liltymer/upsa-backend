@@ -1826,6 +1826,12 @@
    "semester": 2
   },
   {
+   "code": "DIPC009",
+   "name": "Introduction to Information Technology",
+   "level": 100,
+   "semester": 1
+  },
+  {
    "code": "DIPC011",
    "name": "Philosophy and Logic",
    "level": 100,
@@ -3973,12 +3979,6 @@
    "programme": "Diploma in Accounting",
    "level": 100,
    "semester": 1,
-   "code": "DIPA007"
-  },
-  {
-   "programme": "Diploma in Accounting",
-   "level": 100,
-   "semester": 1,
    "code": "DIPC001"
   },
   {
@@ -3998,6 +3998,12 @@
    "level": 100,
    "semester": 1,
    "code": "DIPC007"
+  },
+  {
+   "programme": "Diploma in Accounting",
+   "level": 100,
+   "semester": 1,
+   "code": "DIPC009"
   },
   {
    "programme": "Diploma in Accounting",
@@ -4093,12 +4099,6 @@
    "programme": "Diploma in Information Technology Management",
    "level": 100,
    "semester": 1,
-   "code": "DIPC001"
-  },
-  {
-   "programme": "Diploma in Information Technology Management",
-   "level": 100,
-   "semester": 1,
    "code": "DIPC003"
   },
   {
@@ -4111,13 +4111,7 @@
    "programme": "Diploma in Information Technology Management",
    "level": 100,
    "semester": 1,
-   "code": "DIPC007"
-  },
-  {
-   "programme": "Diploma in Information Technology Management",
-   "level": 100,
-   "semester": 1,
-   "code": "DIPC011"
+   "code": "DIPC009"
   },
   {
    "programme": "Diploma in Information Technology Management",
@@ -4130,12 +4124,6 @@
    "level": 100,
    "semester": 1,
    "code": "DIPT003"
-  },
-  {
-   "programme": "Diploma in Information Technology Management",
-   "level": 100,
-   "semester": 1,
-   "code": "DIPT009"
   },
   {
    "programme": "Diploma in Information Technology Management",
@@ -4303,6 +4291,12 @@
    "programme": "Diploma in Management",
    "level": 100,
    "semester": 1,
+   "code": "DIPC009"
+  },
+  {
+   "programme": "Diploma in Management",
+   "level": 100,
+   "semester": 1,
    "code": "DIPC011"
   },
   {
@@ -4417,6 +4411,12 @@
    "programme": "Diploma in Marketing",
    "level": 100,
    "semester": 1,
+   "code": "DIPC009"
+  },
+  {
+   "programme": "Diploma in Marketing",
+   "level": 100,
+   "semester": 1,
    "code": "DIPC011"
   },
   {
@@ -4525,19 +4525,13 @@
    "programme": "Diploma in Public Relations",
    "level": 100,
    "semester": 1,
-   "code": "DIPC003"
-  },
-  {
-   "programme": "Diploma in Public Relations",
-   "level": 100,
-   "semester": 1,
-   "code": "DIPC005"
-  },
-  {
-   "programme": "Diploma in Public Relations",
-   "level": 100,
-   "semester": 1,
    "code": "DIPC007"
+  },
+  {
+   "programme": "Diploma in Public Relations",
+   "level": 100,
+   "semester": 1,
+   "code": "DIPC009"
   },
   {
    "programme": "Diploma in Public Relations",
